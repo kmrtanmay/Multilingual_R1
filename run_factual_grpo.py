@@ -5,11 +5,15 @@ from datetime import datetime
 import re
 import random
 import torch
-from datasets import Dataset
+from datasets import Dataset, load_dataset
 from transformers.trainer_utils import get_last_checkpoint
 from transformers import AutoTokenizer
 from trl import GRPOConfig, GRPOTrainer, get_peft_config, ModelConfig, TrlParser
-
+# Set up SummaryWriter for more detailed logging
+from torch.utils.tensorboard import SummaryWriter
+from transformers import TrainerCallback
+import numpy as np
+from typing import List, Optional, Tuple, Any
 
 ########################
 # Custom dataclasses
@@ -151,6 +155,550 @@ def correctness_reward_func_factual(completions, targets=None, **kwargs):
 
     return rewards
 
+def correctness_reward_func_factual_fuzzy(completions, targets=None, **kwargs):
+    """
+    Checks whether extracted <answer> matches any answer in the answer_list,
+    with flexible parsing and comparison of answers.
+    
+    Args:
+        completions (list[str]): Model completions
+        targets (list[str]): Not used, targets come from kwargs['target']
+        **kwargs: Contains 'target' (primary answers) and 'answer_list' (all acceptable answers)
+        
+    Returns:
+        list[float]: Reward scores (1.0 for correct, 0.0 for incorrect)
+    """
+    rewards = []
+    
+    # Get targets and answer_lists from kwargs
+    targets = kwargs.get('target', [])
+    answer_lists = kwargs.get('answer_list', [])
+    
+    for i, (completion, target) in enumerate(zip(completions, targets)):
+        try:
+            # Ensure the completion has the <think> tag for proper pattern matching
+            if "<think>" not in completion:
+                completion = "<think>" + completion
+            
+            # Extract the answer text between <answer> tags
+            match = re.search(r"<answer>(.*?)<\/answer>", completion, re.DOTALL)
+            if match is None:
+                rewards.append(0.0)
+                continue
+            
+            # Get the predicted answer and normalize it
+            prediction = match.group(1).strip().lower()
+            
+            # Get all possible acceptable answers
+            all_acceptable_answers = []
+            
+            # Always include the primary target
+            if target:
+                all_acceptable_answers.append(target.strip().lower())
+            
+            # Process the answer_list
+            if i < len(answer_lists):
+                current_answer_list = answer_lists[i]
+                
+                # Handle different formats of answer_list
+                if isinstance(current_answer_list, str):
+                    # Try parsing as a comma-separated string first
+                    if "," in current_answer_list:
+                        parts = [p.strip().lower() for p in current_answer_list.split(",")]
+                        all_acceptable_answers.extend(parts)
+                    else:
+                        all_acceptable_answers.append(current_answer_list.strip().lower())
+                
+                elif isinstance(current_answer_list, list):
+                    # Process each answer in the list
+                    for ans in current_answer_list:
+                        if isinstance(ans, str):
+                            # If it contains commas, split it
+                            if "," in ans:
+                                parts = [p.strip().lower() for p in ans.split(",")]
+                                all_acceptable_answers.extend(parts)
+                            else:
+                                all_acceptable_answers.append(ans.strip().lower())
+                        else:
+                            # For non-string answers (e.g., numbers)
+                            all_acceptable_answers.append(str(ans).strip().lower())
+            
+            # Debug logging for a small percentage of examples
+            if random.random() < 0.01:
+                print(f"\nPrediction: '{prediction}'")
+                print(f"All acceptable answers: {all_acceptable_answers}")
+            
+            # Check if the prediction matches any acceptable answer
+            match_found = False
+            for acceptable in all_acceptable_answers:
+                if prediction == acceptable:
+                    match_found = True
+                    break
+            
+            if match_found:
+                rewards.append(1.0)
+                
+                # Log successful samples occasionally
+                if random.random() < 0.05:
+                    os.makedirs("completion_samples", exist_ok=True)
+                    with open("completion_samples/successful_factual_samples.txt", "a") as f:
+                        f.write(f"\n\n==============\n")
+                        f.write(f"Completion: {completion}\n")
+                        f.write(f"Prediction: '{prediction}'\n")
+                        f.write(f"Matched with one of: {all_acceptable_answers}\n")
+            else:
+                rewards.append(0.0)
+                
+                # Log failures occasionally for debugging
+                if random.random() < 0.01:
+                    print(f"No match found for: '{prediction}'")
+                    print(f"Acceptable answers were: {all_acceptable_answers}")
+            
+        except Exception as e:
+            print(f"Error in reward function: {e}")
+            rewards.append(0.0)
+    
+    return rewards
+
+
+############
+
+def language_matching_reward_func(completions, queries, **kwargs):
+    """
+    Checks whether tokens inside <think></think> are in the same language as the query.
+    Awards higher rewards for higher percentage of matching language tokens.
+    
+    Args:
+        completions (list[str]): Model completions containing <think></think> sections
+        queries (list[str]): The original queries, used to detect language
+        
+    Returns:
+        list[float]: Reward scores between 0.0 and 1.0
+    """
+    import re
+    import os
+    import random
+    
+    # Import langid with error handling
+    try:
+        import langid
+        # Initialize langid for language detection with common languages
+        langid.set_languages(['en', 'hi', 'sw', 'zh', 'es', 'fr', 'ar', 'ru', 'ja', 'de', 'bn', 'pt'])
+        langid_available = True
+    except ImportError:
+        print("Warning: langid not available. Install with 'pip install langid'")
+        langid_available = False
+    
+    rewards = []
+    
+    for completion, query in zip(completions, queries):
+        try:
+            # Add <think> prefix if not present (as in your original function)
+            if not completion.startswith("<think>"):
+                completion = "<think>" + completion
+            
+            # Extract text between <think> and </think> tags
+            think_match = re.search(r"<think>([\s\S]*?)<\/think>", completion, re.DOTALL)
+            
+            if think_match is None:
+                rewards.append(0.0)
+                continue
+                
+            think_content = think_match.group(1).strip()
+            
+            # If thinking content is too short, can't properly evaluate
+            if len(think_content) < 10:
+                rewards.append(0.2)  # Small non-zero reward for valid format at least
+                continue
+            
+            # If langid is not available, fall back to simple heuristics
+            if not langid_available:
+                reward = _fallback_language_match(think_content, query)
+                rewards.append(reward)
+                continue
+            
+            # Detect language of query
+            query_lang, query_conf = langid.classify(query)
+            
+            # For longer thinking content, break into chunks for better language detection
+            chunk_size = 100  # Characters per chunk
+            chunks = [think_content[i:i+chunk_size] for i in range(0, len(think_content), chunk_size)]
+            
+            # Detect language for each chunk
+            matching_chunks = 0
+            total_chunks = len(chunks)
+            chunk_langs = []
+            
+            for chunk in chunks:
+                if len(chunk.strip()) < 10:  # Skip very small chunks
+                    total_chunks -= 1
+                    continue
+                    
+                chunk_lang, confidence = langid.classify(chunk)
+                chunk_langs.append(chunk_lang)
+                
+                if chunk_lang == query_lang:
+                    matching_chunks += 1
+            
+            # Calculate percentage of matching language chunks
+            if total_chunks == 0:
+                # If no valid chunks, give neutral score
+                reward = 0.5
+            else:
+                # The reward is the percentage of chunks in the query language
+                reward = matching_chunks / total_chunks
+            
+            # Add a small bonus for any matching at all (to avoid zero rewards for partial matches)
+            if matching_chunks > 0 and reward < 0.1:
+                reward = 0.1
+                
+            # Log samples occasionally for debugging
+            if random.random() < 0.01:  # 1% chance to log
+                try:
+                    os.makedirs("completion_samples", exist_ok=True)
+                    log_file = os.path.join("completion_samples", "language_match_samples.txt")
+                    with open(log_file, "a") as f:
+                        f.write(f"\n\n==============\n")
+                        f.write(f"Query ({query_lang}): {query}\n")
+                        f.write(f"Think content (sample langs: {chunk_langs[:3]}...): {think_content[:100]}...\n")
+                        f.write(f"Matching chunks: {matching_chunks}/{total_chunks}\n")
+                        f.write(f"Reward: {reward}\n")
+                except Exception as e:
+                    print(f"Warning: Could not write log: {e}")
+            
+            rewards.append(reward)
+            
+        except Exception as e:
+            print(f"Error in language matching reward function: {e}")
+            # Fallback to basic heuristics when errors occur
+            try:
+                fallback_reward = _fallback_language_match(think_content, query)
+                rewards.append(fallback_reward)
+            except:
+                rewards.append(0.5)  # Neutral reward on complete failure
+            
+    return rewards
+
+def _fallback_language_match(text, query):
+    """
+    Fallback language matching method using basic character-set heuristics.
+    Used when langid is not available.
+    """
+    # Character sets that are distinctive for different scripts
+    script_markers = {
+        'devanagari': [chr(c) for c in range(0x0900, 0x097F)],  # Hindi, Sanskrit, etc.
+        'arabic': [chr(c) for c in range(0x0600, 0x06FF)],      # Arabic, Persian, Urdu, etc.
+        'chinese': [chr(c) for c in range(0x4E00, 0x9FFF)],     # Chinese
+        'cyrillic': [chr(c) for c in range(0x0400, 0x04FF)],    # Russian, etc.
+        'thai': [chr(c) for c in range(0x0E00, 0x0E7F)],        # Thai
+        'hangul': [chr(c) for c in range(0xAC00, 0xD7AF)],      # Korean
+        'latin': [chr(c) for c in range(0x0041, 0x007A)]        # Latin/Roman (English, Spanish, etc.)
+    }
+    
+    # Count script markers in query and text
+    query_scripts = {}
+    text_scripts = {}
+    
+    for script, markers in script_markers.items():
+        # Check which script markers appear in query and text
+        query_count = sum(1 for c in query if c in markers)
+        text_count = sum(1 for c in text if c in markers)
+        
+        query_scripts[script] = query_count
+        text_scripts[script] = text_count
+    
+    # Determine dominant script in query
+    dominant_query_script = max(query_scripts.items(), key=lambda x: x[1])[0]
+    if query_scripts[dominant_query_script] < 3:
+        # If minimal script markers, default to 'latin' (most common)
+        dominant_query_script = 'latin'
+    
+    # Check if the same script is dominant in the text
+    if dominant_query_script == max(text_scripts.items(), key=lambda x: x[1])[0]:
+        # Scripts match, but how strongly?
+        query_script_ratio = query_scripts[dominant_query_script] / max(1, len(query))
+        text_script_ratio = text_scripts[dominant_query_script] / max(1, len(text))
+        
+        # The reward is the ratio of matching script markers in the text
+        # scaled by how confident we are about the query's script
+        reward = text_script_ratio * min(1.0, query_script_ratio * 2)
+        return max(0.3, reward)  # At least 0.3 for matching script
+    else:
+        # Scripts don't match
+        return 0.1  # Small non-zero reward
+
+
+# More resilient advanced version that handles code-switching and language mixtures
+def language_matching_reward_func_advanced(completions, targets=None, **kwargs):
+    """
+    Advanced version that handles code-switching and mixture of languages.
+    Uses simpler sentence splitting and multiple language detection methods.
+    
+    Args:
+        completions (list[str]): Model completions containing <think></think> sections
+        queries (list[str]): The original queries, used to detect language
+        
+    Returns:
+        list[float]: Reward scores between 0.0 and 1.0
+    """
+    import re
+    import random
+    import os
+    
+    queries = kwargs['question']
+    # Try multiple language detection libraries with fallbacks
+    langdetect_available = False
+    langid_available = False
+    
+    try:
+        import langdetect
+        from langdetect import detect_langs
+        langdetect_available = True
+    except ImportError:
+        print("Warning: langdetect not available. Install with 'pip install langdetect'")
+    
+    if not langdetect_available:
+        try:
+            import langid
+            langid.set_languages(['en', 'hi', 'sw', 'zh', 'el', 'fr', 'ar', 'ru', 'ja', 'ne', 'tr', 'th'])
+            langid_available = True
+        except ImportError:
+            print("Warning: Neither langdetect nor langid available. Install with 'pip install langdetect langid'")
+    
+    # Simple sentence splitting function that doesn't require NLTK
+    def simple_sentence_split(text):
+        # Split by common sentence terminators
+        sentences = []
+        for rough_sentence in re.split(r'(?<=[.!?])\s+', text):
+            # Further split by newlines, which often indicate sentence breaks in many formats
+            for s in rough_sentence.split('\n'):
+                s = s.strip()
+                if s:  # Only add non-empty sentences
+                    sentences.append(s)
+        return sentences
+    
+    rewards = []
+    
+    for completion, query in zip(completions, queries):
+        try:
+            # Add <think> prefix if not present
+            if not completion.startswith("<think>"):
+                completion = "<think>" + completion
+            
+            # Extract text between <think> and </think> tags
+            think_match = re.search(r"<think>([\s\S]*?)<\/think>", completion, re.DOTALL)
+            
+            if think_match is None:
+                rewards.append(0.0)
+                continue
+                
+            think_content = think_match.group(1).strip()
+            
+            # If thinking content is too short, can't properly evaluate
+            if len(think_content) < 10:
+                rewards.append(0.2)  # Small non-zero reward for valid format
+                continue
+            
+            # Detect language of query
+            primary_query_lang = None
+            if langdetect_available:
+                try:
+                    query_langs = langdetect.detect_langs(query)
+                    primary_query_lang = query_langs[0].lang
+                    primary_query_prob = query_langs[0].prob
+                except:
+                    primary_query_lang = None
+            
+            if primary_query_lang is None and langid_available:
+                try:
+                    primary_query_lang, _ = langid.classify(query)
+                except:
+                    primary_query_lang = None
+            
+            # If we still can't detect language, use fallback method
+            if primary_query_lang is None:
+                # Use the fallback method from the basic function
+                reward = _fallback_language_match(think_content, query)
+                rewards.append(reward)
+                continue
+            
+            # Break thinking content into sentences
+            sentences = simple_sentence_split(think_content)
+            
+            # Skip if no valid sentences
+            if not sentences:
+                rewards.append(0.3)  # Some reward for valid format
+                continue
+                
+            matching_sentences = 0
+            total_sentences = len(sentences)
+            
+            # For each sentence, check language alignment with query
+            for sentence in sentences:
+                if len(sentence.strip()) < 5:  # Skip very short sentences
+                    total_sentences -= 1
+                    continue
+                
+                sentence_lang = None
+                
+                # Try langdetect first if available
+                if langdetect_available:
+                    try:
+                        sent_langs = langdetect.detect_langs(sentence)
+                        for lang_prob in sent_langs:
+                            if lang_prob.lang == primary_query_lang and lang_prob.prob > 0.3:
+                                matching_sentences += 1
+                                break
+                        continue  # If we got here, langdetect worked, so continue to next sentence
+                    except:
+                        pass  # Fall through to next method if langdetect fails
+                
+                # Try langid if langdetect not available or failed
+                if langid_available:
+                    try:
+                        sent_lang, _ = langid.classify(sentence)
+                        if sent_lang == primary_query_lang:
+                            matching_sentences += 1
+                        continue  # If we got here, langid worked, so continue to next sentence
+                    except:
+                        pass  # Fall through to fallback if both methods fail
+                
+                # If both methods failed, use character-based heuristic
+                script_match = _check_script_match(sentence, query)
+                if script_match > 0.5:  # Significant script match
+                    matching_sentences += 1
+            
+            # Calculate final reward
+            if total_sentences == 0:
+                reward = 0.4  # Neutral-positive score if no valid sentences
+            else:
+                # Base reward on percentage of matching sentences
+                reward = matching_sentences / total_sentences
+            
+            # Log samples occasionally
+            if random.random() < 0.01:  # 1% chance to log
+                try:
+                    os.makedirs("completion_samples", exist_ok=True)
+                    log_file = os.path.join("completion_samples", "language_match_advanced_samples.txt")
+                    with open(log_file, "a") as f:
+                        f.write(f"\n\n==============\n")
+                        f.write(f"Query lang: {primary_query_lang}\n")
+                        f.write(f"Query: {query}\n")
+                        f.write(f"Think content (sample): {think_content[:150]}...\n")
+                        f.write(f"Matching sentences: {matching_sentences}/{total_sentences}\n")
+                        f.write(f"Reward: {reward:.7f}\n")  # Updated to 7 decimal places
+                except Exception as e:
+                    print(f"Warning: Could not write log: {e}")
+            
+            # Log detailed reward information occasionally
+            if random.random() < 0.01:  # 1% of batches
+                try:
+                    os.makedirs("logs/reward_details", exist_ok=True)
+                    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+                    log_file = os.path.join("logs/reward_details", f"language_reward_{timestamp}.txt")
+                    with open(log_file, "a") as f:
+                        f.write(f"\n==============\n")
+                        f.write(f"Query lang: {primary_query_lang}\n")
+                        f.write(f"Reward: {reward:.7f}\n")  # Using 7 decimal places for higher precision
+                        f.write(f"Matching sentences: {matching_sentences}/{total_sentences}\n")
+                except Exception as e:
+                    print(f"Warning: Could not write detailed reward log: {e}")
+            
+            rewards.append(reward)
+            
+        except Exception as e:
+            print(f"Error in advanced language matching reward function: {e}")
+            # Use fallback method on error
+            try:
+                fallback_reward = _fallback_language_match(think_content, query)
+                rewards.append(fallback_reward)
+            except:
+                rewards.append(0.5)  # Neutral reward on complete failure
+            
+    return rewards
+
+def _check_script_match(text1, text2):
+    """
+    Check if two texts use the same script/character set.
+    Returns a similarity score between 0 and 1.
+    """
+    # Character sets that are distinctive for different scripts
+    script_markers = {
+        'devanagari': [chr(c) for c in range(0x0900, 0x097F)],  # Hindi, Sanskrit, etc.
+        'arabic': [chr(c) for c in range(0x0600, 0x06FF)],      # Arabic, Persian, Urdu, etc.
+        'chinese': [chr(c) for c in range(0x4E00, 0x9FFF)],     # Chinese
+        'cyrillic': [chr(c) for c in range(0x0400, 0x04FF)],    # Russian, etc.
+        'thai': [chr(c) for c in range(0x0E00, 0x0E7F)],        # Thai
+        'hangul': [chr(c) for c in range(0xAC00, 0xD7AF)],      # Korean
+        'latin': [chr(c) for c in range(0x0041, 0x007A)]        # Latin/Roman (English, Spanish, etc.)
+    }
+    
+    # Count script markers in each text
+    text1_scripts = {}
+    text2_scripts = {}
+    
+    for script, markers in script_markers.items():
+        # Count markers in each text
+        text1_count = sum(1 for c in text1 if c in markers)
+        text2_count = sum(1 for c in text2 if c in markers)
+        
+        text1_scripts[script] = text1_count
+        text2_scripts[script] = text2_count
+    
+    # Find dominant script in each text
+    dominant_script1 = max(text1_scripts.items(), key=lambda x: x[1])[0]
+    dominant_script2 = max(text2_scripts.items(), key=lambda x: x[1])[0]
+    
+    # If minimal script markers, default to 'latin'
+    if text1_scripts[dominant_script1] < 3:
+        dominant_script1 = 'latin'
+    if text2_scripts[dominant_script2] < 3:
+        dominant_script2 = 'latin'
+    
+    # Calculate match score
+    if dominant_script1 == dominant_script2:
+        return 1.0  # Perfect script match
+    else:
+        # Check for partial match (some characters in the same script)
+        # This handles code-switching/mixed language content
+        script1_in_text2 = text2_scripts.get(dominant_script1, 0) / max(1, len(text2))
+        script2_in_text1 = text1_scripts.get(dominant_script2, 0) / max(1, len(text1))
+        
+        return max(script1_in_text2, script2_in_text1)
+
+############
+class DetailedTensorboardCallback(TrainerCallback):
+    """Custom callback for logging more detailed metrics to TensorBoard."""
+    
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        """Event called after logging the last logs."""
+        if not hasattr(args, "writer") or args.writer is None:
+            return
+            
+        for key, value in logs.items():
+            if isinstance(value, (int, float)):
+                # Log with high precision (7 decimal places)
+                args.writer.add_scalar(key, float(f"{value:.7f}"), state.global_step)
+                
+                # Special handling for loss values - log to console with higher precision
+                if "loss" in key.lower():
+                    print(f"Step {state.global_step}: {key} = {value:.7f}")
+                    
+        # Additional useful metrics that might not be in logs
+        if hasattr(state, "train_metrics") and state.train_metrics:
+            for reward_key, reward_val in state.train_metrics.items():
+                if "reward" in reward_key and isinstance(reward_val, (int, float)):
+                    args.writer.add_scalar(f"rewards/{reward_key}", float(f"{reward_val:.7f}"), state.global_step)
+
+    def on_train_begin(self, args, state, control, **kwargs):
+        """Log model architecture and hyperparameters at the beginning of training."""
+        if not hasattr(args, "writer") or args.writer is None:
+            return
+            
+        # Log hyperparameters as text
+        hparams_str = "\n".join([f"{k}: {v}" for k, v in vars(args).items() 
+                                if not k.startswith("_") and not callable(v)])
+        args.writer.add_text("hyperparameters", hparams_str, 0)
 
 def get_checkpoint(training_args: GRPOConfig):
     last_checkpoint = None
@@ -158,6 +706,113 @@ def get_checkpoint(training_args: GRPOConfig):
         last_checkpoint = get_last_checkpoint(training_args.output_dir)
     return last_checkpoint
 
+def prepare_hf_factual_dataset(
+    tokenizer: Any,
+    dataset_name: str = "krtanmay147/factual-multilingual-questions",
+    languages: Optional[List[str]] = None,
+    sample_per_language: Optional[int] = None,
+    test_size: float = 0.1,
+    seed: int = 42
+) -> Tuple[Dataset, Dataset]:
+    """
+    Load a dataset from Hugging Face, format it with the factual QA template, and return train/test splits.
+    
+    Args:
+        tokenizer: The tokenizer to use for formatting prompts
+        dataset_name (str): The name of the Hugging Face dataset to load
+        languages (List[str], optional): If provided, only include these languages
+        sample_per_language (int, optional): If provided, sample this many examples per language
+        test_size (float): Proportion of data to use for testing (default: 0.1)
+        seed (int): Random seed for reproducibility
+        
+    Returns:
+        Tuple[Dataset, Dataset]: (train_dataset, test_dataset)
+    """
+    # Set random seed for reproducibility
+    random.seed(seed)
+    
+    logger.info(f"Loading dataset {dataset_name} from Hugging Face...")
+    
+    # Load the dataset
+    dataset = load_dataset(dataset_name)
+    
+    # Get the main split (usually 'train')
+    main_split = list(dataset.keys())[0]
+    data = dataset[main_split]
+    
+    logger.info(f"Loaded {len(data)} examples from {dataset_name}")
+    
+    # Filter by languages if specified
+    if languages:
+        logger.info(f"Filtering dataset to include only languages: {languages}")
+        data = data.filter(lambda x: x["language"] in languages)
+        logger.info(f"After filtering, dataset has {len(data)} examples")
+    
+    # Group by language
+    examples_by_language = {}
+    for example in data:
+        lang = example["language"]
+        if lang not in examples_by_language:
+            examples_by_language[lang] = []
+        examples_by_language[lang].append(example)
+    
+    # Sample per language if specified
+    formatted_data = []
+    for lang, examples in examples_by_language.items():
+        if sample_per_language and len(examples) > sample_per_language:
+            logger.info(f"Sampling {sample_per_language} examples for language {lang}")
+            sampled = random.sample(examples, sample_per_language)
+        else:
+            sampled = examples
+            logger.info(f"Using all {len(examples)} examples for language {lang}")
+        
+        # Add all examples
+        formatted_data.extend(sampled)
+    
+    # Shuffle the final dataset
+    random.shuffle(formatted_data)
+    
+    # Create a HuggingFace Dataset
+    dataset = Dataset.from_list(formatted_data)
+    
+    logger.info(f"Created dataset with {len(dataset)} examples")
+    
+    # Define the prompt generation function
+    def generate_factual_prompt(example):
+        question = example["question"]
+        answer = example["answers"]
+        
+        r1_prefix = [
+            {"role": "system", "content": "You are a helpful assistant. When answering a factual question, first think and reason in the same language as the question (for example, if question is in Hindi then think and reason in Hindi). Then, provide the final answer clearly in that same language."},
+            #{"role": "system", "content": "You are a helpful assistant. When answering a factual question, first think and reason in the language you are most confident in. (For example, information about Thailand may be recalled better either in English or in Thai.) First, decide which language would be most suitable to answer the given query. If you are not able to recall the information using your internal knowledge in that language, then switch to a different language for reasoning. After reasoning, always provide the final answer clearly in the language of the original question."},
+            {"role": "user", "content": f"{question} Please think carefully and return your reasoning inside <think> </think> tags, and the final direct answer inside <answer> </answer> tags."},
+            {"role": "assistant", "content": "Let me think step by step.\n<think>"}
+        ]
+        
+        return {
+            "prompt": tokenizer.apply_chat_template(r1_prefix, tokenize=False, continue_final_message=True),
+            "target": answer,
+            "question": question,
+            # Preserve additional fields that might be needed
+            "language": example.get("language"),
+            "region": example.get("region"),
+            "topic": example.get("topic"),
+            "answer_type": example.get("answer_type"),
+            "id": example.get("id"),
+            "answer_list": example.get("answer_list")
+        }
+    
+    # Apply the prompt template to the dataset
+    logger.info("Applying prompt template to dataset...")
+    formatted_dataset = dataset.map(generate_factual_prompt)
+    
+    # Split into train/test
+    logger.info(f"Splitting dataset into train/test with test_size={test_size}...")
+    train_test_split = formatted_dataset.train_test_split(test_size=test_size, seed=seed)
+    
+    logger.info(f"Final split: {len(train_test_split['train'])} train examples, {len(train_test_split['test'])} test examples")
+    
+    return train_test_split["train"], train_test_split["test"]
 
 def prepare_factual_dataset(dataset_path, tokenizer):
     """
@@ -166,13 +821,14 @@ def prepare_factual_dataset(dataset_path, tokenizer):
     # Prepare prompt template for factual QA
     def generate_factual_prompt(question, answer):
         r1_prefix = [
-            {"role": "system", "content": "You are a helpful assistant. You first think about the reasoning behind the factual question using your internal knowledge in any language that can help you answer the given question. Think and reason in the language (for example, Hindi, Swahili, or any other language) if you feel that it can help you answer the question more accurately. Then, provide the final answer clearly in the same language as that of the question."},
+            {"role": "system", "content": "You are a helpful assistant. When answering a factual question, first think and reason in the same language as the question (for example, if question is in Hindi then think and reason in Hindi). Then, provide the final answer clearly in that same language."},
             {"role": "user", "content": f"{question} Please think carefully and return your reasoning inside <think> </think> tags, and the final answer inside <answer> </answer> tags."},
             {"role": "assistant", "content": "Let me think step by step.\n<think>"}
         ]
         return {
             "prompt": tokenizer.apply_chat_template(r1_prefix, tokenize=False, continue_final_message=True),
-            "target": answer
+            "target": answer,
+            "question":question
         }
     
     
@@ -232,9 +888,15 @@ def grpo_function(
     # Load datasets
     ###############
     #dataset_path = getattr(script_args, "dataset_id_or_path", None)
-    dataset_path = "./data/factual_dataset"
-    train_dataset, test_dataset = prepare_factual_dataset(
-        dataset_path, tokenizer
+    dataset_path = "./data/xfactual_dataset"
+    # train_dataset, test_dataset = prepare_factual_dataset(
+    #     dataset_path, tokenizer
+    # )
+
+    train_dataset, test_dataset = prepare_hf_factual_dataset(
+        tokenizer=tokenizer,
+        test_size=0.1,
+        seed=42
     )
 
     logger.info(f"Loaded {len(train_dataset)} training examples and {len(test_dataset)} test examples")
@@ -282,12 +944,47 @@ def grpo_function(
     
     trainer = GRPOTrainer(
         model=getattr(model_args, "model_name_or_path", "Qwen/Qwen2.5-3B-Instruct"),
-        reward_funcs=[format_reward_func_factual, correctness_reward_func_factual],
+        #reward_funcs=[format_reward_func_factual, correctness_reward_func_factual],
+        reward_funcs=[correctness_reward_func_factual_fuzzy, format_reward_func_factual, language_matching_reward_func_advanced],
         args=grpo_config,
         train_dataset=train_dataset,
         eval_dataset=test_dataset,
         peft_config=peft_config,
     )
+
+    # Set up SummaryWriter for more detailed logging
+    writer = SummaryWriter(log_dir=output_dir)
+    trainer.writer = writer  # Attach to trainer for use in callbacks
+
+    # Add detailed tensorboard callback
+    detailed_tb_callback = DetailedTensorboardCallback()
+    trainer.add_callback(detailed_tb_callback)
+    
+    # Log the learning rate schedule
+    try:
+        # Create temporary scheduler for visualization
+        from transformers.optimization import get_scheduler
+        temp_optimizer = torch.optim.AdamW([torch.nn.Parameter(torch.tensor([0.0]))], lr=grpo_config.learning_rate)
+        temp_scheduler = get_scheduler(
+            grpo_config.lr_scheduler_type,
+            optimizer=temp_optimizer,
+            num_warmup_steps=int(grpo_config.warmup_ratio * grpo_config.max_steps),
+            num_training_steps=grpo_config.max_steps,
+        )
+        
+        # Calculate and log LR schedule
+        lrs = []
+        for i in range(grpo_config.max_steps):
+            lrs.append(temp_scheduler.get_last_lr()[0])
+            temp_scheduler.step()
+        
+        # Log to tensorboard
+        for step, lr in enumerate(lrs):
+            writer.add_scalar("training/learning_rate_schedule", lr, step)
+        
+        logger.info(f"Logged learning rate schedule to TensorBoard")
+    except Exception as e:
+        logger.warning(f"Failed to log learning rate schedule: {e}")
 
     ###############
     # Training loop
@@ -308,9 +1005,30 @@ def grpo_function(
     # Log and save metrics
     metrics = train_result.metrics
     metrics["train_samples"] = len(train_dataset)
+
+    # Format loss values with more decimal places for logging
+    for key, value in metrics.items():
+        if isinstance(value, (int, float)) and "loss" in key:
+            logger.info(f"{key}: {value:.7f}")
+        else:
+            logger.info(f"{key}: {value}")
+
     trainer.log_metrics("train", metrics)
     trainer.save_metrics("train", metrics)
     trainer.save_state()
+
+    # Log final rewards to tensorboard
+    try:
+        reward_metrics = {}
+        for i, reward_func in enumerate(trainer.reward_funcs):
+            func_name = reward_func.__name__
+            if hasattr(trainer, "last_rewards") and i < len(trainer.last_rewards):
+                last_reward = np.mean(trainer.last_rewards[i])
+                reward_metrics[f"final_{func_name}"] = last_reward
+                writer.add_scalar(f"rewards/final_{func_name}", last_reward, 0)
+                logger.info(f"Final reward for {func_name}: {last_reward:.7f}")
+    except Exception as e:
+        logger.warning(f"Failed to log final rewards: {e}")
 
     logger.info("*** Training complete ***")
 
@@ -345,6 +1063,8 @@ def grpo_function(
         except Exception as e:
             logger.error(f"Error pushing to hub: {e}")
 
+    # Close tensorboard writer
+    writer.close()
     logger.info("*** Training complete! ***")
 
 

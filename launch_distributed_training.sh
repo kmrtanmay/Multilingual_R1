@@ -7,10 +7,10 @@ export HF_HUB_ENABLE_HF_TRANSFER=1
 
 # Config file
 CONFIG_FILE="factual_grpo_config.yaml"
-OUTPUT_DIR="runs/qwen-r1-factual-qa_steps_1000_batch_2_promptv2"
+OUTPUT_DIR="runs/qwen2.5-3B-R1-factual-qa_template_1_lora"
 
 # Distributed training settings
-NUM_GPUS=4
+NUM_GPUS=2
 MASTER_PORT=$(shuf -i 10000-65535 -n 1)
 
 # Memory optimizations for distributed training
@@ -32,7 +32,7 @@ echo "Master port: $MASTER_PORT"
 mkdir -p $OUTPUT_DIR
 
 # Launch distributed training using accelerate
-python -m accelerate.commands.launch \
+exec python -m accelerate.commands.launch \
     --config_file accelerate_config.yaml \
     --num_processes=$NUM_GPUS \
     --main_process_port=$MASTER_PORT \

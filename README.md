@@ -8,14 +8,6 @@ This project trains LLMs using DeepSeek R1 GRPO method to improve their multilin
 
 First, prepare the factual question-answer dataset.
 
-- The factual questions are generated based on the ideas from [this paper](https://arxiv.org/abs/2502.17955).
-
-- To create the dataset:
-
-```bash
-python prepare_factual_dataset.py
-```
-
 This will generate question-answer pairs across 13 languages, focusing on entities like persons, events, and landmarks linked to countries.
 
 ---
@@ -35,7 +27,7 @@ bash train_single_gpu.sh
 If you want to train the model using **distributed training** on 4 A100 GPUs, run:
 
 ```bash
-bash run_with_logs.sh
+bash main.sh
 ```
 
 This script will handle launching the distributed training and saving logs automatically.
