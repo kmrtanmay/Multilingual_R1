@@ -65,7 +65,7 @@ def format_reward_func_factual(completions, target, **kwargs):
             # Log samples occasionally
             if random.random() < 0.05:  # 5% chance to log samples
                 os.makedirs("completion_samples", exist_ok=True)
-                log_file = os.path.join("completion_samples", "factual_samples.txt")
+                log_file = os.path.join("completion_samples", "factual_samples_v2.txt")
                 with open(log_file, "a") as f:
                     f.write(f"\n\n==============\n")
                     f.write(completion)
@@ -141,7 +141,7 @@ def correctness_reward_func_factual(completions, targets=None, **kwargs):
                 # Log successful samples occasionally
                 if random.random() < 0.10:  # 10% chance to log successful samples
                     os.makedirs("completion_samples", exist_ok=True)
-                    log_file = os.path.join("completion_samples", "successful_factual_samples.txt")
+                    log_file = os.path.join("completion_samples", "successful_factual_samples_v2.txt")
                     with open(log_file, "a") as f:
                         f.write(f"\n\n==============\n")
                         f.write(f"Completion: {completion}\n")
@@ -155,6 +155,113 @@ def correctness_reward_func_factual(completions, targets=None, **kwargs):
 
     return rewards
 
+# def correctness_reward_func_factual_fuzzy(completions, targets=None, **kwargs):
+#     """
+#     Checks whether extracted <answer> matches any answer in the answer_list,
+#     with flexible parsing and comparison of answers.
+    
+#     Args:
+#         completions (list[str]): Model completions
+#         targets (list[str]): Not used, targets come from kwargs['target']
+#         **kwargs: Contains 'target' (primary answers) and 'answer_list' (all acceptable answers)
+        
+#     Returns:
+#         list[float]: Reward scores (1.0 for correct, 0.0 for incorrect)
+#     """
+#     rewards = []
+    
+#     # Get targets and answer_lists from kwargs
+#     targets = kwargs.get('target', [])
+#     answer_lists = kwargs.get('answer_list', [])
+    
+#     for i, (completion, target) in enumerate(zip(completions, targets)):
+#         try:
+#             # Ensure the completion has the <think> tag for proper pattern matching
+#             if "<think>" not in completion:
+#                 completion = "<think>" + completion
+            
+#             # Extract the answer text between <answer> tags
+#             match = re.search(r"<answer>(.*?)<\/answer>", completion, re.DOTALL)
+#             if match is None:
+#                 rewards.append(0.0)
+#                 continue
+            
+#             # Get the predicted answer and normalize it
+#             prediction = match.group(1).strip().lower()
+            
+#             # Get all possible acceptable answers
+#             all_acceptable_answers = []
+            
+#             # Always include the primary target
+#             if target:
+#                 all_acceptable_answers.append(target.strip().lower())
+            
+#             # Process the answer_list
+#             if i < len(answer_lists):
+#                 current_answer_list = answer_lists[i]
+                
+#                 # Handle different formats of answer_list
+#                 if isinstance(current_answer_list, str):
+#                     # Try parsing as a comma-separated string first
+#                     if "," in current_answer_list:
+#                         parts = [p.strip().lower() for p in current_answer_list.split(",")]
+#                         all_acceptable_answers.extend(parts)
+#                     else:
+#                         all_acceptable_answers.append(current_answer_list.strip().lower())
+                
+#                 elif isinstance(current_answer_list, list):
+#                     # Process each answer in the list
+#                     for ans in current_answer_list:
+#                         if isinstance(ans, str):
+#                             # If it contains commas, split it
+#                             if "," in ans:
+#                                 parts = [p.strip().lower() for p in ans.split(",")]
+#                                 all_acceptable_answers.extend(parts)
+#                             else:
+#                                 all_acceptable_answers.append(ans.strip().lower())
+#                         else:
+#                             # For non-string answers (e.g., numbers)
+#                             all_acceptable_answers.append(str(ans).strip().lower())
+            
+#             # Debug logging for a small percentage of examples
+#             if random.random() < 0.01:
+#                 print(f"\nPrediction: '{prediction}'")
+#                 print(f"All acceptable answers: {all_acceptable_answers}")
+            
+#             # Check if the prediction matches any acceptable answer
+#             match_found = False
+#             for acceptable in all_acceptable_answers:
+#                 if prediction == acceptable:
+#                     match_found = True
+#                     break
+            
+#             if match_found:
+#                 rewards.append(1.0)
+                
+#                 # Log successful samples occasionally
+#                 if random.random() < 0.05:
+#                     os.makedirs("completion_samples", exist_ok=True)
+#                     with open("completion_samples/successful_factual_samples_v2.txt", "a") as f:
+#                         f.write(f"\n\n==============\n")
+#                         f.write(f"Completion: {completion}\n")
+#                         f.write(f"Prediction: '{prediction}'\n")
+#                         f.write(f"Matched with one of: {all_acceptable_answers}\n")
+#             else:
+#                 rewards.append(0.0)
+                
+#                 # Log failures occasionally for debugging
+#                 if random.random() < 0.01:
+#                     print(f"No match found for: '{prediction}'")
+#                     print(f"Acceptable answers were: {all_acceptable_answers}")
+            
+#         except Exception as e:
+#             print(f"Error in reward function: {e}")
+#             rewards.append(0.0)
+    
+#     return rewards
+
+from difflib import SequenceMatcher
+
 def correctness_reward_func_factual_fuzzy(completions, targets=None, **kwargs):
     """
     Checks whether extracted <answer> matches any answer in the answer_list,
@@ -166,13 +273,67 @@ def correctness_reward_func_factual_fuzzy(completions, targets=None, **kwargs):
         **kwargs: Contains 'target' (primary answers) and 'answer_list' (all acceptable answers)
         
     Returns:
-        list[float]: Reward scores (1.0 for correct, 0.0 for incorrect)
+        list[float]: Reward scores between 0.0 and 1.0, with partial credit for close matches
     """
     rewards = []
     
     # Get targets and answer_lists from kwargs
     targets = kwargs.get('target', [])
     answer_lists = kwargs.get('answer_list', [])
+    
+    # Define thresholds for fuzzy matching
+    exact_match_threshold = 1.0
+    high_similarity_threshold = 0.9
+    medium_similarity_threshold = 0.75
+    low_similarity_threshold = 0.6
+    
+    def normalize_text(text):
+        """Normalize text by removing extra spaces, lowercasing, etc."""
+        if not isinstance(text, str):
+            text = str(text)
+        # Remove extra whitespace and lowercase
+        return re.sub(r'\s+', ' ', text).strip().lower()
+    
+    def similarity_ratio(text1, text2):
+        """Calculate similarity ratio between two strings using SequenceMatcher."""
+        return SequenceMatcher(None, text1, text2).ratio()
+    
+    def contains_key_elements(prediction, acceptable):
+        """Check if prediction contains all important words from acceptable answer."""
+        # Tokenize and filter for meaningful words (longer than 3 chars)
+        acceptable_words = [w for w in acceptable.split() if len(w) > 3]
+        if not acceptable_words:  # If no meaningful words, fall back to all words
+            acceptable_words = acceptable.split()
+        
+        # Count how many key words are found in the prediction
+        found_words = sum(1 for word in acceptable_words if word in prediction)
+        
+        # Calculate coverage ratio
+        if len(acceptable_words) == 0:
+            return 0.0
+        return found_words / len(acceptable_words)
+    
+    def is_numeric_match(pred, target, tolerance=0.05):
+        """Check if numerical values match within tolerance."""
+        try:
+            # Extract numbers from strings
+            pred_nums = [float(s) for s in re.findall(r'[-+]?\d*\.\d+|\d+', pred)]
+            target_nums = [float(s) for s in re.findall(r'[-+]?\d*\.\d+|\d+', target)]
+            
+            # If both have exactly one number, compare them
+            if len(pred_nums) == 1 and len(target_nums) == 1:
+                return abs(pred_nums[0] - target_nums[0]) <= tolerance * max(1, abs(target_nums[0]))
+            
+            # If they have the same number of numerical values, compare each pair
+            if len(pred_nums) == len(target_nums) and len(pred_nums) > 0:
+                matches = 0
+                for p, t in zip(sorted(pred_nums), sorted(target_nums)):
+                    if abs(p - t) <= tolerance * max(1, abs(t)):
+                        matches += 1
+                return matches / len(target_nums)
+        except:
+            pass
+        return 0.0
     
     for i, (completion, target) in enumerate(zip(completions, targets)):
         try:
@@ -187,14 +348,14 @@ def correctness_reward_func_factual_fuzzy(completions, targets=None, **kwargs):
                 continue
             
             # Get the predicted answer and normalize it
-            prediction = match.group(1).strip().lower()
+            prediction = normalize_text(match.group(1))
             
             # Get all possible acceptable answers
             all_acceptable_answers = []
             
             # Always include the primary target
             if target:
-                all_acceptable_answers.append(target.strip().lower())
+                all_acceptable_answers.append(normalize_text(target))
             
             # Process the answer_list
             if i < len(answer_lists):
@@ -204,10 +365,10 @@ def correctness_reward_func_factual_fuzzy(completions, targets=None, **kwargs):
                 if isinstance(current_answer_list, str):
                     # Try parsing as a comma-separated string first
                     if "," in current_answer_list:
-                        parts = [p.strip().lower() for p in current_answer_list.split(",")]
+                        parts = [normalize_text(p) for p in current_answer_list.split(",")]
                         all_acceptable_answers.extend(parts)
                     else:
-                        all_acceptable_answers.append(current_answer_list.strip().lower())
+                        all_acceptable_answers.append(normalize_text(current_answer_list))
                 
                 elif isinstance(current_answer_list, list):
                     # Process each answer in the list
@@ -215,44 +376,104 @@ def correctness_reward_func_factual_fuzzy(completions, targets=None, **kwargs):
                         if isinstance(ans, str):
                             # If it contains commas, split it
                             if "," in ans:
-                                parts = [p.strip().lower() for p in ans.split(",")]
+                                parts = [normalize_text(p) for p in ans.split(",")]
                                 all_acceptable_answers.extend(parts)
                             else:
-                                all_acceptable_answers.append(ans.strip().lower())
+                                all_acceptable_answers.append(normalize_text(ans))
                         else:
                             # For non-string answers (e.g., numbers)
-                            all_acceptable_answers.append(str(ans).strip().lower())
+                            all_acceptable_answers.append(normalize_text(str(ans)))
+            
+            # Remove duplicates from acceptable answers
+            all_acceptable_answers = list(set(all_acceptable_answers))
             
             # Debug logging for a small percentage of examples
             if random.random() < 0.01:
                 print(f"\nPrediction: '{prediction}'")
                 print(f"All acceptable answers: {all_acceptable_answers}")
             
-            # Check if the prediction matches any acceptable answer
-            match_found = False
-            for acceptable in all_acceptable_answers:
-                if prediction == acceptable:
-                    match_found = True
-                    break
+            # Check for matches with various degrees of flexibility
+            best_match_score = 0.0
+            best_match_answer = ""
+            match_method = ""
             
-            if match_found:
-                rewards.append(1.0)
+            for acceptable in all_acceptable_answers:
+                # Try exact match first (original behavior)
+                if prediction == acceptable:
+                    best_match_score = 1.0
+                    best_match_answer = acceptable
+                    match_method = "exact"
+                    break
                 
-                # Log successful samples occasionally
-                if random.random() < 0.05:
-                    os.makedirs("completion_samples", exist_ok=True)
-                    with open("completion_samples/successful_factual_samples.txt", "a") as f:
-                        f.write(f"\n\n==============\n")
-                        f.write(f"Completion: {completion}\n")
-                        f.write(f"Prediction: '{prediction}'\n")
-                        f.write(f"Matched with one of: {all_acceptable_answers}\n")
+                # Calculate similarity score
+                sim_score = similarity_ratio(prediction, acceptable)
+                
+                # Check for numeric match if we have numbers
+                num_match_score = is_numeric_match(prediction, acceptable)
+                
+                # Check for key elements containment
+                containment_score = contains_key_elements(prediction, acceptable)
+                
+                # Take the best score from the different methods
+                method_scores = [
+                    (sim_score, "similarity"),
+                    (num_match_score, "numeric"),
+                    (containment_score, "key_elements")
+                ]
+                
+                # Get the highest score and its method
+                current_score, current_method = max(method_scores, key=lambda x: x[0])
+                
+                # Update best match if this is better
+                if current_score > best_match_score:
+                    best_match_score = current_score
+                    best_match_answer = acceptable
+                    match_method = current_method
+            
+            # Assign reward based on match quality
+            if best_match_score >= exact_match_threshold:
+                reward = 1.0
+            elif best_match_score >= high_similarity_threshold:
+                reward = 0.9
+            elif best_match_score >= medium_similarity_threshold:
+                reward = 0.7
+            elif best_match_score >= low_similarity_threshold:
+                reward = 0.5
             else:
-                rewards.append(0.0)
+                reward = 0.0
+            
+            rewards.append(reward)
+            
+            # Log samples for analysis
+            if random.random() < 0.05:
+                os.makedirs("completion_samples", exist_ok=True)
+                log_file = "successful_factual_samples_v2.txt" if reward >= 0.9 else "partial_match_samples_v2.txt"
                 
-                # Log failures occasionally for debugging
-                if random.random() < 0.01:
-                    print(f"No match found for: '{prediction}'")
-                    print(f"Acceptable answers were: {all_acceptable_answers}")
+                with open(f"completion_samples/{log_file}", "a") as f:
+                    f.write(f"\n\n==============\n")
+                    f.write(f"Completion: {completion}\n")
+                    f.write(f"Prediction: '{prediction}'\n")
+                    f.write(f"Best Match: '{best_match_answer}' (Score: {best_match_score:.2f}, Method: {match_method})\n")
+                    f.write(f"Reward: {reward}\n")
+                    f.write(f"All acceptable answers: {all_acceptable_answers}\n")
+            
+            # Log failures occasionally for debugging
+            if reward == 0.0 and random.random() < 0.05:
+                os.makedirs("completion_samples", exist_ok=True)
+                with open("completion_samples/failed_matches_v2.txt", "a") as f:
+                    f.write(f"\n\n==============\n")
+                    f.write(f"Completion: {completion}\n")
+                    f.write(f"Prediction: '{prediction}'\n")
+                    f.write(f"Failed to match. Best match: '{best_match_answer}' (Score: {best_match_score:.2f})\n")
+                    f.write(f"Acceptable answers were: {all_acceptable_answers}\n")
+                    
+                    # Log individual similarity scores for analysis
+                    f.write("Detailed match scores:\n")
+                    for acceptable in all_acceptable_answers:
+                        sim = similarity_ratio(prediction, acceptable)
+                        num = is_numeric_match(prediction, acceptable)
+                        key = contains_key_elements(prediction, acceptable)
+                        f.write(f"  - '{acceptable}': Similarity={sim:.2f}, Numeric={num:.2f}, KeyElements={key:.2f}\n")
             
         except Exception as e:
             print(f"Error in reward function: {e}")
@@ -356,7 +577,7 @@ def language_matching_reward_func(completions, queries, **kwargs):
             if random.random() < 0.01:  # 1% chance to log
                 try:
                     os.makedirs("completion_samples", exist_ok=True)
-                    log_file = os.path.join("completion_samples", "language_match_samples.txt")
+                    log_file = os.path.join("completion_samples", "language_match_samples_v2.txt")
                     with open(log_file, "a") as f:
                         f.write(f"\n\n==============\n")
                         f.write(f"Query ({query_lang}): {query}\n")
@@ -595,7 +816,7 @@ def language_matching_reward_func_advanced(completions, targets=None, **kwargs):
                 try:
                     os.makedirs("logs/reward_details", exist_ok=True)
                     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-                    log_file = os.path.join("logs/reward_details", f"language_reward_{timestamp}.txt")
+                    log_file = os.path.join("logs/reward_details", f"language_reward_{timestamp}_v2.txt")
                     with open(log_file, "a") as f:
                         f.write(f"\n==============\n")
                         f.write(f"Query lang: {primary_query_lang}\n")
@@ -708,7 +929,7 @@ def get_checkpoint(training_args: GRPOConfig):
 
 def prepare_hf_factual_dataset(
     tokenizer: Any,
-    dataset_name: str = "krtanmay147/factual-multilingual-questions",
+    dataset_name: str = "krtanmay147/train-dataset-grpo",
     languages: Optional[List[str]] = None,
     sample_per_language: Optional[int] = None,
     test_size: float = 0.1,
@@ -783,6 +1004,8 @@ def prepare_hf_factual_dataset(
         answer = example["answers"]
         
         r1_prefix = [
+            {"role": "system", "content": "You are a helpful assistant. When answering a factual question, follow these steps:\n1. First, search your internal knowledge base thoroughly for relevant background information about the topic.\n2. Think and reason carefully in the same language as the question (for example, if the question is in Hindi, then think and reason in Hindi).\n3. Consider multiple perspectives and potential answers before settling on your final response.\n4. Evaluate the confidence in your answer based on the information available to you.\n5. Provide the final answer clearly in the same language as the question, making sure it's well-supported by your reasoning.\n6. If there are significant uncertainties or gaps in your knowledge, acknowledge them transparently.\n\nYour goal is to provide accurate, well-reasoned responses that demonstrate depth of understanding, not just surface-level answers."
+            },
             {"role": "system", "content": "You are a helpful assistant. When answering a factual question, first think and reason in the same language as the question (for example, if question is in Hindi then think and reason in Hindi). Then, provide the final answer clearly in that same language."},
             #{"role": "system", "content": "You are a helpful assistant. When answering a factual question, first think and reason in the language you are most confident in. (For example, information about Thailand may be recalled better either in English or in Thai.) First, decide which language would be most suitable to answer the given query. If you are not able to recall the information using your internal knowledge in that language, then switch to a different language for reasoning. After reasoning, always provide the final answer clearly in the language of the original question."},
             {"role": "user", "content": f"{question} Please think carefully and return your reasoning inside <think> </think> tags, and the final direct answer inside <answer> </answer> tags."},
