@@ -929,7 +929,7 @@ def get_checkpoint(training_args: GRPOConfig):
 
 def prepare_hf_factual_dataset(
     tokenizer: Any,
-    dataset_name: str = "krtanmay147/train-dataset-grpo",
+    dataset_name: str = "krtanmay147/train-dataset-grpo_v2",
     languages: Optional[List[str]] = None,
     sample_per_language: Optional[int] = None,
     test_size: float = 0.1,
@@ -1001,7 +1001,9 @@ def prepare_hf_factual_dataset(
     # Define the prompt generation function
     def generate_factual_prompt(example):
         question = example["question"]
-        answer = example["answers"]
+        answer_list = example.get("answer_list")
+        #answer = example["answers"]
+        answer = answer_list[0]
         
         r1_prefix = [
             {"role": "system", "content": "You are a helpful assistant. When answering a factual question, follow these steps:\n1. First, search your internal knowledge base thoroughly for relevant background information about the topic.\n2. Think and reason carefully in the same language as the question (for example, if the question is in Hindi, then think and reason in Hindi).\n3. Consider multiple perspectives and potential answers before settling on your final response.\n4. Evaluate the confidence in your answer based on the information available to you.\n5. Provide the final answer clearly in the same language as the question, making sure it's well-supported by your reasoning.\n6. If there are significant uncertainties or gaps in your knowledge, acknowledge them transparently.\n\nYour goal is to provide accurate, well-reasoned responses that demonstrate depth of understanding, not just surface-level answers."
