@@ -1,0 +1,908 @@
+Launching distributed training on 2 GPUs
+Using configuration from factual_grpo_config.yaml
+Output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+Master port: 62267
+[W514 23:16:31.863873417 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:62267 (errno: 97 - Address family not supported by protocol).
+INFO 05-14 23:17:03 [importing.py:53] Triton module has been replaced with a placeholder.
+INFO 05-14 23:17:03 [importing.py:53] Triton module has been replaced with a placeholder.
+INFO 05-14 23:17:04 [__init__.py:239] Automatically detected platform cuda.
+INFO 05-14 23:17:04 [__init__.py:239] Automatically detected platform cuda.
+[W514 23:17:14.356092125 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:62267 (errno: 97 - Address family not supported by protocol).
+[W514 23:17:15.451903470 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:62267 (errno: 97 - Address family not supported by protocol).
+2025-05-14 23:17:15,078 - __main__ - INFO - Detected 2 GPUs. Enabling distributed training.
+INFO:__main__:Detected 2 GPUs. Enabling distributed training.
+2025-05-14 23:17:15,078 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:17:15,078 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:17:15,078 - __main__ - INFO - Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+INFO:__main__:Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+2025-05-14 23:17:15,079 - __main__ - INFO - Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=2,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-17-14_holygpu8a16501.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=8,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=2,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+INFO:__main__:Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=2,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-17-14_holygpu8a16501.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=8,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=2,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+2025-05-14 23:17:15,079 - __main__ - INFO - Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+INFO:__main__:Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+2025-05-14 23:17:15,079 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+2025-05-14 23:17:15,270 - __main__ - INFO - Detected 2 GPUs. Enabling distributed training.
+INFO:__main__:Detected 2 GPUs. Enabling distributed training.
+2025-05-14 23:17:15,270 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:17:15,270 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:17:15,270 - __main__ - INFO - Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+INFO:__main__:Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+2025-05-14 23:17:15,270 - __main__ - INFO - Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=2,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=1,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-17-14_holygpu8a16501.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=8,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=2,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+INFO:__main__:Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=2,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=1,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-17-14_holygpu8a16501.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=8,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=2,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+2025-05-14 23:17:15,270 - __main__ - INFO - Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+INFO:__main__:Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+2025-05-14 23:17:15,270 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+2025-05-14 23:17:15,453 - __main__ - INFO - Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+INFO:__main__:Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+2025-05-14 23:17:15,599 - __main__ - INFO - Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+INFO:__main__:Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+2025-05-14 23:17:16,570 - __main__ - INFO - Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+INFO:__main__:Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+2025-05-14 23:17:16,759 - __main__ - INFO - Using all 1063 examples for language hi
+INFO:__main__:Using all 1063 examples for language hi
+2025-05-14 23:17:16,759 - __main__ - INFO - Using all 1099 examples for language en
+INFO:__main__:Using all 1099 examples for language en
+2025-05-14 23:17:16,759 - __main__ - INFO - Using all 1063 examples for language ja
+INFO:__main__:Using all 1063 examples for language ja
+2025-05-14 23:17:16,759 - __main__ - INFO - Using all 1063 examples for language sw
+INFO:__main__:Using all 1063 examples for language sw
+2025-05-14 23:17:16,759 - __main__ - INFO - Using all 1063 examples for language th
+INFO:__main__:Using all 1063 examples for language th
+2025-05-14 23:17:16,784 - __main__ - INFO - Created dataset with 5351 examples
+INFO:__main__:Created dataset with 5351 examples
+2025-05-14 23:17:16,784 - __main__ - INFO - Applying prompt template to dataset...
+INFO:__main__:Applying prompt template to dataset...
+Map:   0%|          | 0/5351 [00:00<?, ? examples/s]Map:  17%|█▋        | 917/5351 [00:00<00:00, 9109.11 examples/s]Map:  35%|███▌      | 1873/5351 [00:00<00:00, 9372.75 examples/s]2025-05-14 23:17:17,128 - __main__ - INFO - Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+INFO:__main__:Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+Map:  53%|█████▎    | 2846/5351 [00:00<00:00, 9530.21 examples/s]Map:  71%|███████▏  | 3814/5351 [00:00<00:00, 9588.51 examples/s]2025-05-14 23:17:17,319 - __main__ - INFO - Using all 1063 examples for language hi
+INFO:__main__:Using all 1063 examples for language hi
+2025-05-14 23:17:17,319 - __main__ - INFO - Using all 1099 examples for language en
+INFO:__main__:Using all 1099 examples for language en
+2025-05-14 23:17:17,319 - __main__ - INFO - Using all 1063 examples for language ja
+INFO:__main__:Using all 1063 examples for language ja
+2025-05-14 23:17:17,319 - __main__ - INFO - Using all 1063 examples for language sw
+INFO:__main__:Using all 1063 examples for language sw
+2025-05-14 23:17:17,319 - __main__ - INFO - Using all 1063 examples for language th
+INFO:__main__:Using all 1063 examples for language th
+2025-05-14 23:17:17,343 - __main__ - INFO - Created dataset with 5351 examples
+INFO:__main__:Created dataset with 5351 examples
+2025-05-14 23:17:17,343 - __main__ - INFO - Applying prompt template to dataset...
+INFO:__main__:Applying prompt template to dataset...
+Map:  97%|█████████▋| 5177/5351 [00:00<00:00, 9354.44 examples/s]Map:   0%|          | 0/5351 [00:00<?, ? examples/s]Map: 100%|██████████| 5351/5351 [00:00<00:00, 9347.90 examples/s]
+2025-05-14 23:17:17,418 - __main__ - INFO - Splitting dataset into train/test with test_size=0.1...
+INFO:__main__:Splitting dataset into train/test with test_size=0.1...
+2025-05-14 23:17:17,421 - __main__ - INFO - Final split: 4815 train examples, 536 test examples
+INFO:__main__:Final split: 4815 train examples, 536 test examples
+2025-05-14 23:17:17,425 - __main__ - INFO - Loaded 4815 training examples and 536 test examples
+INFO:__main__:Loaded 4815 training examples and 536 test examples
+2025-05-14 23:17:17,425 - __main__ - INFO - Example 0:
+INFO:__main__:Example 0:
+2025-05-14 23:17:17,425 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:17:17,426 - __main__ - INFO - Target: Kalenjin
+INFO:__main__:Target: Kalenjin
+2025-05-14 23:17:17,426 - __main__ - INFO - Example 1:
+INFO:__main__:Example 1:
+2025-05-14 23:17:17,426 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:17:17,426 - __main__ - INFO - Target: 18
+INFO:__main__:Target: 18
+2025-05-14 23:17:17,426 - __main__ - INFO - Example 2:
+INFO:__main__:Example 2:
+2025-05-14 23:17:17,426 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:17:17,426 - __main__ - INFO - Target: 1994
+INFO:__main__:Target: 1994
+2025-05-14 23:17:17,426 - __main__ - INFO - Initializing GRPO trainer...
+INFO:__main__:Initializing GRPO trainer...
+2025-05-14 23:17:17,426 - __main__ - INFO - Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+INFO:__main__:Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+Map:  17%|█▋        | 915/5351 [00:00<00:00, 9089.72 examples/s]2025-05-14 23:17:17,505 - __main__ - INFO - Initializing PEFT config
+INFO:__main__:Initializing PEFT config
+Map:  35%|███▌      | 1889/5351 [00:00<00:00, 9469.07 examples/s]Map:  54%|█████▎    | 2876/5351 [00:00<00:00, 9647.79 examples/s]Map:  80%|███████▉  | 4277/5351 [00:00<00:00, 9492.65 examples/s]Map:  98%|█████████▊| 5244/5351 [00:00<00:00, 9548.62 examples/s]Map: 100%|██████████| 5351/5351 [00:00<00:00, 9466.65 examples/s]
+2025-05-14 23:17:17,966 - __main__ - INFO - Splitting dataset into train/test with test_size=0.1...
+INFO:__main__:Splitting dataset into train/test with test_size=0.1...
+2025-05-14 23:17:17,970 - __main__ - INFO - Final split: 4815 train examples, 536 test examples
+INFO:__main__:Final split: 4815 train examples, 536 test examples
+2025-05-14 23:17:17,974 - __main__ - INFO - Loaded 4815 training examples and 536 test examples
+INFO:__main__:Loaded 4815 training examples and 536 test examples
+2025-05-14 23:17:17,974 - __main__ - INFO - Example 0:
+INFO:__main__:Example 0:
+2025-05-14 23:17:17,974 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:17:17,974 - __main__ - INFO - Target: Kalenjin
+INFO:__main__:Target: Kalenjin
+2025-05-14 23:17:17,974 - __main__ - INFO - Example 1:
+INFO:__main__:Example 1:
+2025-05-14 23:17:17,974 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:17:17,974 - __main__ - INFO - Target: 18
+INFO:__main__:Target: 18
+2025-05-14 23:17:17,974 - __main__ - INFO - Example 2:
+INFO:__main__:Example 2:
+2025-05-14 23:17:17,974 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:17:17,975 - __main__ - INFO - Target: 1994
+INFO:__main__:Target: 1994
+2025-05-14 23:17:17,975 - __main__ - INFO - Initializing GRPO trainer...
+INFO:__main__:Initializing GRPO trainer...
+2025-05-14 23:17:17,975 - __main__ - INFO - Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+INFO:__main__:Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+2025-05-14 23:17:18,044 - __main__ - INFO - Initializing PEFT config
+INFO:__main__:Initializing PEFT config
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.29s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.32s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.06it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.00it/s]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.03it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.02s/it]
+WARNING:accelerate.utils.other:Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-05-14 23:17:31,848 - __main__ - INFO - Logged learning rate schedule to TensorBoard
+INFO:__main__:Logged learning rate schedule to TensorBoard
+2025-05-14 23:17:31,853 - __main__ - INFO - *** Starting training 2025-05-14 23:17:31 ***
+INFO:__main__:*** Starting training 2025-05-14 23:17:31 ***
+2025-05-14 23:17:32,051 - __main__ - INFO - Logged learning rate schedule to TensorBoard
+INFO:__main__:Logged learning rate schedule to TensorBoard
+2025-05-14 23:17:32,054 - __main__ - INFO - *** Starting training 2025-05-14 23:17:32 ***
+INFO:__main__:*** Starting training 2025-05-14 23:17:32 ***
+holygpu8a16501:4181939:4181939 [0] NCCL INFO NCCL_SOCKET_FAMILY set by environment to ipv4
+holygpu8a16501:4181939:4181939 [0] NCCL INFO Bootstrap : Using ib0:10.31.183.47<0>
+holygpu8a16501:4181939:4181939 [0] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+holygpu8a16501:4181939:4181939 [0] NCCL INFO NET/Plugin: Plugin load returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory : when loading libnccl-net.so
+holygpu8a16501:4181939:4181939 [0] NCCL INFO NET/Plugin: Using internal network plugin.
+holygpu8a16501:4181939:4181939 [0] NCCL INFO cudaDriverVersion 12050
+NCCL version 2.21.5+cuda12.4
+holygpu8a16501:4181939:4181939 [0] NCCL INFO Comm config Blocking set to 1
+holygpu8a16501:4181940:4181940 [1] NCCL INFO cudaDriverVersion 12050
+holygpu8a16501:4181940:4181940 [1] NCCL INFO NCCL_SOCKET_FAMILY set by environment to ipv4
+holygpu8a16501:4181940:4181940 [1] NCCL INFO Bootstrap : Using ib0:10.31.183.47<0>
+holygpu8a16501:4181940:4181940 [1] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+holygpu8a16501:4181940:4181940 [1] NCCL INFO NET/Plugin: Plugin load returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory : when loading libnccl-net.so
+holygpu8a16501:4181940:4181940 [1] NCCL INFO NET/Plugin: Using internal network plugin.
+holygpu8a16501:4181940:4181940 [1] NCCL INFO Comm config Blocking set to 1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO NCCL_SOCKET_FAMILY set by environment to ipv4
+holygpu8a16501:4181939:4183956 [0] NCCL INFO NET/IB : Using [0]mlx5_2:1/IB [1]mlx5_3:1/IB [2]mlx5_4:1/IB [3]mlx5_5:1/IB [RO]; OOB ib0:10.31.183.47<0>
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Using non-device net plugin version 0
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Using network IB
+holygpu8a16501:4181940:4183974 [1] NCCL INFO NCCL_SOCKET_FAMILY set by environment to ipv4
+holygpu8a16501:4181940:4183974 [1] NCCL INFO NET/IB : Using [0]mlx5_2:1/IB [1]mlx5_3:1/IB [2]mlx5_4:1/IB [3]mlx5_5:1/IB [RO]; OOB ib0:10.31.183.47<0>
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Using non-device net plugin version 0
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Using network IB
+holygpu8a16501:4181940:4183974 [1] NCCL INFO ncclCommInitRank comm 0x55735a8bdf80 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId c6000 commId 0x589d5c2e73c14519 - Init START
+holygpu8a16501:4181939:4183956 [0] NCCL INFO ncclCommInitRank comm 0x5569fa8c38c0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId a6000 commId 0x589d5c2e73c14519 - Init START
+holygpu8a16501:4181939:4183956 [0] NCCL INFO NCCL_CUMEM_ENABLE set by environment to 0.
+holygpu8a16501:4181940:4183974 [1] NCCL INFO NCCL_CUMEM_ENABLE set by environment to 0.
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Setting affinity for GPU 0 to 030000,00000000
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Setting affinity for GPU 1 to 030000,00000000
+holygpu8a16501:4181939:4183956 [0] NCCL INFO comm 0x5569fa8c38c0 rank 0 nRanks 2 nNodes 1 localRanks 2 localRank 0 MNNVL 0
+holygpu8a16501:4181940:4183974 [1] NCCL INFO comm 0x55735a8bdf80 rank 1 nRanks 2 nNodes 1 localRanks 2 localRank 1 MNNVL 0
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 00/08 :    0   1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 01/08 :    0   1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 02/08 :    0   1
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0 [2] 0/-1/-1->1->-1 [3] 0/-1/-1->1->-1 [4] -1/-1/-1->1->0 [5] -1/-1/-1->1->0 [6] 0/-1/-1->1->-1 [7] 0/-1/-1->1->-1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 03/08 :    0   1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 04/08 :    0   1
+holygpu8a16501:4181940:4183974 [1] NCCL INFO P2P Chunksize set to 524288
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 05/08 :    0   1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 06/08 :    0   1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 07/08 :    0   1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] -1/-1/-1->0->1 [3] -1/-1/-1->0->1 [4] 1/-1/-1->0->-1 [5] 1/-1/-1->0->-1 [6] -1/-1/-1->0->1 [7] -1/-1/-1->0->1
+holygpu8a16501:4181939:4183956 [0] NCCL INFO P2P Chunksize set to 524288
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 00/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 02/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 03/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 01/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 04/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 02/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 05/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 03/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[1] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 04/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 05/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 06/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Channel 07/0 : 1[1] -> 0[0] via P2P/IPC
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Connected all rings
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Connected all rings
+holygpu8a16501:4181939:4183956 [0] NCCL INFO Connected all trees
+holygpu8a16501:4181940:4183974 [1] NCCL INFO Connected all trees
+holygpu8a16501:4181940:4183974 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+holygpu8a16501:4181940:4183974 [1] NCCL INFO 8 coll channels, 8 collnet channels, 0 nvls channels, 8 p2p channels, 8 p2p channels per peer
+holygpu8a16501:4181939:4183956 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+holygpu8a16501:4181939:4183956 [0] NCCL INFO 8 coll channels, 8 collnet channels, 0 nvls channels, 8 p2p channels, 8 p2p channels per peer
+holygpu8a16501:4181940:4183974 [1] NCCL INFO TUNER/Plugin: Plugin load returned 11 : libnccl-net.so: cannot open shared object file: No such file or directory : when loading libnccl-tuner.so
+holygpu8a16501:4181939:4183956 [0] NCCL INFO TUNER/Plugin: Plugin load returned 11 : libnccl-net.so: cannot open shared object file: No such file or directory : when loading libnccl-tuner.so
+holygpu8a16501:4181939:4183956 [0] NCCL INFO TUNER/Plugin: Using internal tuner plugin.
+holygpu8a16501:4181940:4183974 [1] NCCL INFO TUNER/Plugin: Using internal tuner plugin.
+holygpu8a16501:4181940:4183974 [1] NCCL INFO ncclCommInitRank comm 0x55735a8bdf80 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId c6000 commId 0x589d5c2e73c14519 - Init COMPLETE
+holygpu8a16501:4181939:4183956 [0] NCCL INFO ncclCommInitRank comm 0x5569fa8c38c0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId a6000 commId 0x589d5c2e73c14519 - Init COMPLETE
+  0%|          | 0/2000 [00:00<?, ?it/s][rank1]:[W514 23:17:48.273932943 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank0]:[W514 23:17:48.273928883 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+  0%|          | 1/2000 [00:15<8:30:49, 15.33s/it]

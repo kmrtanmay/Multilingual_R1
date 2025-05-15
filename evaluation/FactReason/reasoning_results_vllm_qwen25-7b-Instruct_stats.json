@@ -1,0 +1,19 @@
+{
+  "total_evaluations": 2155,
+  "average_reasoning_score": 5.6440835266821345,
+  "language_mismatch_count": 1255,
+  "answer_correctness_count": 750,
+  "score_distribution": {
+    "0": 0,
+    "1": 0,
+    "2": 232,
+    "3": 0,
+    "4": 455,
+    "5": 225,
+    "6": 395,
+    "7": 488,
+    "8": 272,
+    "9": 88,
+    "10": 0
+  }
+}

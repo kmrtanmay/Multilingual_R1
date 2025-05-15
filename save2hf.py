@@ -4,11 +4,11 @@ import json
 
 # Set your Hugging Face username and dataset name
 username = "krtanmay147"  # Replace with your HF username
-dataset_name = "train-dataset-grpo"  # Choose a name for your dataset
+dataset_name = "train-dataset-sft_v2"  # Choose a name for your dataset
 
 # Load the shuffled JSONL file
 data = []
-with open("./data/train_dataset_grpo_shuffled.jsonl", "r", encoding="utf-8") as f:
+with open("./data/train_dataset_sft_shuffled_v2.jsonl", "r", encoding="utf-8") as f:
     for line in f:
         data.append(json.loads(line))
 

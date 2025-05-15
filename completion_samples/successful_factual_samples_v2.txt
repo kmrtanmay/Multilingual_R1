@@ -1,0 +1,18 @@
+
+
+==============
+Completion: <think> Artemisia annua, also known as sweet wormwood, is a plant used in traditional Chinese medicine. The question is specifically asking about its antimalarial properties and who discovered them. I need to recall historical information on this subject. The discovery of Artemisia annua's antimalarial properties was originally attributed to Chinese medical texts, but further study revealed the active ingredient, artemisinin, was discovered independently by Chinese scientist Tu Youyou in 1971. The work on artemisinin was further validated and expanded upon by other researchers, including William Campbell and Satoshi Ōmura, which led to the award of the Nobel Prize in 2015. However, the original identification of Artemisia annua as having antimalarial properties and its isolation of artemisinin are often associated with Tu Youyou. </think>
+<answer> Tu Youyou </answer>
+Prediction: 'tu youyou'
+Best Match: 'tu youyou' (Score: 1.00, Method: exact)
+Reward: 1.0
+All acceptable answers: ['あなたが', '屠呦呦 (to yōyō)', '屠呦呦', 'tu youyou', 'tu youou']
+
+
+==============
+Completion: <think>首先，我们需要知道Artemisia annua的抗疟疾特性已经被广泛接受，但它的发现者并非这一特性被发现的最直接的先驱作者。关于抗疟疾特性，最早是由中国古代医学家张仲景所记载的。然而，对Artemisia annua直接抗疟疾效果的科学研究和使用则更多与其发现者屠呦呦有关。屠呦呦是第一位提取出Artemisinin（青蒿素）的人，这一发现获得了2015年诺贝尔生理学或医学奖。因此，虽然它的抗疟疾特性是由古代中医记载的，但现代科学抗疟疾治疗的研究与应用则主要归功于屠呦呦。</think>
+<answer>屠呦呦</answer>
+Prediction: '屠呦呦'
+Best Match: '屠呦呦' (Score: 1.00, Method: exact)
+Reward: 1.0
+All acceptable answers: ['tu youyou', 'tu youou', 'あなたが', '屠呦呦 (to yōyō)', '屠呦呦']

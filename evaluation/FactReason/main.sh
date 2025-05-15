@@ -1,4 +1,4 @@
-INPUT_FILE="../data/test_dataset_v3.jsonl"
+INPUT_FILE="../../data/test_dataset_v3.jsonl"
 RESULTS_FILE="generations_qwen25-7b-Instruct.jsonl"
 OUTPUT_FILE="reasoning_results_vllm_qwen25-7b-Instruct.jsonl"
 MODEL_NAME="Qwen/Qwen2.5-7B-Instruct"

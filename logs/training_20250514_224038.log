@@ -1,0 +1,4 @@
+Launching distributed training on 2 GPUs
+Using configuration from factual_grpo_config.yaml
+Output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+Master port: 49795

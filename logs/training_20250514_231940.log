@@ -1,0 +1,5 @@
+Launching distributed training on 2 GPUs
+Using configuration from factual_grpo_config.yaml
+Output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+Master port: 28159
+[W514 23:19:50.892470670 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:28159 (errno: 97 - Address family not supported by protocol).

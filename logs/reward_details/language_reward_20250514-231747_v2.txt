@@ -1,0 +1,5 @@
+
+==============
+Query lang: ja
+Reward: 0.0000000
+Matching sentences: 0/10

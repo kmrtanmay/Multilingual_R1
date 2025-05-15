@@ -1,0 +1,924 @@
+Launching distributed training on 2 GPUs
+Using configuration from factual_grpo_config.yaml
+Output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+Master port: 49173
+[W514 23:06:25.064967664 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:49173 (errno: 97 - Address family not supported by protocol).
+INFO 05-14 23:06:59 [importing.py:53] Triton module has been replaced with a placeholder.
+INFO 05-14 23:06:59 [importing.py:53] Triton module has been replaced with a placeholder.
+INFO 05-14 23:07:00 [__init__.py:239] Automatically detected platform cuda.
+INFO 05-14 23:07:00 [__init__.py:239] Automatically detected platform cuda.
+[W514 23:07:11.235243792 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:49173 (errno: 97 - Address family not supported by protocol).
+[W514 23:07:11.240715331 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:49173 (errno: 97 - Address family not supported by protocol).
+2025-05-14 23:07:11,133 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:07:11,133 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:07:11,133 - __main__ - INFO - Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+INFO:__main__:Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+2025-05-14 23:07:11,134 - __main__ - INFO - Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-07-11_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+INFO:__main__:Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-07-11_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+2025-05-14 23:07:11,134 - __main__ - INFO - Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+INFO:__main__:Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+2025-05-14 23:07:11,134 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+2025-05-14 23:07:11,139 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:07:11,139 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:07:11,139 - __main__ - INFO - Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+INFO:__main__:Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+2025-05-14 23:07:11,140 - __main__ - INFO - Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=1,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-07-11_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+INFO:__main__:Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=1,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-07-11_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+2025-05-14 23:07:11,140 - __main__ - INFO - Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+INFO:__main__:Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+2025-05-14 23:07:11,140 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+2025-05-14 23:07:11,582 - __main__ - INFO - Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+INFO:__main__:Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+2025-05-14 23:07:11,584 - __main__ - INFO - Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+INFO:__main__:Loading dataset krtanmay147/factual-multilingual-questions from Hugging Face...
+2025-05-14 23:07:13,206 - __main__ - INFO - Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+INFO:__main__:Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+2025-05-14 23:07:13,227 - __main__ - INFO - Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+INFO:__main__:Loaded 5351 examples from krtanmay147/factual-multilingual-questions
+2025-05-14 23:07:13,526 - __main__ - INFO - Using all 1063 examples for language hi
+INFO:__main__:Using all 1063 examples for language hi
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1099 examples for language en
+INFO:__main__:Using all 1099 examples for language en
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1063 examples for language ja
+INFO:__main__:Using all 1063 examples for language ja
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1063 examples for language sw
+INFO:__main__:Using all 1063 examples for language sw
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1063 examples for language th
+INFO:__main__:Using all 1063 examples for language th
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1063 examples for language hi
+INFO:__main__:Using all 1063 examples for language hi
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1099 examples for language en
+INFO:__main__:Using all 1099 examples for language en
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1063 examples for language ja
+INFO:__main__:Using all 1063 examples for language ja
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1063 examples for language sw
+INFO:__main__:Using all 1063 examples for language sw
+2025-05-14 23:07:13,527 - __main__ - INFO - Using all 1063 examples for language th
+INFO:__main__:Using all 1063 examples for language th
+2025-05-14 23:07:13,558 - __main__ - INFO - Created dataset with 5351 examples
+2025-05-14 23:07:13,558 - __main__ - INFO - Created dataset with 5351 examples
+INFO:__main__:Created dataset with 5351 examples
+INFO:__main__:Created dataset with 5351 examples
+2025-05-14 23:07:13,558 - __main__ - INFO - Applying prompt template to dataset...
+2025-05-14 23:07:13,559 - __main__ - INFO - Applying prompt template to dataset...
+INFO:__main__:Applying prompt template to dataset...
+INFO:__main__:Applying prompt template to dataset...
+Map:   0%|          | 0/5351 [00:00<?, ? examples/s]Map:   0%|          | 0/5351 [00:00<?, ? examples/s]Map:  10%|▉         | 521/5351 [00:00<00:00, 5164.42 examples/s]Map:  10%|▉         | 524/5351 [00:00<00:00, 5193.30 examples/s]Map:  20%|█▉        | 1064/5351 [00:00<00:00, 5315.97 examples/s]Map:  20%|█▉        | 1069/5351 [00:00<00:00, 5338.35 examples/s]Map:  31%|███       | 1672/5351 [00:00<00:00, 5661.11 examples/s]Map:  31%|███▏      | 1676/5351 [00:00<00:00, 5665.75 examples/s]Map:  47%|████▋     | 2534/5351 [00:00<00:00, 5697.40 examples/s]Map:  47%|████▋     | 2536/5351 [00:00<00:00, 5695.16 examples/s]Map:  63%|██████▎   | 3389/5351 [00:00<00:00, 5696.21 examples/s]Map:  63%|██████▎   | 3390/5351 [00:00<00:00, 5688.64 examples/s]Map:  75%|███████▍  | 3997/5351 [00:00<00:00, 5802.22 examples/s]Map:  75%|███████▍  | 3998/5351 [00:00<00:00, 5797.05 examples/s]Map:  91%|█████████ | 4866/5351 [00:00<00:00, 5795.36 examples/s]Map:  91%|█████████ | 4869/5351 [00:00<00:00, 5796.49 examples/s]Map: 100%|██████████| 5351/5351 [00:00<00:00, 5652.46 examples/s]
+2025-05-14 23:07:14,575 - __main__ - INFO - Splitting dataset into train/test with test_size=0.1...
+INFO:__main__:Splitting dataset into train/test with test_size=0.1...
+Map: 100%|██████████| 5351/5351 [00:00<00:00, 5652.13 examples/s]
+2025-05-14 23:07:14,578 - __main__ - INFO - Splitting dataset into train/test with test_size=0.1...
+INFO:__main__:Splitting dataset into train/test with test_size=0.1...
+2025-05-14 23:07:14,582 - __main__ - INFO - Final split: 4815 train examples, 536 test examples
+INFO:__main__:Final split: 4815 train examples, 536 test examples
+2025-05-14 23:07:14,582 - __main__ - INFO - Final split: 4815 train examples, 536 test examples
+INFO:__main__:Final split: 4815 train examples, 536 test examples
+2025-05-14 23:07:14,586 - __main__ - INFO - Loaded 4815 training examples and 536 test examples
+INFO:__main__:Loaded 4815 training examples and 536 test examples
+2025-05-14 23:07:14,586 - __main__ - INFO - Example 0:
+INFO:__main__:Example 0:
+2025-05-14 23:07:14,586 - __main__ - INFO - Loaded 4815 training examples and 536 test examples
+INFO:__main__:Loaded 4815 training examples and 536 test examples
+2025-05-14 23:07:14,587 - __main__ - INFO - Example 0:
+INFO:__main__:Example 0:
+2025-05-14 23:07:14,587 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:07:14,587 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:07:14,587 - __main__ - INFO - Target: Kalenjin
+INFO:__main__:Target: Kalenjin
+2025-05-14 23:07:14,587 - __main__ - INFO - Example 1:
+INFO:__main__:Example 1:
+2025-05-14 23:07:14,587 - __main__ - INFO - Target: Kalenjin
+INFO:__main__:Target: Kalenjin
+2025-05-14 23:07:14,587 - __main__ - INFO - Example 1:
+INFO:__main__:Example 1:
+2025-05-14 23:07:14,587 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:07:14,587 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:07:14,587 - __main__ - INFO - Target: 18
+INFO:__main__:Target: 18
+2025-05-14 23:07:14,587 - __main__ - INFO - Example 2:
+INFO:__main__:Example 2:
+2025-05-14 23:07:14,587 - __main__ - INFO - Target: 18
+INFO:__main__:Target: 18
+2025-05-14 23:07:14,587 - __main__ - INFO - Example 2:
+INFO:__main__:Example 2:
+2025-05-14 23:07:14,587 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:07:14,587 - __main__ - INFO - Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+INFO:__main__:Prompt: <|im_start|>system
+You are a helpful assistant. When answering a factual question, follow these step...
+2025-05-14 23:07:14,587 - __main__ - INFO - Target: 1994
+INFO:__main__:Target: 1994
+2025-05-14 23:07:14,587 - __main__ - INFO - Initializing GRPO trainer...
+INFO:__main__:Initializing GRPO trainer...
+2025-05-14 23:07:14,587 - __main__ - INFO - Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+INFO:__main__:Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+2025-05-14 23:07:14,587 - __main__ - INFO - Target: 1994
+INFO:__main__:Target: 1994
+2025-05-14 23:07:14,588 - __main__ - INFO - Initializing GRPO trainer...
+INFO:__main__:Initializing GRPO trainer...
+2025-05-14 23:07:14,588 - __main__ - INFO - Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+INFO:__main__:Using output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+2025-05-14 23:07:14,617 - __main__ - INFO - Initializing PEFT config
+INFO:__main__:Initializing PEFT config
+2025-05-14 23:07:14,618 - __main__ - INFO - Initializing PEFT config
+INFO:__main__:Initializing PEFT config
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+WARNING:huggingface_hub.file_download:Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+WARNING:huggingface_hub.file_download:Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [01:05<01:05, 65.36s/it]Loading checkpoint shards:  50%|█████     | 1/2 [01:05<01:05, 65.49s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:40<00:00, 47.79s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:40<00:00, 50.45s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [01:40<00:00, 47.87s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:40<00:00, 50.49s/it]
+WARNING:accelerate.utils.other:Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1333, in <module>
+[rank0]:     main()
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1329, in main
+[rank0]:     grpo_function(model_args, script_args, training_args)
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1169, in grpo_function
+[rank0]:     trainer = GRPOTrainer(
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 565, in __init__
+[rank0]:     super().__init__(
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+[rank0]:     return func(*args, **kwargs)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/transformers/trainer.py", line 614, in __init__
+[rank0]:     self._move_model_to_device(model, args.device)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/transformers/trainer.py", line 901, in _move_model_to_device
+[rank0]:     model = model.to(device)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1343, in to
+[rank0]:     return self._apply(convert)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 903, in _apply
+[rank0]:     module._apply(fn)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 903, in _apply
+[rank0]:     module._apply(fn)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 903, in _apply
+[rank0]:     module._apply(fn)
+[rank0]:   [Previous line repeated 4 more times]
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 930, in _apply
+[rank0]:     param_applied = fn(param)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1329, in convert
+[rank0]:     return t.to(
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 19.50 GiB of which 78.31 MiB is free. Process 3397109 has 1.38 GiB memory in use. Including non-PyTorch memory, this process has 9.50 GiB memory in use. Process 3411635 has 9.87 GiB memory in use. Of the allocated memory 9.33 GiB is allocated by PyTorch, and 1.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1333, in <module>
+[rank1]:     main()
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1329, in main
+[rank1]:     grpo_function(model_args, script_args, training_args)
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1169, in grpo_function
+[rank1]:     trainer = GRPOTrainer(
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 565, in __init__
+[rank1]:     super().__init__(
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+[rank1]:     return func(*args, **kwargs)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/transformers/trainer.py", line 614, in __init__
+[rank1]:     self._move_model_to_device(model, args.device)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/transformers/trainer.py", line 901, in _move_model_to_device
+[rank1]:     model = model.to(device)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1343, in to
+[rank1]:     return self._apply(convert)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 903, in _apply
+[rank1]:     module._apply(fn)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 903, in _apply
+[rank1]:     module._apply(fn)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 903, in _apply
+[rank1]:     module._apply(fn)
+[rank1]:   [Previous line repeated 4 more times]
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 930, in _apply
+[rank1]:     param_applied = fn(param)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1329, in convert
+[rank1]:     return t.to(
+[rank1]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 19.50 GiB of which 78.31 MiB is free. Process 3397109 has 1.38 GiB memory in use. Process 3411634 has 9.50 GiB memory in use. Including non-PyTorch memory, this process has 9.87 GiB memory in use. Of the allocated memory 9.70 GiB is allocated by PyTorch, and 1.54 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank1]:[W514 23:10:28.450799980 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank0]:[W514 23:10:28.456360240 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+E0514 23:10:29.002000 3410203 torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 3411634) of binary: /n/home05/kumartanmay/multilingual_env/bin/python
+Traceback (most recent call last):
+  File "/n/sw/Mambaforge-22.11.1-4/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/n/sw/Mambaforge-22.11.1-4/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1223, in <module>
+    main()
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1219, in main
+    launch_command(args)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1204, in launch_command
+    multi_gpu_launcher(args)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 825, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+run_factual_grpo.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2025-05-14_23:10:29
+  host      : holygpu7c26201.rc.fas.harvard.edu
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 3411635)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-05-14_23:10:29
+  host      : holygpu7c26201.rc.fas.harvard.edu
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 3411634)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

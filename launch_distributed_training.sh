@@ -7,7 +7,7 @@ export HF_HUB_ENABLE_HF_TRANSFER=1
 
 # Config file
 CONFIG_FILE="factual_grpo_config.yaml"
-OUTPUT_DIR="runs/qwen2.5-3B-R1-factual-qa_template_1_lora"
+OUTPUT_DIR="runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2"
 
 # Distributed training settings
 NUM_GPUS=2

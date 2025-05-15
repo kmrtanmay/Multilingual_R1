@@ -1,0 +1,2813 @@
+Launching distributed training on 2 GPUs
+Using configuration from factual_grpo_config.yaml
+Output directory: runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2
+Master port: 18122
+[W514 23:02:47.224362854 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:18122 (errno: 97 - Address family not supported by protocol).
+INFO 05-14 23:03:26 [importing.py:53] Triton module has been replaced with a placeholder.
+INFO 05-14 23:03:26 [importing.py:53] Triton module has been replaced with a placeholder.
+INFO 05-14 23:03:26 [__init__.py:239] Automatically detected platform cuda.
+INFO 05-14 23:03:26 [__init__.py:239] Automatically detected platform cuda.
+[W514 23:03:38.737027349 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:18122 (errno: 97 - Address family not supported by protocol).
+[W514 23:03:38.746121498 socket.cpp:759] [c10d] The client socket cannot be initialized to connect to [localhost]:18122 (errno: 97 - Address family not supported by protocol).
+2025-05-14 23:03:38,634 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:03:38,634 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:03:38,634 - __main__ - INFO - Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+INFO:__main__:Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+2025-05-14 23:03:38,635 - __main__ - INFO - Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-03-38_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+INFO:__main__:Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-03-38_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+2025-05-14 23:03:38,635 - __main__ - INFO - Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+INFO:__main__:Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+2025-05-14 23:03:38,635 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+2025-05-14 23:03:38,640 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:03:38,640 - __main__ - INFO - Enabled TF32 precision for faster training on A100 GPUs
+INFO:__main__:Enabled TF32 precision for faster training on A100 GPUs
+2025-05-14 23:03:38,640 - __main__ - INFO - Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+INFO:__main__:Model parameters ModelConfig(model_name_or_path='Qwen/Qwen2.5-3B-Instruct', model_revision='main', torch_dtype='bfloat16', trust_remote_code=False, attn_implementation='flash_attention_2', use_peft=True, lora_r=16, lora_alpha=32, lora_dropout=0.05, lora_target_modules=None, lora_modules_to_save=None, lora_task_type='CAUSAL_LM', use_rslora=False, use_dora=False, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+2025-05-14 23:03:38,641 - __main__ - INFO - Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=1,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-03-38_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+INFO:__main__:Training/evaluation parameters GRPOConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+beta=0.001,
+bf16=True,
+bf16_full_eval=False,
+cache_implementation=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_dropout=False,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+ds3_gather_for_generation=True,
+epsilon=0.2,
+epsilon_high=None,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=50,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-06,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=1,
+log_completions=False,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2/runs/May14_23-03-38_holygpu7c26201.rc.fas.harvard.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+loss_type=bnpo,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+mask_truncated_completions=False,
+max_completion_length=512,
+max_grad_norm=1.0,
+max_prompt_length=256,
+max_steps=2000,
+metric_for_best_model=None,
+min_p=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_completions_to_print=None,
+num_generations=1,
+num_iterations=1,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=True,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+ref_model_mixup_alpha=0.6,
+ref_model_sync_steps=512,
+remove_unused_columns=False,
+repetition_penalty=1.0,
+report_to=['tensorboard'],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+reward_weights=None,
+run_name=runs/qwen2.5-3B-R1-factual-qa_template_1_lora_v2,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+scale_rewards=True,
+seed=42,
+shuffle_dataset=True,
+skip_memory_metrics=True,
+sync_ref_model=False,
+temperature=0.9,
+tf32=False,
+top_k=50,
+top_p=1.0,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tp_size=0,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_liger_loss=False,
+use_mps_device=False,
+use_vllm=False,
+vllm_device=None,
+vllm_dtype=None,
+vllm_enable_prefix_caching=None,
+vllm_gpu_memory_utilization=None,
+vllm_guided_decoding_regex=None,
+vllm_max_model_len=None,
+vllm_server_host=0.0.0.0,
+vllm_server_port=8000,
+vllm_server_timeout=240.0,
+wandb_log_unique_prompts=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.0,
+)
+2025-05-14 23:03:38,641 - __main__ - INFO - Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+INFO:__main__:Script arguments ScriptArguments(dataset_id_or_path=None, tokenizer_name_or_path=None)
+2025-05-14 23:03:38,641 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-3B-Instruct
+2025-05-14 23:03:39,093 - __main__ - INFO - Loading dataset krtanmay147/train-dataset-grpo_v2 from Hugging Face...
+INFO:__main__:Loading dataset krtanmay147/train-dataset-grpo_v2 from Hugging Face...
+2025-05-14 23:03:39,426 - __main__ - INFO - Loading dataset krtanmay147/train-dataset-grpo_v2 from Hugging Face...
+INFO:__main__:Loading dataset krtanmay147/train-dataset-grpo_v2 from Hugging Face...
+2025-05-14 23:03:40,992 - __main__ - INFO - Loaded 2208 examples from krtanmay147/train-dataset-grpo_v2
+INFO:__main__:Loaded 2208 examples from krtanmay147/train-dataset-grpo_v2
+2025-05-14 23:03:41,057 - __main__ - INFO - Loaded 2208 examples from krtanmay147/train-dataset-grpo_v2
+INFO:__main__:Loaded 2208 examples from krtanmay147/train-dataset-grpo_v2
+2025-05-14 23:03:41,128 - __main__ - INFO - Using all 422 examples for language swahili
+INFO:__main__:Using all 422 examples for language swahili
+2025-05-14 23:03:41,128 - __main__ - INFO - Using all 430 examples for language thai
+INFO:__main__:Using all 430 examples for language thai
+2025-05-14 23:03:41,128 - __main__ - INFO - Using all 433 examples for language japanese
+INFO:__main__:Using all 433 examples for language japanese
+2025-05-14 23:03:41,128 - __main__ - INFO - Using all 443 examples for language hindi
+INFO:__main__:Using all 443 examples for language hindi
+2025-05-14 23:03:41,128 - __main__ - INFO - Using all 480 examples for language english
+INFO:__main__:Using all 480 examples for language english
+2025-05-14 23:03:41,152 - __main__ - INFO - Created dataset with 2208 examples
+INFO:__main__:Created dataset with 2208 examples
+2025-05-14 23:03:41,152 - __main__ - INFO - Applying prompt template to dataset...
+INFO:__main__:Applying prompt template to dataset...
+2025-05-14 23:03:41,194 - __main__ - INFO - Using all 422 examples for language swahili
+INFO:__main__:Using all 422 examples for language swahili
+2025-05-14 23:03:41,195 - __main__ - INFO - Using all 430 examples for language thai
+INFO:__main__:Using all 430 examples for language thai
+2025-05-14 23:03:41,195 - __main__ - INFO - Using all 433 examples for language japanese
+INFO:__main__:Using all 433 examples for language japanese
+2025-05-14 23:03:41,195 - __main__ - INFO - Using all 443 examples for language hindi
+INFO:__main__:Using all 443 examples for language hindi
+2025-05-14 23:03:41,195 - __main__ - INFO - Using all 480 examples for language english
+INFO:__main__:Using all 480 examples for language english
+2025-05-14 23:03:41,220 - __main__ - INFO - Created dataset with 2208 examples
+INFO:__main__:Created dataset with 2208 examples
+2025-05-14 23:03:41,220 - __main__ - INFO - Applying prompt template to dataset...
+INFO:__main__:Applying prompt template to dataset...
+Map:   0%|          | 0/2208 [00:00<?, ? examples/s]Little Dancer of Fourteen Years ['Little Dancer of Fourteen Years', 'La Petite Danseuse de Quatorze Ans']
+प्रोग्रेसिव पार्टी ['प्रोग्रेसिव पार्टी', 'बुल मूस पार्टी', 'प्रोग्रेसिव', 'प्रगतिशील पार्टी']
+एगेसा ['एगेसा']
+Osaka ['Osaka', 'Ōsaka']
+Ok Phansa ['Ok Phansa', 'Awk Phansa']
+1991 ['1991', 'Elfu moja mia tisa tisini na moja']
+Milima Myeupe ['Milima Myeupe', 'Milima nyeupe']
+Kalidasa ['Kalidasa', 'Kalidas']
+Agni ['Agni']
+तिर्यक विभक्ति (ティリャク・ヴィバクティ) ['तिर्यक विभक्ति (ティリャク・ヴィバクティ)', 'Tiryak Vibhakti', 'તિર્યકવિભક્તિ']
+August 18, 1920 ['August 18, 1920', '18 August 1920', '1920-08-18']
+हे-बुनौ-वरिला संधि ['हे-बुनौ-वरिला संधि', 'Hay-Bunau-Varilla Sandhi', 'हा-बूनू-वैरीला संधि']
+Saumu ['Saumu', 'Sawm']
+Aryabhata ['Aryabhata', 'アーリヤバタ', 'Aryabhatta']
+सोमदेत फ्रा बुद्धाचन तोह ['सोमदेत फ्रा बुद्धाचन तोह', 'सोमदेत तोह', 'Somdet Phra Buddhachan Toh']
+อาสาฬหบูชา ['อาสาฬหบูชา', 'วันอาสาฬหบูชา']
+Lord Dalhousie ['Lord Dalhousie', 'Dalhousie', 'The Earl of Dalhousie', 'James Andrew Broun-Ramsay, 1st Marquess of Dalhousie']
+灰の水曜日 ['灰の水曜日', '灰の水曜日 (Hai no suiyōbi)']
+グレート・スモーキー山脈 ['グレート・スモーキー山脈', 'スモーキー山脈', 'スモーキーズ', 'グレートスモーキー山脈', 'スモーキー山脈', 'スモーキーズ']
+B. R. Ambedkar ['B. R. Ambedkar', 'Bhimrao Ramji Ambedkar', 'Babasaheb Ambedkar']
+ภาษาม้ง ['ภาษาม้ง', 'ม้ง']
+レモングラス ['レモングラス']
+Kae Sa Luk ['Kae Sa Luk', 'Fruit carving', 'แกะสลัก']
+Saigo Takamori ['Saigo Takamori', 'Takamori Saigo']
+ฮารูกิ มูราคามิ ['ฮารูกิ มูราคามิ', 'Haruki Murakami', 'Murakami Haruki', '村上春樹']
+Miaka 30 ['Miaka 30', 'Miaka thelathini', 'Umri wa miaka 30']
+明石海峡大橋 ['明石海峡大橋', 'Akashi Kaikyo Ohashi', 'パールブリッジ']
+विक्रम साराभाई ['विक्रम साराभाई', 'डॉ. विक्रम साराभाई', 'विक्रम अंबालाल साराभाई']
+536 km ['536 km', '536 kilometers', 'Approximately 536 km', 'Approximately 536 kilometers']
+テキサス ['テキサス', 'Tekisasu']
+พี. วี. สินธุ ['พี. วี. สินธุ', 'PV Sindhu', 'Pusarla Venkata Sindhu']
+Loi Krathong ['Loi Krathong']
+ラーマーヤナ ['ラーマーヤナ', 'ラマヤナ']
+P.V.シンドゥ ['P.V.シンドゥ', 'PV Sindhu', 'Pusarla Venkata Sindhu', 'プサルラ・ヴェンカタ・シンドゥ', 'P. V. シンドゥ']
+थी लो सू झरना ['थी लो सू झरना', 'थि लो सु झरना', 'Thi Lo Su Waterfall', 'น้ำตกทีลอซู', 'Namtok Thi Lo Su', 'नाम्तोक थी लो सु']
+INAC Kobe Leonessa ['INAC Kobe Leonessa', 'INAC神戸レオネッサ']
+Theodore Maiman ['Theodore Maiman', 'Theodore Harold Maiman']
+1,000 किमी ['1,000 किमी', '1000 किमी', '1,000 किलोमीटर', '1000 किलोमीटर', 'लगभग 1,000 किमी', 'लगभग 1000 किमी', 'लगभग 1,000 किलोमीटर', 'लगभग 1000 किलोमीटर', 'लगभग 1000 किलोमीटर']
+Ash Wednesday ['Ash Wednesday']
+युधिष्ठिर ['युधिष्ठिर', 'युधिष्ठिर महाराज']
+1600 ['1600']
+एसिस (Asis) ['एसिस (Asis)']
+Tirthankara ['Tirthankara']
+मेवाड़ी ['मेवाड़ी']
+किबाटा ['किबाटा']
+อักษรไทย ['อักษรไทย', 'สคริปต์ไทย', 'Abugida ไทย']
+Ukulele ['Ukulele']
+1963 ['1963']
+59.199点 ['59.199点', '59.199', 'ごじゅうきゅうてん いちきゅうきゅう (gojuukyuu ten ichikyuukyuu)']
+Kiindo-Aryani ['Kiindo-Aryani', 'Kiindo Aryani', 'Kiindo-Ariani']
+1939 ['1939']
+ベル・ジャー ['ベル・ジャー', 'ベルジャー', 'The Bell Jar']
+รางวัล Ruth Lilly Poetry ['รางวัล Ruth Lilly Poetry', 'รางวัล Ruth Lilly']
+เท็กซัส ['เท็กซัส']
+ケニア山 ['ケニア山', 'マウントケニア', 'Mount Kenya']
+khrap ['khrap', 'krap']
+Ulinganifu wa viwakilishi tegemezi ['Ulinganifu wa viwakilishi tegemezi', 'Ulinganifu wa vishazi tegemezi', 'Ulinganifu katika vishazi tegemezi']
+アスター家 ['アスター家', 'アスターファミリー', 'アスター']
+रक्षा मंत्रालय ['रक्षा मंत्रालय', 'मिनिस्ट्री ऑफ डिफेन्स (Ministry of Defence)', 'กระทรวงกลาโหม (Krasuang Kalahom)']
+बी. आर. अम्बेडकर ['बी. आर. अम्बेडकर', 'भीमराव रामजी अम्बेडकर', 'बाबासाहेब अम्बेडकर']
+Hisamitsu Springs ['Hisamitsu Springs', '久光スプリングス']
+1977 ['1977']
+Mae Varee ['Mae Varee', 'แม่วารี']
+The River and the Source ['The River and the Source']
+2014 Berlin Marathon ['2014 Berlin Marathon', 'Berlin Marathon 2014']
+Gichugu ['Gichugu', 'Gichugu Kikuyu']
+เบอร์ลินมาราธอน 2014 ['เบอร์ลินมาราธอน 2014', 'เบอร์ลินมาราธอนปี 2014']
+अंडे ['अंडे', 'तमागो']
+เมานต์เอลกอน ['เมานต์เอลกอน', 'เอลกอน']
+1 กรกฎาคม 2560 ['1 กรกฎาคม 2560', '1 กรกฎาคม ค.ศ. 2017']
+Magharibi ['Magharibi', 'Kenya ya Magharibi', 'Nyanza', 'Eneo la Magharibi']
+2013 ['2013']
+ทิวเขาถนนธงชัย ['ทิวเขาถนนธงชัย', 'Thanon Thong Chai Range']
+न्यातिति ['न्यातिति', 'न्यातिति वीणा', 'न्यातिती लाइर', 'Nyatiti', 'Nyatiti lyre', 'Nyatiti veena']
+Jomo Kenyatta ['Jomo Kenyatta', 'Mzee Jomo Kenyatta', 'Kamau wa Ngengi']
+Bugaku ['Bugaku']
+แมรี ลีกีย์ ['แมรี ลีกีย์']
+มาจิก วอเตอร์ ['มาจิก วอเตอร์', 'Majik Water', 'Majikwater']
+ムファンガノ島 ['ムファンガノ島', 'ムファンガノとう', 'Mfangano Island']
+Katakana ['Katakana', 'かたかな', 'カタカナ']
+15 जनवरी, 1967 ['15 जनवरी, 1967', '15 जनवरी 1967', '15/01/1967']
+1905 ['1905']
+Anyango Mpinga ['Anyango Mpinga']
+Soko la Wahindi la Santa Fe ['Soko la Wahindi la Santa Fe']
+เคี่ยว (Khiao) ['เคี่ยว (Khiao)', 'ตุ๋น (Tun)', 'การเคี่ยว (Kan khiao)']
+ナイロビ ['ナイロビ']
+Khushwant Singh ['Khushwant Singh']
+Elections Act ['Elections Act', 'The Elections Act']
+オルツ ['オルツ', '一本弦のフィドル', 'Orutu', 'Ippon gen no fidoru']
+रामकिएन ['रामकिएन', 'रामकियान', 'रामकियन']
+Januari 26, 1950 ['Januari 26, 1950', '26 Januari 1950']
+Ahmedabad ['Ahmedabad']
+Phoenix ['Phoenix']
+Sunday service ['Sunday service', 'Church attendance', 'Worship service', 'Sunday worship']
+थोम्मायन्ती ['थोम्मायन्ती', 'खुनयिंग विमोन सिरिपाईबुन']
+Kyoto University ['Kyoto University', 'Kyoto University iPS Cell Research and Application Center', 'CiRA', 'Center for iPS Cell Research and Application', 'Kyoto University (including CiRA)']
+アクバル ['アクバル', 'Akubaru', 'अकबर', 'ジャラールッディーン・ムハンマド・アクバル']
+टेक्सास ['टेक्सास']
+Bangkok ['Bangkok', 'Krung Thep Maha Nakhon']
+Majik Water ['Majik Water', 'Majikwater']
+Mbinu za kuhifadhi damu ['Mbinu za kuhifadhi damu', 'Uhifadhi wa damu', 'Benki ya damu', 'Utunzaji wa damu', 'Benki ya Damu', 'Mgawanyo wa plasma ya damu']
+619 ['619', 'Anil Kumble', "Anil Kumble's 619"]
+1238 ['1238']
+Thailand ya Mashariki ['Thailand ya Mashariki', 'Mashariki']
+नात्सुमे सोसेकी ['नात्सुमे सोसेकी', 'सोसेकी नात्सुमे', 'Natsume Sōseki', 'Sōseki Natsume', '夏目漱石']
+1935年8月14日 ['1935年8月14日', '1935ねん8がつ14にち', '1935/08/14', '1935-08-14']
+34 ['34']
+สำนักข่าวกรองแห่งชาติ ['สำนักข่าวกรองแห่งชาติ', 'Samnak Khaokrong Haeng Chat', 'NIS']
+バティアン ['バティアン']
+Olive Garden ['Olive Garden']
+BG Pathum United ['BG Pathum United']
+Ajmer ['Ajmer']
+सिमरिंग (Simmering) ['सिमरिंग (Simmering)', 'धीमी आंच पर पकाना (Dhimi aanch par pakana)']
+राजीव गांधी स्वास्थ्य विज्ञान विश्वविद्यालय पुरस्कार ['राजीव गांधी स्वास्थ्य विज्ञान विश्वविद्यालय पुरस्कार', 'राजीव गांधी यूनिवर्सिटी ऑफ हेल्थ साइंसेज अवार्ड्स']
+カー ['カー', 'kha', 'ka']
+नाचती हुई लड़की ['नाचती हुई लड़की', 'मोहनजोदड़ो की नाचती हुई लड़की', 'नाचने वाली लड़की']
+सलमान रुश्दी ['सलमान रुश्दी', 'Salman Rushdie']
+मध्य ['मध्य', 'मध्य केन्या', 'माउंट केन्या क्षेत्र', 'केंद्रीय', 'सेंट्रल केन्या']
+प्लेक फिबुनसोंगखराम ['प्लेक फिबुनसोंगखराम', 'फिबन', 'फील्ड मार्शल प्लेक फिबुनसोंगखराम']
+1877 का समझौता ['1877 का समझौता', '1877 का समझौता (1877 ka samjhauta)']
+Mount Elgon ['Mount Elgon', 'Elgon']
+อร่อย (aroi) ['อร่อย (aroi)', 'aroi', 'aroy', 'อร่อย']
+อภิชาติ วรรณวิจิตร ['อภิชาติ วรรณวิจิตร', 'Apichart Vanavichit']
+आलू (Aaloo) ['आलू (Aaloo)', 'आयरिश आलू (Irish aaloo)', 'आलू', 'आयरिश आलू']
+พ.ศ. 2143 ['พ.ศ. 2143', '1600']
+Jumatano ya Majivu ['Jumatano ya Majivu']
+1869 ['1869']
+こんばんは ['こんばんは', 'こんばんは (Konbanwa)', 'コンバンワ']
+मैरी लीकी ['मैरी लीकी']
+Deep frying ['Deep frying', 'Shallow frying', 'Pan frying', 'Frying']
+รามเกียรติ์ ['รามเกียรติ์', 'รามายณะ']
+सुफन्नाहोंग ['सुफन्नाहोंग', 'เรือพระที่นั่งสุพรรณหงส์']
+Federalist ['Federalist', 'Chama cha Federalist']
+8 ['8', 'आठ']
+Januari 15, 1967 ['Januari 15, 1967', 'Januari 15 mwaka 1967', '15 Januari 1967']
+1962 ['1962']
+1968 ['1968']
+1884 ['1884', '1885']
+サウム ['サウム', 'サウム (Saum)']
+Central ['Central', 'Central Kenya', 'Mount Kenya Region']
+Viking Press ['Viking Press', 'Viking']
+Nang Yai ['Nang Yai', 'หนังใหญ่', 'Nangyai']
+ナショナル・プレイヤー・ブレックファスト ['ナショナル・プレイヤー・ブレックファスト', '国民的祈祷朝食会', '国民の祈りの朝食']
+ब्राउन परिवार ['ब्राउन परिवार', 'ब्राउन', 'ब्राउन्स', 'भूरे रंग का परिवार']
+เศาะห์ม์ ['เศาะห์ม์', 'เศาะห์ม (Saum)']
+सरवण भवन ['सरवण भवन', 'होटल सरवण भवन']
+ชิโกกุ ['ชิโกกุ', 'ภูมิภาคชิโกกุ', '四国']
+รพินทรนาถ ฐากูร ['รพินทรนาถ ฐากูร', 'ฐากูร', 'คุรุเทพ รพินทรนาถ ฐากูร']
+俳句 ['俳句', 'はいく', 'Haiku']
+Varhadi ['Varhadi', 'Varhādi']
+वॉल्ट व्हिटमैन ['वॉल्ट व्हिटमैन', 'वाल्टर व्हिटमैन']
+1960 ['1960']
+フォートジーザス ['フォートジーザス', 'Fort Jesus', 'イエス砦']
+Francis Muthaura ['Francis Muthaura']
+โอนูสะ (Ōnusa) ['โอนูสะ (Ōnusa)', 'โอนูสะ', 'Ōnusa', '大麻']
+टू किल अ मॉकिंगबर्ड ['टू किल अ मॉकिंगबर्ड', 'एक मॉकिंगबर्ड को मारना', 'एक मॉकिंगबर्ड को मारने के लिए']
+น้ำตกทีลอซู ['น้ำตกทีลอซู', 'Thi Lo Su Waterfall', 'Namtok Thi Lo Su', 'น้ำตก thi lo su', 'namtok thi lo su']
+Chuo Kikuu cha Kasetsart ['Chuo Kikuu cha Kasetsart']
+ओरुतु ['ओरुतु', 'एक तार वाला वायलिन', 'Orutu', 'Ek taar wala violin']
+Kyoto ['Kyoto', 'Kyoto City']
+タイ南部地方 ['タイ南部地方', '南部地方', '南部', 'タイ南部', '南']
+ขุนช้าง ['ขุนช้าง']
+Buddha Purnima ['Buddha Purnima', 'Vesak', 'Buddha Jayanti']
+Yama ['Yama', 'Yamraj', 'Bwana wa Kifo']
+जैक लंदन ['जैक लंदन', 'जॉन ग्रिफ़िथ चेनी']
+पश्चिमी [Pashchimi] ['पश्चिमी [Pashchimi]', 'पश्चिमी केन्या [Pashchimi Kenya]', 'न्यांज़ा [Nyanza]', 'पश्चिमी क्षेत्र [Pashchimi Kshetra]']
+March on Washington ['March on Washington', 'March on Washington for Jobs and Freedom']
+ทีดี การ์เดน ['ทีดี การ์เดน', 'เดอะ การ์เดน', 'บอสตัน การ์เดน']
+シマー (Shimaa) ['シマー (Shimaa)', '煮る (Niru)', 'シチュー (Shichuu)', '煮込み (Nikomi)', '煮る']
+Ford's Theatre ["Ford's Theatre", "Ford's Theater"]
+59.199 ['59.199']
+Storymoja Publishers ['Storymoja Publishers', 'Storymoja']
+Uwanja wa Yokohama Mitsuzawa ['Uwanja wa Yokohama Mitsuzawa', 'Uwanja wa Soka wa Mitsuzawa', 'Yokohama Mitsuzawa Stadium', 'Mitsuzawa Soccer Stadium', 'Uwanja wa Nippatsu Mitsuzawa', 'ニッパツ三ツ沢球技場']
+Thailand ya Mashariki ['Thailand ya Mashariki', 'Mashariki']
+2 मार्च 2018 ['2 मार्च 2018', 'मार्च 2 2018']
+अग्नि ['अग्नि']
+Potato ['Potato', 'Irish potato', 'Potatoes', 'Irish potatoes']
+Hōnen ['Hōnen', 'Hōnen Shōnin', 'Genkū']
+Udon ['Udon', 'うどん']
+Boston accent ['Boston accent', 'Boston dialect']
+ख्राप ['ख्राप']
+ハイデラバード ['ハイデラバード', 'ハイデラバード市', 'Haiderabādo']
+माउंट एल्गोन ['माउंट एल्गोन', 'एल्गोन']
+Treaty of Fort Laramie (1868) ['Treaty of Fort Laramie (1868)', 'Fort Laramie Treaty (1868)', '1868 Treaty of Fort Laramie']
+ซูซุ ['ซูซุ', 'Suzu', 'Suuzu', '鈴']
+การเดินขบวนสู่กรุงวอชิงตัน ['การเดินขบวนสู่กรุงวอชิงตัน', 'การเดินขบวนสู่กรุงวอชิงตันเพื่องานและอิสรภาพ']
+เกียวโต ['เกียวโต', 'เมืองเกียวโต']
+Hachiko Statue ['Hachiko Statue', 'Statue of Hachiko', 'Hachiko-zo', 'Hachikō-zō']
+5,199 m ['5,199 m', '5199 m', '5,199 meters', '5199 meters', '5,199 metres', '5199 metres']
+2016年12月1日 ['2016年12月1日']
+フェニックス ['フェニックス', 'Fenikkusu (フェニックス)']
+インド ['インド', 'インドクリケットチーム', 'インド・クリケットチーム', 'インド代表']
+スワミナサン ['スワミナサン', 'スワミ', 'スワミナサン（スワミ）']
+No way ['No way', "You're kidding", "I can't believe it"]
+Tunday Kababi ['Tunday Kababi', 'Tunday Kababi Restaurant']
+Kamakura ['Kamakura', 'Kamakura City']
+ศาลฎีกา ['ศาลฎีกา', 'ศาลฎีกาแห่งสหรัฐอเมริกา', 'SCOTUS']
+เอไซ ['เอไซ', 'เมียวอัน เอไซ', 'โยไซ', 'Eisai', 'myōan eisai']
+Medali ya Dhahabu ['Medali ya Dhahabu', 'Medali ya Dhahabu ya Olimpiki']
+माजिक वाटर ['माजिक वाटर', 'माजिकवाटर', 'माजिक वाटर (Majik Water)', 'माजिकवाटर (Majikwater)', 'Majik Water']
+Loi Krathong ['Loi Krathong']
+रॉयल थाई पुलिस ['रॉयल थाई पुलिस', 'สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat)']
+สวาฮิลี เพลท ['สวาฮิลี เพลท', 'Swahili Phlet']
+สนธิสัญญาสันติภาพซานฟรานซิสโก ['สนธิสัญญาสันติภาพซานฟรานซิสโก', 'สนธิสัญญาซานฟรานซิสโก', 'Sonthisanya Santiphap San Francisco']
+सांता फ़े इंडियन मार्केट ['सांता फ़े इंडियन मार्केट']
+Kitelugu ['Kitelugu']
+1960 ['1960']
+Juneau ['Juneau']
+Treaty of Portsmouth ['Treaty of Portsmouth', 'Portsmouth Treaty']
+大麻 ['大麻', 'おおぬさ', 'Ōnusa', 'Oonusa']
+Sheria ya Uhuru wa Mitaa ['Sheria ya Uhuru wa Mitaa', 'Sheria ya Uhuru wa Mitaa (Chihō Jichi Hō)', 'Chihō Jichi Hō', '地方自治法']
+Khun Chang ['Khun Chang']
+ओलिव गार्डन ['ओलिव गार्डन']
+納札 ['納札', 'おさめふだ', 'Osamefuda', 'Osame-fuda']
+Shirazi ['Shirazi', 'Shirazi dynasty']
+1922 ['1922', '4 फरवरी 1922']
+ओबोकानो ['ओबोकानो', 'गुसी वीणा', 'ओबोकानो', 'गुसी लिरे']
+Yama ['Yama', 'Yamraj', 'Lord of Death']
+警察庁 ['警察庁', 'けいさつちょう', 'Keisatsu-cho']
+Mfangano Island ['Mfangano Island']
+ฟีนิกซ์ ['ฟีนิกซ์', 'ฟีนิกซ์ (Phoenix)']
+1950年1月26日 ['1950年1月26日', '1950ねん1がつ26にち']
+Katika Sifa ya Vivuli ['Katika Sifa ya Vivuli', "In'ei Raisan", '陰翳礼讃']
+ナンヤイ ['ナンヤイ', 'ナンヤイ (Nan Yai)', 'Nang Yai', 'หนังใหญ่']
+進歩党 ['進歩党', 'プログレッシブ党', 'ブルムース党']
+บุก ['บุก', 'Konnyaku', 'ลิ้นของปีศาจ']
+1964 ['1964']
+1,000 km ['1,000 km', '1000 km', 'Kilomita 1,000', 'Kilomita 1000', 'Takribani 1,000 km', 'Takribani 1000 km', 'Takribani kilomita 1,000', 'Takribani kilomita 1000', 'Takriban km 1,000', 'Takriban 1000 km', 'Takriban kilomita 1,000', 'Takriban kilomita 1000']
+Apichart Vanavichit ['Apichart Vanavichit', 'อภิชาติ วรรณวิจิตร']
+Aryabhata ['Aryabhata', 'Aryabhatta', 'आर्यभट']
+2000 ['2000']
+Chattahoochee River ['Chattahoochee River', 'Chattahoochee']
+Agni ['Agni']
+Sushruta ['Sushruta']
+माउंट एल्गोन ['माउंट एल्गोन', 'एलगोन']
+2505 ['2505', 'พ.ศ. 2505', '1962']
+3डी प्रिंटिंग ['3डी प्रिंटिंग', '3D प्रिंटिंग', 'त्रि-आयामी मुद्रण', '3 डी मुद्रण', 'योजक विनिर्माण', 'Additive Manufacturing']
+Shirika la Polisi la Kitaifa ['Shirika la Polisi la Kitaifa', 'Keisatsu-cho']
+Delicate Arch ['Delicate Arch', 'Tao Maridadi']
+कालिदास ['कालिदास']
+Swahili Plate ['Swahili Plate']
+Tuzo ya Jomo Kenyatta ya Fasihi ['Tuzo ya Jomo Kenyatta ya Fasihi']
+国民虹の連合 ['国民虹の連合', 'NARC']
+Swaminathan ['Swaminathan', 'Swami', 'Swaminathan (Swami)']
+Osamefuda ['Osamefuda', 'Osame-fuda', '納札']
+Asalha Puja ['Asalha Puja', 'Asanha Puja', 'Wan Asalha Puja', 'Wan Asanha Puja']
+Nakhon Si Thammarat Range ['Nakhon Si Thammarat Range', 'Nakhon Si Thammarat Mountains']
+มหาวิทยาลัยเกียวโต ['มหาวิทยาลัยเกียวโต', 'มหาวิทยาลัยเกียวโต (Kyoto University)', 'ศูนย์วิจัยและประยุกต์ใช้เซลล์ iPS มหาวิทยาลัยเกียวโต', 'CiRA', 'Center for iPS Cell Research and Application', 'มหาวิทยาลัยเกียวโต (รวมถึง CiRA)']
+लॉन्ग आइलैंड ['लॉन्ग आइलैंड', 'लम्बा द्वीप']
+ตระกูลแอสเตอร์ ['ตระกูลแอสเตอร์', 'ครอบครัวแอสเตอร์', 'แอสเตอร์']
+Shikoku Pilgrimage ['Shikoku Pilgrimage', '88 Temple Pilgrimage', 'Shikoku Henro']
+ภาษาอังกฤษ ['ภาษาอังกฤษ', 'P̣hās̄ʹā xạngkฤษ̄']
+ข้อตกลงประนีประนอมปี 1877 ['ข้อตกลงประนีประนอมปี 1877']
+Simmering ['Simmering', 'Stewing']
+Kolkata ['Kolkata', 'Salt Lake City, Kolkata', 'Bidhannagar']
+นยาติติ ['นยาติติ', 'พิณนยาติติ', 'Nyatiti', 'Nyatiti lyre']
+Tuzo ya Utamaduni ya Tafsiri ya Japani ['Tuzo ya Utamaduni ya Tafsiri ya Japani']
+Satyajit Ray ['Satyajit Ray']
+เถรวาท ['เถรวาท', 'พุทธศาสนานิกายเถรวาท']
+Computer Vision ['Computer Vision']
+चांग इंटरनेशनल सर्किट ['चांग इंटरनेशनल सर्किट', 'चांग अंतर्राष्ट्रीय सर्किट', 'Chang International Circuit', 'बुरिराम इंटरनेशनल सर्किट', 'Buriram International Circuit', 'ช้าง อินเตอร์เนชั่นแนล เซอร์กิต']
+Long Island ['Long Island', 'Kisiwa cha Long']
+สภาการศึกษาเทคนิคแห่งอินเดียทั้งหมด ['สภาการศึกษาเทคนิคแห่งอินเดียทั้งหมด', 'Sapha Kan Suksa Theknik Haeng India Thangmot', 'AICTE']
+लॉर्ड डलहौजी ['लॉर्ड डलहौजी', 'डलहौजी', 'द अर्ल ऑफ़ डलहौजी', 'जेम्स एंड्रयू ब्रौन-रामसे, डलहौजी के पहले मार्किस']
+Sri Thanonchai ['Sri Thanonchai', 'Si Thanonchai']
+Kakuzo Okakura ['Kakuzo Okakura', 'Okakura Kakuzo']
+Tennessee Williams ['Tennessee Williams', 'Thomas Lanier Williams III']
+Kukaanga sana ['Kukaanga sana', 'Kukaanga', 'Kukaanga kwa kina']
+信濃川 ['信濃川', 'しなのがわ', 'Shinano-gawa', 'シナノ川']
+サンドラ・デイ・オコナー ['サンドラ・デイ・オコナー', 'サンドラ・オコナー', 'オコナー']
+1978年10月14日 ['1978年10月14日', '1978/10/14', '1978-10-14']
+Nyatiti ['Nyatiti', 'Kinubi cha Nyatiti', 'Nyatiti lyre']
+दक्षिणी थाईलैंड ['दक्षिणी थाईलैंड', 'दक्षिण']
+ชูบุ ['ชูบุ', 'Chubu']
+チャールズ・グッドイヤー ['チャールズ・グッドイヤー', 'Charles Goodyear', 'チャールズグッドイヤー']
+Vikram Sarabhai ['Vikram Sarabhai', 'Dkt. Vikram Sarabhai', 'Vikram Ambalal Sarabhai']
+गिचूगु ['गिचूगु', 'गिचूगु किकुयू']
+Momofuku Ando ['Momofuku Ando', 'Ando Momofuku']
+Supreme Court ['Supreme Court', 'Supreme Court of the United States', 'SCOTUS']
+अकबर ['अकबर', 'जलालुद्दीन मुहम्मद अकबर']
+Silpawatthanatham Publishing ['Silpawatthanatham Publishing', 'สำนักพิมพ์ศิลปวัฒนธรรม', 'Samnakphim Silpawatthanatham']
+金メダル ['金メダル', '世界チャンピオン']
+शो ['शो', 'शो (Shō)', '笙']
+Yudhishthira ['Yudhishthira', 'Yudhishthir', 'Yudhisthira']
+367 km ['367 km', 'Kilomita 367', 'Kilomita mia tatu sitini na saba']
+การจาริกแสวงบุญชิโกกุ ['การจาริกแสวงบุญชิโกกุ', 'การจาริกแสวงบุญ 88 วัด', 'ชิโกกุ เฮนโระ']
+Astor family ['Astor family', 'Astors', 'The Astors']
+केन्या का सर्वेक्षण ['केन्या का सर्वेक्षण']
+Buddha Purnima ['Buddha Purnima', 'Vesak', 'Buddha Jayanti']
+Anglo-Siamese Treaty of 1909 ['Anglo-Siamese Treaty of 1909', 'Bangkok Treaty of 1909', 'Treaty of Bangkok (1909)']
+Phi Sua Lae Dokmai ['Phi Sua Lae Dokmai', 'Pee Sua Lae Dokmai', 'Vipepeo na Maua']
+Mary Leakey ['Mary Leakey']
+Salman Rushdie ['Salman Rushdie']
+Traditional African Religions ['Traditional African Religions', 'African Traditional Religions']
+Yudhishthira ['Yudhishthira']
+四国 ['四国', '四国地方', 'しこく', 'シコク']
+परदेसी आराधनालय ['परदेसी आराधनालय', 'कोचीन यहूदी आराधनालय', 'मट्टनचेरी आराधनालय']
+November 25, 2002 ['November 25, 2002', '25 November 2002', '2002-11-25']
+ช้าง อินเตอร์เนชั่นแนล เซอร์กิต ['ช้าง อินเตอร์เนชั่นแนล เซอร์กิต', 'Chang International Circuit', 'สนามช้าง อินเตอร์เนชั่นแนล เซอร์กิต', 'Buriram International Circuit']
+ओक फंसा ['ओक फंसा', 'औक फंसा', 'Ok Phansa', 'Awk Phansa']
+Anyango Mpinga ['Anyango Mpinga']
+Establishment of Sukhothai ['Establishment of Sukhothai', 'Founding of Sukhothai', 'Sukhothai Kingdom founding']
+ปัทมินี ['ปัทมินี']
+インディラ・ポイント ['インディラ・ポイント', 'インディラポイント']
+Eggs ['Eggs', 'Tamago']
+Bahadur Shah Zafar ['Bahadur Shah Zafar', 'Bahadur Shah II', 'Zafar']
+Familia ya Brown ['Familia ya Brown', 'Brown']
+นักเต้นน้อยวัยสิบสี่ปี ['นักเต้นน้อยวัยสิบสี่ปี', 'ลา เปอตีต ดองเซอส เดอ กาตอร์ส อองส์', 'Little Dancer of Fourteen Years']
+सिलपावत्थानथम प्रकाशन ['सिलपावत्थानथम प्रकाशन', 'Silpawatthanatham Prakashan', 'สำนักพิมพ์ศิลปวัฒนธรรม', 'Samnakphim Silpawatthanatham']
+หนังใหญ่ ['หนังใหญ่', 'Nang Yai']
+15 ['15']
+किसुमु ['किसुमु']
+Tabla ['Tabla', 'Tabala']
+กระทรวงการต่างประเทศ (Krasuang Kan Tang Prathet) ['กระทรวงการต่างประเทศ (Krasuang Kan Tang Prathet)']
+รัฐสภา ['รัฐสภา', 'Ratthasapha', 'สภาคองเกรสแห่งสหรัฐอเมริกา']
+द नैरो रोड टू द डीप नॉर्थ ['द नैरो रोड टू द डीप नॉर्थ', 'ओकू नो होसोमिची', 'गहरे उत्तर की ओर संकीर्ण सड़क', '奥の細道']
+อะโวคาโด ['อะโวคาโด']
+菊谷吾郎 ['菊谷吾郎', 'きくたに ごろう', 'Kikutani Goro', 'ゴロ・キクタニ']
+गैस मास्क ['गैस मास्क', 'सुरक्षा हुड', 'श्वास हुड', 'गैस मुखौटा', 'सुरक्षा टोपी', 'गैस का मुखौटा', 'सांस लेना हुड']
+Mlima Kenya ['Mlima Kenya', 'Mt. Kenya']
+Okonomiyaki ['Okonomiyaki', 'お好み焼き']
+คันไซ ['คันไซ', 'คินกิ']
+テネシー・ウィリアムズ ['テネシー・ウィリアムズ', 'トーマス・ラニア・ウィリアムズ3世']
+उत्तरी थाई ['उत्तरी थाई', 'खाम मुएंग', 'काम मुआंग', 'लन्ना', 'उत्तरी थाई (Uttari Thai)', 'खाम मुइंग', 'काम मुंग', 'लाना (Lana)']
+เทือกเขาไวต์ ['เทือกเขาไวต์', 'Thueak Khao Wait', 'ภูเขาสีขาว']
+サンタフェ・インディアン・マーケット ['サンタフェ・インディアン・マーケット', 'サンタフェインディアンマーケット']
+อารยภฏ ['อารยภฏ', 'Aryabhata', 'Aryabhatta']
+ลิตเติล บราวน์ แอนด์ คอมพานี ['ลิตเติล บราวน์ แอนด์ คอมพานี', 'ลิตเติล บราวน์', 'Little, Brown and Company', 'Little, Brown']
+จักกัต สิงห์ ['จักกัต สิงห์', 'จักกา']
+1952 ['1952', 'Nineteen fifty-two']
+आकाशी कैक्यो ब्रिज ['आकाशी कैक्यो ब्रिज', 'Akashi Kaikyo Bridge', 'आकाशी-कैक्यो ब्रिज', 'Akashi-Kaikyo Bridge', 'पर्ल ब्रिज', 'Pearl Bridge']
+Holi ['Holi']
+Absalom Jones ['Absalom Jones']
+紫綬褒章 ['紫綬褒章', 'しじゅほうしょう']
+3,776.24 ม. ['3,776.24 ม.', '3776.24 ม.', '3776.24 เมตร', '3,776.24 เมตร']
+Sheria ya Ulinzi wa Watoa Taarifa ['Sheria ya Ulinzi wa Watoa Taarifa', 'Sheria ya Ulinzi wa Watoa Taarifa ya 1989']
+Chonburi ['Chonburi', 'Mkoa wa Chonburi']
+AIFF Super Cup ['AIFF Super Cup', 'Super Cup', 'เอไอเอฟเอฟ ซูเปอร์ คัพ', 'ซูเปอร์ คัพ']
+ข้อตกลงสรรพนามสัมพัทธ์ ['ข้อตกลงสรรพนามสัมพัทธ์', 'ข้อตกลงประโยคสัมพัทธ์', 'ข้อตกลงในประโยคสัมพัทธ์']
+तीज ['तीज', 'हरियाली तीज', 'हरतालिका तीज']
+พ.ศ. 2069 ['พ.ศ. 2069', 'ค.ศ. 1526', '1526']
+Map:   0%|          | 0/2208 [00:00<?, ? examples/s]स्वर्ण पदक ['स्वर्ण पदक', 'विश्व चैंपियन']
+ศูนย์วิจัยปรมาณู Bhabha ['ศูนย์วิจัยปรมาณู Bhabha', 'BARC', 'ศูนย์วิจัยอะตอมของ Bhabha']
+タノン・トンチャイ山脈 ['タノン・トンチャイ山脈', 'Thanon Thong Chai Range', 'ทิวเขาถนนธงชัย']
+アーメダバード ['アーメダバード', 'アーメダバード (Āmedabādo)', ' अहमदाबाद (Āmedābādo)']
+พระราชบัญญัติการเลือกตั้ง ['พระราชบัญญัติการเลือกตั้ง', 'กฎหมายการเลือกตั้ง']
+Little Dancer of Fourteen Years ['Little Dancer of Fourteen Years', 'La Petite Danseuse de Quatorze Ans']
+Survey of Kenya ['Survey of Kenya']
+1917年 ['1917年', '1917ねん']
+1962 ['1962']
+Songkran ['Songkran', 'Songkran Festival']
+Juneau ['Juneau']
+1952 ['1952']
+チャンドラヤーン ['チャンドラヤーン', 'チャンドラヤン', 'Chandrayaan']
+โช ['โช', 'Shō', '笙']
+Familia ya Astor ['Familia ya Astor', 'Astor']
+Bhumibol Adulyadej ['Bhumibol Adulyadej', 'King Bhumibol', 'Rama IX']
+1952 ['1952']
+1526 ['1526', '21 अप्रैल 1526']
+लुआउ ['लुआउ', 'Luau']
+राष्ट्रीय खुफिया सेवा ['राष्ट्रीय खुफिया सेवा', 'नेशनल इंटेलिजेंस सर्विस', 'एनआईएस', 'NIS']
+14 ตุลาคม 2521 ['14 ตุลาคม 2521', '14 ตุลาคม พ.ศ. 2521', '1978-10-14', '2521-10-14']
+East African Educational Publishers ['East African Educational Publishers', 'EAEP', 'Wachapishaji wa elimu wa Afrika Mashariki']
+1984 ['1984', '2527']
+アデテト ['アデテト', 'トゥルカナの角笛', 'アデテト(Adetet)', 'トゥルカナホーン', 'アデテト(Turkana horn)']
+लाम फु थाई ['लाम फु थाई', 'लैम फु थाई', 'Lam Phu Thai', 'ลำภูไท']
+村上春樹 ['村上春樹', 'むらかみはるき', 'Murakami Haruki', 'Haruki Murakami']
+Nagarjuna Restaurant ['Nagarjuna Restaurant', 'Nagarjuna']
+हिंदी ['हिंदी']
+थाईलैंड 4.0 ['थाईलैंड 4.0', 'थाईलैंड ४.०']
+まさか ['まさか', 'Masaka', 'うそでしょ', 'Uso desho', '信じられない', 'Shinjirarenai', 'とんでもない', '冗談です', 'ありえない', 'arienai']
+268,596平方マイル ['268,596平方マイル', '268596平方マイル', '695,662平方キロメートル', '695662平方キロメートル']
+Hyderabad ['Hyderabad']
+รางวัลโจโม เคนยัตตา สาขาวรรณกรรม ['รางวัลโจโม เคนยัตตา สาขาวรรณกรรม']
+ओन्डिएक ['ओन्डिएक']
+1984 ['1984']
+Nagano ['Nagano', 'Nagano Prefecture']
+Kihmong ['Kihmong', 'Lugha ya Kihmong', 'Hmong', 'Lugha ya Hmong']
+Grilling ['Grilling']
+J. B. Lippincott & Co. ['J. B. Lippincott & Co.', 'J. B. Lippincott', 'J・B・リッピンコット']
+एलायंस फॉर सस्टेनेबल एनर्जी, एलएलसी (Alliance for Sustainable Energy, LLC) ['एलायंस फॉर सस्टेनेबल एनर्जी, एलएलसी (Alliance for Sustainable Energy, LLC)', 'एलायंस फॉर सस्टेनेबल एनर्जी (Alliance for Sustainable Energy)', 'सस्टेनेबल एनर्जी के लिए गठबंधन, एलएलसी']
+โอซาเมะฟุดะ ['โอซาเมะฟุดะ', 'Osamefuda', 'โอซาเมะ-ฟุดะ', 'Osame-fuda', '納札']
+15 มกราคม 1967 ['15 มกราคม 1967', '15 มกราคม พ.ศ. 2510', '15 มกราคม 2510']
+紀伊半島 ['紀伊半島', 'きいはんとう', 'Kii hantō']
+Jack London ['Jack London', 'John Griffith Chaney']
+โอโบกาโน ['โอโบกาโน', 'gusii lyre']
+भाभा परमाणु अनुसंधान केंद्र ['भाभा परमाणु अनुसंधान केंद्र', 'बार्क', 'Bhabha Parmanu Anusandhan Kendra', 'BARC']
+367 km ['367 km', '367 kilometers', '367 kilometres']
+選挙法 ['選挙法', '選挙法 (せんきょほう)']
+อบนินทรนาถ ฐากูร ['อบนินทรนาถ ฐากูร', 'Abanindranath Tagore']
+ヴァッラブバーイー・パテール ['ヴァッラブバーイー・パテール', 'サルダール・ヴァッラブバーイー・パテール', 'パテール副首相', 'Vallabhbhai Patel', 'Sardar Vallabhbhai Patel']
+RIKEN ['RIKEN', 'Riken', '理化学研究所', 'Rikagaku Kenkyūsho']
+Jomo Kenyatta Prize for Literature ['Jomo Kenyatta Prize for Literature']
+สาราวานา บาวัน ['สาราวานา บาวัน', 'Saravana Bhavan', 'Hotel Saravana Bhavan']
+रक्त भंडारण तकनीक ['रक्त भंडारण तकनीक', 'रक्त भंडारण', 'रक्त संरक्षण', 'ब्लड बैंकिंग', 'रक्त बैंक', 'रक्त परिरक्षण', 'रक्त बैंकिंग', 'ब्लड प्लाज्मा पृथक्करण']
+Kii Peninsula ['Kii Peninsula']
+チョンブリー ['チョンブリー', 'チョンブリー県']
+Reform Party ['Reform Party', 'Reform', 'Chama cha Reform']
+ガンジス川 ['ガンジス川', 'Gangesu-gawa', 'Ganges River', 'ガンジス', 'ガンガー', 'Ganga', 'Ganges']
+バセイン条約 ['バセイン条約', 'バセインじょうやく', 'Basein Jōyaku']
+फोर्ड का थिएटर ['फोर्ड का थिएटर', 'फोर्ड का थियेटर', 'फोर्ड थिएटर']
+Little, Brown and Company ['Little, Brown and Company', 'Little, Brown']
+Nam Dok Mai ['Nam Dok Mai', 'Nam Dokmai']
+Saigo Takamori ['Saigo Takamori', 'Takamori Saigo']
+268,596 ตารางไมล์ ['268,596 ตารางไมล์', '268596 ตารางไมล์', '695,662 ตารางกิโลเมตร', '695662 ตารางกิโลเมตร']
+デイビッド・ルディシャ ['デイビッド・ルディシャ', 'デビッド・ルディシャ', 'David Rudisha']
+揚げ (Age) ['揚げ (Age)', 'ディープフライ (Diipufurai)', '深揚げ (Fukaage)', '揚げ物']
+タイ東北部 ['タイ東北部', 'イサーン', 'イサン', 'エサン', '東北タイ', 'タイ北東部']
+Kukaanga sana ['Kukaanga sana', 'Deep-frying', 'Kukaanga kwa kina']
+Cyrus Kabiru ['Cyrus Kabiru']
+15 ['15']
+268,596 वर्ग मील ['268,596 वर्ग मील', '268596 वर्ग मील', '695,662 वर्ग किलोमीटर', '695662 वर्ग किलोमीटर']
+मोंटियन बूनमा ['मोंटियन बूनमा', 'Montien Boonma', 'มณเฑียร บุญมา']
+トンマヤンティ ['トンマヤンティ', 'クンイン・ウィモン・シリパイブン']
+प्रोग्रेसिव पार्टी ['प्रोग्रेसिव पार्टी', 'बुल मूस पार्टी', 'प्रोग्रेसिव', 'प्रगतिशील पार्टी']
+1885 ['1885']
+एगेसा ['एगेसा']
+ค่ะ ['ค่ะ', 'คะ']
+सोंगक्रान Osaka['सोंगक्रान', 'सोंगक्रान महोत्सव', 'Songkran', 'Songkran Mahotsav']
+ ['Osaka', 'Ōsaka']
+6 สิงหาคม 1965 ['6 สิงหาคม 1965', '6 ส.ค. 1965', '1965-08-06', '6 สิงหาคม 2508']
+Ok Phansa ['Ok Phansa', 'Awk Phansa']
+Bangkok ['Bangkok', 'Krung Thep Maha Nakhon', 'Krung Thep']
+1991 ['1991', 'Elfu moja mia tisa tisini na moja']
+513,120 sq km ['513,120 sq km', '513,120平方キロメートル', '513,120 平方キロ']
+Milima Myeupe ['Milima Myeupe', 'Milima nyeupe']
+सैन फ्रांसिस्को की संधि ['सैन फ्रांसिस्को की संधि', 'सैन फ्रांसिस्को शांति संधि']
+Kalidasa ['Kalidasa', 'Kalidas']
+Agni ['Agni']
+जापान मौसम विज्ञान एजेंसी ['जापान मौसम विज्ञान एजेंसी', 'जापान मौसम विज्ञान एजेंसी (Japan Meteorological Agency)', 'जेएमए', 'जापानी मौसम विज्ञान एजेंसी']
+तिर्यक विभक्ति (ティリャク・ヴィバクティ) ['तिर्यक विभक्ति (ティリャク・ヴィバクティ)', 'Tiryak Vibhakti', 'તિર્યકવિભક્તિ']
+Poke ['Poke', 'Poké']
+फुकुओका सॉफ्टबैंक हॉक्स August 18, 1920['फुकुओका सॉफ्टबैंक हॉक्स', 'Fukuoka SoftBank Hawks', '福岡ソフトバンクホークス'] 
+['August 18, 1920', '18 August 1920', '1920-08-18']
+60 ['60', 'หกสิบ']
+हे-बुनौ-वरिला संधि ['हे-बुनौ-वरिला संधि', 'Hay-Bunau-Varilla Sandhi', 'हा-बूनू-वैरीला संधि']
+इंडो-आर्यन ['इंडो-आर्यन', 'इंडोआर्यन']
+Saumu ['Saumu', 'Sawm']
+グリル (Guriru) ['グリル (Guriru)', 'グリル']
+Aryabhata ['Aryabhata', 'アーリヤバタ', 'Aryabhatta']
+ソマリ語 ['ソマリ語', 'ソマリご', 'Somari-go']
+सोमदेत फ्रा बुद्धाचन तोह ['सोमदेत फ्रा बुद्धाचन तोह', 'सोमदेत तोह', 'Somdet Phra Buddhachan Toh']
+नागानो ['नागानो', 'नागानो प्रीफेक्चर', 'नागानो प्रांत']
+อาสาฬหบูชา ['อาสาฬหบูชา', 'วันอาสาฬหบูชา']
+Kibaata ['Kibaata']
+Lord Dalhousie ['Lord Dalhousie', 'Dalhousie', 'The Earl of Dalhousie', 'James Andrew Broun-Ramsay, 1st Marquess of Dalhousie']
+Blood storage techniques ['Blood storage techniques', 'Blood storage', 'Blood preservation', 'Blood banking', 'Blood plasma separation']
+灰の水曜日 ['灰の水曜日', '灰の水曜日 (Hai no suiyōbi)']
+ゴル・マヒア ['ゴル・マヒア', 'ゴル・マヒアFC']
+グレート・スモーキー山脈 ['グレート・スモーキー山脈', 'スモーキー山脈', 'スモーキーズ', 'グレートスモーキー山脈', 'スモーキー山脈', 'スモーキーズ']
+अफ्रीकी संघ का संविधान अधिनियम ['अफ्रीकी संघ का संविधान अधिनियम', 'एयू संविधान अधिनियम', 'Afriki Sangh ka Samvidhan Adhiniyam']
+B. R. Ambedkar ['B. R. Ambedkar', 'Bhimrao Ramji Ambedkar', 'Babasaheb Ambedkar']
+川と源 ['川と源', 'The River and the Source']
+ภาษาม้ง ['ภาษาม้ง', 'ม้ง']
+रिफॉर्म पार्टी ['रिफॉर्म पार्टी', 'रिफॉर्म']
+レモングラス ['レモングラス']
+Rice family Kae Sa Luk['Rice family', 'Rices'] 
+['Kae Sa Luk', 'Fruit carving', 'แกะสลัก']
+Saigo Takamori ['Saigo Takamori', 'Takamori Saigo']
+ग्रेट स्मोकी पर्वत ['ग्रेट स्मोकी पर्वत', 'स्मोकी पर्वत', 'स्मोकीज', 'महान स्मोकी पर्वत', 'स्मोकी माउंटेन']
+ฮารูกิ มูราคามิ ['ฮารูกิ มูราคามิ', 'Haruki Murakami', 'Murakami Haruki', '村上春樹']
+Kitai cha Kusini ['Kitai cha Kusini', 'Pak Tai', 'Thai Tai', 'Thai ya kusini', 'Kipak Tai', 'Kitai Tai']
+Miaka 30 ['Miaka 30', 'Miaka thelathini', 'Umri wa miaka 30']
+พระราชบัญญัติควบคุมคนเข้าเมืองและการรับรองผู้ลี้ภัย ['พระราชบัญญัติควบคุมคนเข้าเมืองและการรับรองผู้ลี้ภัย', 'พระราชบัญญัติควบคุมการเข้าเมือง', 'Nyūkanhō', '入管法']
+明石海峡大橋 ['明石海峡大橋', 'Akashi Kaikyo Ohashi', 'パールブリッジ']
+ポール・ウィンチェル ['ポール・ウィンチェル', 'Paul Winchell']
+विक्रम साराभाई ['विक्रम साराभाई', 'डॉ. विक्रम साराभाई', 'विक्रम अंबालाल साराभाई']
+खाद बनाना ['खाद बनाना', 'कंपोस्टिंग', 'खाद']
+536 km ['536 km', '536 kilometers', 'Approximately 536 km', 'Approximately 536 kilometers']
+हैरिसन परिवार ['हैरिसन परिवार']
+テキサス ['テキサス', 'Tekisasu']
+2013年 ['2013年']
+เอเกซา ['เอเกซา']
+พี. วี. สินธุ ['พี. วี. สินธุ', 'PV Sindhu', 'Pusarla Venkata Sindhu']
+1941 ['1941']
+Loi Krathong ['Loi Krathong']
+1963 ['1963', 'หนึ่งพันเก้าร้อยหกสิบสาม', '2506']
+ラーマーヤナ ['ラーマーヤナ', 'ラマヤナ']
+ओनुसा (Ōnusa) ['ओनुसा (Ōnusa)', 'ओनुसा', 'Ōnusa', '大麻']P.V.シンドゥ
+ ['P.V.シンドゥ', 'PV Sindhu', 'Pusarla Venkata Sindhu', 'プサルラ・ヴェンカタ・シンドゥ', 'P. V. シンドゥ']
+พระราชบัญญัติรัฐธรรมนูญแห่งสหภาพแอฟริกา ['พระราชบัญญัติรัฐธรรมนูญแห่งสหภาพแอฟริกา', 'พระราชบัญญัติรัฐธรรมนูญ AU', 'Phra Ratchabanyat Rattha Thammanun Haeng Sahaphap Afrikka', 'Phra Ratchabanyat Rattha Thammanun AU']
+थी लो सू झरना ['थी लो सू झरना', 'थि लो सु झरना', 'Thi Lo Su Waterfall', 'น้ำตกทีลอซู', 'Namtok Thi Lo Su', 'नाम्तोक थी लो सु']
+काताकाना INAC Kobe Leonessa ['काताकाना', 'カタカナ', 'かたかな']
+['INAC Kobe Leonessa', 'INAC神戸レオネッサ']
+Theodore Maiman ['Theodore Maiman', 'Theodore Harold Maiman']
+तंदूर में पकाना ['तंदूर में पकाना', 'तंदूरी खाना पकाना', 'तंदूर ओवन में पकाना', 'तंदूर में बेकिंग', 'मिट्टी के ओवन में पकाना']
+1,000 किमी โฮเน็น ['1,000 किमी', '1000 किमी', '1,000 किलोमीटर', '1000 किलोमीटर', 'लगभग 1,000 किमी', 'लगभग 1000 किमी', 'लगभग 1,000 किलोमीटर', 'लगभग 1000 किलोमीटर', 'लगभग 1000 किलोमीटर']
+['โฮเน็น', 'โฮเน็น โชนิน', 'เก็นคู']
+Ash Wednesday ['Ash Wednesday']
+จอห์น แกสต์ ['จอห์น แกสต์', 'John Gast']
+リトル・ブラウン ['リトル・ブラウン', 'リトル・ブラウン・アンド・カンパニー', 'Little, Brown and Company', 'Little, Brown']
+Charles Schulz ['Charles Schulz', 'Charles M. Schulz']
+Mto Chattahoochee ['Mto Chattahoochee', 'Chattahoochee', 'Chattahoochee River', 'Mto wa Chattahoochee']
+Khon ['Khon', 'โขน']
+ना कुरु काउंटी ['ना कुरु काउंटी', 'नाकुरु काउंटी', 'ना कुरु', 'नाकुरु']
+युधिष्ठिर ['युधिष्ठिर', 'युधिष्ठिर महाराज']
+Nakhon Si Thammarat Range ['Nakhon Si Thammarat Range', 'Milima ya Nakhon Si Thammarat']
+1600 ['1600']
+एसिस (Asis) ['एसिस (Asis)']
+デーヴァナーガリー文字 ['デーヴァナーガリー文字', 'デーヴァナーガリー', 'Devanagari', 'Dēvanāgarī']
+Tirthankara ['Tirthankara']
+मेवाड़ी ['मेवाड़ी']イード・アル＝フィトル
+ ['イード・アル＝フィトル', 'イード・ウル＝フィトル', 'ミティ・イード', 'イード', '断食明けの祭り', 'Eid al-Fitr', 'Eid ul-Fitr', 'Meethi Eid']
+किबाटा ['किबाटा']
+Julie Krone ['Julie Krone']
+อักษรไทย ['อักษรไทย', 'สคริปต์ไทย', 'Abugida ไทย']
+พ.ศ. 2509 ['พ.ศ. 2509', '2509']
+Ukulele ['Ukulele']
+Nagano ['Nagano', 'Mkoa wa Nagano']
+1963 ['1963']
+Sushruta ['Sushruta', 'スシュルタ']
+59.199点 ['59.199点', '59.199', 'ごじゅうきゅうてん いちきゅうきゅう (gojuukyuu ten ichikyuukyuu)']
+1952 ['1952']
+Kiindo-Aryani ['Kiindo-Aryani', 'Kiindo Aryani', 'Kiindo-Ariani']
+Sri Thanonchai ['Sri Thanonchai', 'Si Thanonchai']
+1939 ['1939']
+AIFF Super Cup ['AIFF Super Cup', 'Super Cup']
+ベル・ジャー ['ベル・ジャー', 'ベルジャー', 'The Bell Jar']
+Marathon ya Berlin ya 2014 ['Marathon ya Berlin ya 2014', 'Berlin Marathon 2014']
+รางวัล Ruth Lilly Poetry ['รางวัล Ruth Lilly Poetry', 'รางวัล Ruth Lilly']
+Relative pronoun agreement ['Relative pronoun agreement', 'Relative clause agreement', 'Agreement in relative clauses']
+เท็กซัส ['เท็กซัส']
+ผัด (Phat) ['ผัด (Phat)']
+ケニア山 ['ケニア山', 'マウントケニア', 'Mount Kenya']
+อินทิราพอยต์ ['อินทิราพอยต์', 'จุดอินทิรา']
+khrap ['khrap', 'krap']
+1991 ['1991', 'Nineteen ninety-one']
+Ulinganifu wa viwakilishi tegemezi ['Ulinganifu wa viwakilishi tegemezi', 'Ulinganifu wa vishazi tegemezi', 'Ulinganifu katika vishazi tegemezi']
+ओरिक्स बफ़ेलोज़ ['ओरिक्स बफ़ेलोज़', 'ओरिक्स बफ़ेलो', 'Orix Buffaloes', 'オリックス・バファローズ']
+アスター家 ['アスター家', 'アスターファミリー', 'アスター']
+1965年8月6日 ['1965年8月6日', '1965ねん8がつ6にち', '1965/08/06', '1965-08-06']
+रक्षा मंत्रालय ['रक्षा मंत्रालय', 'मिनिस्ट्री ऑफ डिफेन्स (Ministry of Defence)', 'กระทรวงกลาโหม (Krasuang Kalahom)']
+シー・タノンチャイ ['シー・タノンチャイ', 'Sri Thanonchai', 'Si Thanonchai']
+बी. आर. अम्बेडकर ['बी. आर. अम्बेडकर', 'भीमराव रामजी अम्बेडकर', 'बाबासाहेब अम्बेडकर']
+Bustani ya TD ['Bustani ya TD', 'Bustani', 'Bustani ya Boston']
+Hisamitsu Springs ['Hisamitsu Springs', '久光スプリングス']
+ตลาดอินเดียนซานตาเฟ ['ตลาดอินเดียนซานตาเฟ']
+1977 ['1977']
+1964 ['1964']
+Mae Varee ['Mae Varee', 'แม่วารี']
+1600年 ['1600年', '1600']
+The River and the Source ['The River and the Source']
+2013 ['2013']
+2014 Berlin Marathon ['2014 Berlin Marathon', 'Berlin Marathon 2014']
+イーデン・ガーデンズ ['イーデン・ガーデンズ', 'イーデン・ガーデンズ、コルカタ', 'イーデンガーデンズ', 'イーデンガーデンズ、コルカタ', 'エデンガーデン', 'エデンガーデン、コルカタ']
+Absalom Jones ['Absalom Jones']
+चिकामात्सु मोंज़ेमोन ['चिकामात्सु मोंज़ेमोन', 'मोंज़ेमोन चिकामात्सु', '近松門左衛門']
+टेनेसी विलियम्स ['टेनेसी विलियम्स', 'थॉमस लानियर विलियम्स III']
+ギチュグ ['ギチュグ', 'ギチュグ・キクユ']
+Jagadish Chandra Bose ['Jagadish Chandra Bose', 'J.C. Bose', 'Sir J.C. Bose']
+बिवा ['बिवा', 'बीवा', '琵琶', '琵琶 (Biwa)']
+Burney Treaty ['Burney Treaty', 'Treaty of Burney']
+Gichugu ['Gichugu', 'Gichugu Kikuyu']
+चट्टाहूची नदी ['चट्टाहूची नदी', 'चट्टाहूची', 'चटाहोची नदी', 'चत्ताहूची', 'Chattahoochee River', 'Chattahoochee']
+เบอร์ลินมาราธอน 2014 ['เบอร์ลินมาราธอน 2014', 'เบอร์ลินมาราธอนปี 2014']
+National Police Agency ['National Police Agency', 'Keisatsu-cho', '警察庁']
+अंडे ['अंडे', 'तमागो']
+ชลบุรี ['ชลบุรี', 'จังหวัดชลบุรี']
+เมานต์เอลกอน ['เมานต์เอลกอน', 'เอลกอน']
+うどん ['うどん', 'Udon']
+1 กรกฎาคม 2560 ['1 กรกฎาคม 2560', '1 กรกฎาคม ค.ศ. 2017']
+川端康成 ['川端康成', 'かわばたやすなり', 'Kawabata Yasunari', 'Yasunari Kawabata']
+ヤギ (Yagi) Magharibi ['ヤギ (Yagi)', 'ヤギ肉', 'ヤギ', '牛肉 (Gyūniku)', '牛肉']
+['Magharibi', 'Kenya ya Magharibi', 'Nyanza', 'Eneo la Magharibi']
+ウクレレ 2013['ウクレレ'] 
+['2013']
+ทิวเขาถนนธงชัยกอร์ มาเฮีย  ['ทิวเขาถนนธงชัย', 'Thanon Thong Chai Range']
+['กอร์ มาเฮีย', 'กอร์ มาเฮีย เอฟซี']
+ソンクラーン न्यातिति ['ソンクラーン', 'ソンクラーン祭り', 'ソングクラン', 'ソングクランフェスティバル']
+['न्यातिति', 'न्यातिति वीणा', 'न्यातिती लाइर', 'Nyatiti', 'Nyatiti lyre', 'Nyatiti veena']
+Jomo KenyattaSwami and Friends  ['Jomo Kenyatta', 'Mzee Jomo Kenyatta', 'Kamau wa Ngengi']
+['Swami and Friends', 'สวามีและเพื่อน', 'สวามีและเพื่อนๆ']
+Bugaku ['Bugaku']
+जगदीश चंद्र बोस ['जगदीश चंद्र बोस', 'जे. सी. बोस', 'सर जे. सी. बोस']
+แมรี ลีกีย์ ['แมรี ลีกีย์']
+กาลิทาส ['กาลิทาส', 'Kalidasa', 'Kalidas']
+มาจิก วอเตอร์ ['มาจิก วอเตอร์', 'Majik Water', 'Majikwater']
+वरहाडी ['वरहाडी', 'वरहदी', 'वरदी', 'Varhadi']
+ムファンガノ島 ['ムファンガノ島', 'ムファンガノとう', 'Mfangano Island']
+इवानामी शोतेन ['इवानामी शोतेन', 'इवानामी शोतेन, प्रकाशक', '岩波書店']
+Katakana ['Katakana', 'かたかな', 'カタカナ']
+Kukaanga sana ['Kukaanga sana', 'Kukaanga kwa maji kidogo', 'Kukaanga kwenye kikaango', 'Kukaanga']
+15 जनवरी, 1967 ['15 जनवरी, 1967', '15 जनवरी 1967', '15/01/1967']
+ダルハウジー卿 ['ダルハウジー卿', 'ダルハウジー', 'Daruhōjī-kyō (ダルハウジー卿)', 'ダルハウジー伯爵', 'ジェームズ・アンドリュー・ブラウン＝ラムゼイ、初代ダルハウジー侯爵']
+1905 ['1905']
+P. V. Sindhu ['P. V. Sindhu', 'PV Sindhu', 'Pusarla Venkata Sindhu']
+Anyango Mpinga ['Anyango Mpinga']
+舞楽 ['舞楽', 'ぶがく', 'Bugaku', 'ブガク']
+Soko la Wahindi la Santa Fe ['Soko la Wahindi la Santa Fe']
+किगुरु ['किगुरु', 'गिचुकिआ']
+เคี่ยว (Khiao) ['เคี่ยว (Khiao)', 'ตุ๋น (Tun)', 'การเคี่ยว (Kan khiao)']
+チン ['チン', 'チンチャップ', 'ฉิ่ง']
+ナイロビ ['ナイロビ']
+Biwa ['Biwa', '琵琶', '琵琶 (Biwa)']
+Khushwant Singh ['Khushwant Singh']
+Indira Point ['Indira Point', 'Uhakika wa Indira']
+Elections Act ['Elections Act', 'The Elections Act']
+Kisumu ['Kisumu']
+オルツ ['オルツ', '一本弦のフィドル', 'Orutu', 'Ippon gen no fidoru']
+1960年 ['1960年', '1960']
+रामकिएन ['रामकिएन', 'रामकियान', 'रामकियन']
+นางาโนะ ['นางาโนะ', 'จังหวัดนางาโนะ', 'นากาโน่', 'จังหวัดนากาโน่']
+Januari 26, 1950 ['Januari 26, 1950', '26 Januari 1950']
+Mkataba wa Salbai ['Mkataba wa Salbai']
+Ahmedabad ['Ahmedabad']
+フォード劇場 ['フォード劇場', 'フォードシアター', 'フォードの劇場']
+Phoenix ['Phoenix']
+ナイロビ ['ナイロビ', 'ないろび', 'Nairobi']
+Sunday service ['Sunday service', 'Church attendance', 'Worship service', 'Sunday worship']
+Were ['Were']
+थोम्मायन्ती ['थोम्मायन्ती', 'खुनयिंग विमोन सिरिपाईबुन']
+Phoenix ['Phoenix']
+Kyoto University ['Kyoto University', 'Kyoto University iPS Cell Research and Application Center', 'CiRA', 'Center for iPS Cell Research and Application', 'Kyoto University (including CiRA)']
+Map:  23%|██▎       | 517/2208 [00:00<00:00, 5121.67 examples/s]アクバル ['アクバル', 'Akubaru', 'अकबर', 'ジャラールッディーン・ムハンマド・アクバル']
+Deep-frying ['Deep-frying', 'Frying', 'Deep fried']
+टेक्सास ['टेक्सास']
+गोर माहिया ['गोर माहिया', 'गोर माहिया एफसी']
+Bangkok ['Bangkok', 'Krung Thep Maha Nakhon']
+1600 ['1600', '१६००']
+Majik Water ['Majik Water', 'Majikwater']
+Mbinu za kuhifadhi damu ['Mbinu za kuhifadhi damu', 'Uhifadhi wa damu', 'Benki ya damu', 'Utunzaji wa damu', 'Benki ya Damu', 'Mgawanyo wa plasma ya damu']
+619 อีฎิ้ลฟิตริ['619', 'Anil Kumble', "Anil Kumble's 619"] 
+['อีฎิ้ลฟิตริ', 'อีฎ อัล-ฟิตร์', 'มีถี อีฎ', 'Eid al-Fitr', 'Eid ul-Fitr', 'Meethi Eid', 'อีฎ', 'เทศกาลแห่งการละศีลอด']
+1238 ['1238']
+ธีโอดอร์ ไมแมน ['ธีโอดอร์ ไมแมน', 'ธีโอดอร์ แฮโรลด์ ไมแมน']
+Thailand ya Mashariki ['Thailand ya Mashariki', 'Mashariki']
+सेबास्टियाओ रोड्रिग्स ['सेबास्टियाओ रोड्रिग्स', 'सेबस्टियाओ रोड्रिगेस', 'सेबास्टियाओ रोड्रिग्स']
+नात्सुमे सोसेकी ['नात्सुमे सोसेकी', 'सोसेकी नात्सुमे', 'Natsume Sōseki', 'Sōseki Natsume', '夏目漱石']
+Sebastião Rodrigues ['Sebastião Rodrigues', 'Sebastiao Rodrigues']
+1935年8月14日 ['1935年8月14日', '1935ねん8がつ14にち', '1935/08/14', '1935-08-14']
+Bangkok ['Bangkok', 'Krung Thep Maha Nakhon']
+34 ['34']
+ตะไคร้ ['ตะไคร้']
+สำนักข่าวกรองแห่งชาติ ['สำนักข่าวกรองแห่งชาติ', 'Samnak Khaokrong Haeng Chat', 'NIS']
+1977 ['1977']
+バティアン ['バティアン']
+สำนักงานตำรวจแห่งชาติ ['สำนักงานตำรวจแห่งชาติ', 'Samnakngan Tamruat Haeng Chat', '警察庁', 'Keisatsu-cho']
+Olive Garden ['Olive Garden']
+जोमो केन्याटा साहित्य पुरस्कार ['जोमो केन्याटा साहित्य पुरस्कार', 'साहित्य के लिए जोमो केन्याटा पुरस्कार']
+BG Pathum United ['BG Pathum United']
+1977 ['1977']
+Ajmer ['Ajmer']
+सुप्रीम कोर्ट ['सुप्रीम कोर्ट', 'संयुक्त राज्य अमेरिका का सर्वोच्च न्यायालय', 'उच्चतम न्यायालय', 'स्कोटस']
+सिमरिंग (Simmering) ['सिमरिंग (Simmering)', 'धीमी आंच पर पकाना (Dhimi aanch par pakana)']
+द सेंटेनियल लैंड रन मॉन्युमेंट ['द सेंटेनियल लैंड रन मॉन्युमेंट', 'सेंटेनियल लैंड रन स्मारक']
+राजीव गांधी स्वास्थ्य विज्ञान विश्वविद्यालय पुरस्कार ['राजीव गांधी स्वास्थ्य विज्ञान विश्वविद्यालय पुरस्कार', 'राजीव गांधी यूनिवर्सिटी ऑफ हेल्थ साइंसेज अवार्ड्स']
+डीप फ्राई ['डीप फ्राई', 'शैलो फ्राई', 'पैन फ्राई', 'तलना', 'उथला तलना']
+カー ['カー', 'kha', 'ka']
+Reform Party ['Reform Party', 'Reform']
+नाचती हुई लड़की ['नाचती हुई लड़की', 'मोहनजोदड़ो की नाचती हुई लड़की', 'नाचने वाली लड़की']
+मोमोफुकु एंडो ['मोमोफुकु एंडो', 'एंडो मोमोफुकु', 'अंडो मोमोफुकु']
+सलमान रुश्दी ['सलमान रुश्दी', 'Salman Rushdie']
+Ukulele ['Ukulele']
+मध्य ['मध्य', 'मध्य केन्या', 'माउंट केन्या क्षेत्र', 'केंद्रीय', 'सेंट्रल केन्या']
+खोन ['खोन', 'Khon', 'โขน']
+प्लेक फिबुनसोंगखराम ['प्लेक फिबुनसोंगखराम', 'फिबन', 'फील्ड मार्शल प्लेक फिबुनसोंगखराम']
+ภาษาเตลูกู ['ภาษาเตลูกู']
+1877 का समझौता ['1877 का समझौता', '1877 का समझौता (1877 ka samjhauta)']
+व्हिसलब्लोअर संरक्षण अधिनियम ['व्हिसलब्लोअर संरक्षण अधिनियम', 'व्हिसलब्लोअर संरक्षण अधिनियम 1989']
+Mount Elgon ['Mount Elgon', 'Elgon']
+Udon ['Udon', 'うどん']
+อร่อย (aroi) ['อร่อย (aroi)', 'aroi', 'aroy', 'อร่อย']
+สนามกีฬา นางาอิ ['สนามกีฬา นางาอิ', 'สนามกีฬายันมาร์ นางาอิ', 'Nagai Stadium', 'Yanmar Stadium Nagai', '長居スタジアム']
+อภิชาติ วรรณวิจิตร ['อภิชาติ วรรณวิจิตร', 'Apichart Vanavichit']
+न्यू मैक्सिको ['न्यू मैक्सिको', 'न्यू मेक्सिको']
+आलू (Aaloo) ['आलू (Aaloo)', 'आयरिश आलू (Irish aaloo)', 'आलू', 'आयरिश आलू']
+जॉन एफ. कैनेडी ['जॉन एफ. कैनेडी', 'जॉन कैनेडी', 'जेएफके', 'जॉन फिट्जगेराल्ड कैनेडी', 'जॉन एफ कैनेडी']
+พ.ศ. 2143 ['พ.ศ. 2143', '1600']
+เคี่ยว (Khiao) ['เคี่ยว (Khiao)', 'การเคี่ยว (Kan Khiao)']
+Jumatano ya Majivu ['Jumatano ya Majivu']
+Treaty of Salbai ['Treaty of Salbai', 'Salbai Treaty']
+1869 ['1869']
+アフリカ連合憲章 ['アフリカ連合憲章', 'AU憲章', 'Afurika Rengō Ken Shō', 'AU Ken Shō', 'アフリカ連合設立法', 'アフリカ連合構成法', 'Afurika Rengō Sōchi Hō', 'Afurika Rengō Kōsei Hō', 'AU 設立法', 'AU 構成法', 'AU Sōchi Hō', 'AU Kōsei Hō']
+こんばんは ['こんばんは', 'こんばんは (Konbanwa)', 'コンバンワ']
+मौसम विज्ञान ['मौसम विज्ञान', 'मीटियोरोलॉजी']
+मैरी लीकी ['मैरी लीकी']
+タンドール料理 (Tandōru ryōri) ['タンドール料理 (Tandōru ryōri)', 'タンドリー料理 (Tandōrī ryōri)', 'タンドールでの調理 (Tandōru de no chōri)', '粘土オーブン料理 (Nendo ōbun ryōri)']
+アシス (Asis) ['アシス (Asis)']
+การปรุงอาหารด้วยเตาทันดูร์ (Kan prung ahan duai tao than dur) ['การปรุงอาหารด้วยเตาทันดูร์ (Kan prung ahan duai tao than dur)', 'การปรุงอาหารทันดูรี (Kan prung ahan than duri)', 'การปรุงอาหารในเตาทันดูร์ (Kan prung ahan nai tao than dur)', 'การปรุงอาหารด้วยเตาอบดิน (Kan prung ahan duai tao op din)']
+ย่าง (Yang) ['ย่าง (Yang)', 'การย่าง']
+Nairobi ['Nairobi']
+เทคนิคการเก็บรักษาเลือด ['เทคนิคการเก็บรักษาเลือด', 'การเก็บรักษาเลือด', 'ธนาคารเลือด', 'เทคนิคการเก็บเลือด', 'การจัดเก็บเลือด', 'การอนุรักษ์เลือด', 'การแยกพลาสมาในเลือด']
+1917 ['1917', '๑๙๑๗', '2460']
+Walt Whitman ['Walt Whitman', 'Walter Whitman']
+माउंट एल्गोन ['माउंट एल्गोन', 'एल्गोन']
+Progressive Party ['Progressive Party', 'Bull Moose Party', 'Progressive']
+नेशनल रेनबो कोएलिशन ['नेशनल रेनबो कोएलिशन', 'नार्क', 'राष्ट्रीय इंद्रधनुषी गठबंधन']
+Paradesi Synagogue ['Paradesi Synagogue', 'Cochin Jewish Synagogue', 'Mattancherry Synagogue', 'Paradesi sinagogi', 'Cochin Wayahudi sinagogi', 'Mattancherry sinagogi']
+Deep frying ['Deep frying', 'Shallow frying', 'Pan frying', 'Frying']
+スピリチュアル ['スピリチュアル', 'ニグロスピリチュアル', '黒人霊歌']
+รามเกียรติ์ ['รามเกียรติ์', 'รามายณะ']
+アラバマ物語 ['アラバマ物語', 'To Kill a Mockingbird']
+सुफन्नाहोंग ['सुफन्नाहोंग', 'เรือพระที่นั่งสุพรรณหงส์']
+星雲賞 (Seiun Shō) ['星雲賞 (Seiun Shō)', 'Seiun賞']
+Federalist ['Federalist', 'Chama cha Federalist']
+サタジット・レイ ['サタジット・レイ', 'Satyajit Ray', 'Satajitto Rei']
+8 ['8', 'आठ']
+1600 ['1600']
+Januari 15, 1967 ['Januari 15, 1967', 'Januari 15 mwaka 1967', '15 Januari 1967']
+แซนดรา เด โอคอนเนอร์ ['แซนดรา เด โอคอนเนอร์', 'แซนดรา โอคอนเนอร์', 'โอคอนเนอร์']
+1962 ['1962']
+द बेल जार ['द बेल जार']
+1968 ['1968']
+1,456 ['1,456']
+1884 ['1884', '1885']
+जैक निकलॉस ['जैक निकलॉस', 'जैक निक्लॉस', 'निकलॉस, जैक']
+サウム ['サウム', 'サウム (Saum)']
+2013 ['2013']
+Central ['Central', 'Central Kenya', 'Mount Kenya Region']
+ルース・リリー詩賞 ['ルース・リリー詩賞', 'ルース・リリー賞']
+Viking Press ['Viking Press', 'Viking']
+Diwali ['Diwali', 'Deepavali', 'Festival of Lights']
+Nang Yai ['Nang Yai', 'หนังใหญ่', 'Nangyai']
+Majik Water ['Majik Water', 'Majikwater']
+ナショナル・プレイヤー・ブレックファスト ['ナショナル・プレイヤー・ブレックファスト', '国民的祈祷朝食会', '国民の祈りの朝食']
+ワイ ['ワイ', 'Wai', 'ไหว้']
+ब्राउन परिवार ['ब्राउन परिवार', 'ब्राउन', 'ब्राउन्स', 'भूरे रंग का परिवार']
+中央公論新社 ['中央公論新社', '株式会社中央公論新社', '中央公論社', 'Chuokoron-Shinsha']
+เศาะห์ม์ ['เศาะห์ม์', 'เศาะห์ม (Saum)']
+1986 ['1986']
+सरवण भवन ['सरवण भवन', 'होटल सरवण भवन']
+ソンクラーンダンス ['ソンクラーンダンス', 'Sonkurān Dansu', 'Songkran Dance', 'รำสงกรานต์', 'Ram Songkran', 'ソングクランダンス', 'ラムソングクラン']
+ชิโกกุ ['ชิโกกุ', 'ภูมิภาคชิโกกุ', '四国']
+Hayashi Akira ['Hayashi Akira', 'Akira Hayashi', '林韑', 'Hayashi Daigaku-no-kami']
+ガルバ ['ガルバ', 'Garba']
+รพินทรนาถ ฐากูร ['รพินทรนาถ ฐากูร', 'ฐากูร', 'คุรุเทพ รพินทรนาถ ฐากูร']
+Param Pravega ['Param Pravega', 'Param-Pravega']
+俳句 ['俳句', 'はいく', 'Haiku']
+Butter Chicken ['Butter Chicken', 'Murgh Makhani']
+Varhadi ['Varhadi', 'Varhādi']
+Nakuru County ['Nakuru County', 'Nakuru']
+वॉल्ट व्हिटमैन ['वॉल्ट व्हिटमैन', 'वाल्टर व्हिटमैन']
+ゴア・コンカニ語 ['ゴア・コンカニ語', 'ゴエンチ・コンカニ語']
+1960 ['1960']
+Devanagari ['Devanagari', 'Devanāgarī']
+フォートジーザス ['フォートジーザス', 'Fort Jesus', 'イエス砦']
+Francis Muthaura ['Francis Muthaura']
+Tokugawa Yoshinobu ['Tokugawa Yoshinobu', 'Yoshinobu Tokugawa', 'Tokugawa Keiki', 'Keiki Tokugawa']
+โอนูสะ (Ōnusa) ['โอนูสะ (Ōnusa)', 'โอนูสะ', 'Ōnusa', '大麻']
+6 अगस्त 1965 ['6 अगस्त 1965', 'अगस्त 6, 1965', '1965-08-06', '6 अगस्त, 1965']
+टू किल अ मॉकिंगबर्ड ['टू किल अ मॉकिंगबर्ड', 'एक मॉकिंगबर्ड को मारना', 'एक मॉकिंगबर्ड को मारने के लिए']
+อุทยานนารา ['อุทยานนารา', 'อุทยานกวางนารา', 'นาราพาร์ค', 'Nara Park', 'Nara Deer Park']
+น้ำตกทีลอซู ['น้ำตกทีลอซู', 'Thi Lo Su Waterfall', 'Namtok Thi Lo Su', 'น้ำตก thi lo su', 'namtok thi lo su']
+Maize flour ['Maize flour', 'Cornmeal']
+Chuo Kikuu cha Kasetsart ['Chuo Kikuu cha Kasetsart']
+1979 ['1979']
+ओरुतु ['ओरुतु', 'एक तार वाला वायलिन', 'Orutu', 'Ek taar wala violin']
+Ganges ['Ganges', 'Ganga', 'Mto Ganges', 'Mto Ganga']
+Kyoto ['Kyoto', 'Kyoto City']
+1964 ['1964', 'หนึ่งพันเก้าร้อยหกสิบสี่', 'พ.ศ. 2507']
+タイ南部地方 ['タイ南部地方', '南部地方', '南部', 'タイ南部', '南']
+Arunachal Pradesh ['Arunachal Pradesh', 'Arunachal Pradesh State']
+ขุนช้าง ['ขุนช้าง']
+1 दिसंबर 2016 ['1 दिसंबर 2016', 'दिसंबर 1, 2016']
+Buddha Purnima ['Buddha Purnima', 'Vesak', 'Buddha Jayanti']
+1941 ['1941', '१९४१']
+Yama ['Yama', 'Yamraj', 'Bwana wa Kifo']
+1987 ['1987']
+जैक लंदन ['जैक लंदन', 'जॉन ग्रिफ़िथ चेनी']
+โอลีฟ การ์เด้น ['โอลีฟ การ์เด้น']
+पश्चिमी [Pashchimi] ['पश्चिमी [Pashchimi]', 'पश्चिमी केन्या [Pashchimi Kenya]', 'न्यांज़ा [Nyanza]', 'पश्चिमी क्षेत्र [Pashchimi Kshetra]']
+एब्सलोम जोन्स ['एब्सलोम जोन्स']
+March on Washington ['March on Washington', 'March on Washington for Jobs and Freedom']
+コンピュータビジョン ทีดี การ์เดน ['コンピュータビジョン', 'コンピュータービジョン', 'Konpyūta bijon', 'Konpyūtā bijon', 'Computer Vision']
+['ทีดี การ์เดน', 'เดอะ การ์เดน', 'บอสตัน การ์เดน']
+シマー (Shimaa) पर्पल मेडल ऑफ ऑनर ['シマー (Shimaa)', '煮る (Niru)', 'シチュー (Shichuu)', '煮込み (Nikomi)', '煮る']
+['पर्पल मेडल ऑफ ऑनर', 'मेडल ऑफ ऑनर', 'बैंगनी मेडल ऑफ ऑनर', 'बैंगनी सम्मान पदक']
+Ford's Theatre ["Ford's Theatre", "Ford's Theater"]
+Jagadish Chandra Bose ['Jagadish Chandra Bose', 'J. C. Bose', 'Sir J. C. Bose']
+59.199 ['59.199']सोंगक्रान नृत्य
+ ['सोंगक्रान नृत्य', 'Songkran Dance', 'รำสงกรานต์', 'Ram Songkran', 'राम सोंगक्रान']
+Storymoja Publishers ['Storymoja Publishers', 'Storymoja']
+Kituo cha Utafiti wa Atomiki cha Bhabha ['Kituo cha Utafiti wa Atomiki cha Bhabha', 'BARC']
+Uwanja wa Yokohama Mitsuzawa ['Uwanja wa Yokohama Mitsuzawa', 'Uwanja wa Soka wa Mitsuzawa', 'Yokohama Mitsuzawa Stadium', 'Mitsuzawa Soccer Stadium', 'Uwanja wa Nippatsu Mitsuzawa', 'ニッパツ三ツ沢球技場']
+Mkataba wa San Francisco ['Mkataba wa San Francisco', 'Mkataba wa Amani wa San Francisco']
+Thailand ya Mashariki ['Thailand ya Mashariki', 'Mashariki']
+2 मार्च 2018 ['2 मार्च 2018', 'मार्च 2 2018']
+ハリソン家 ['ハリソン家']
+अग्नि ['अग्नि']
+สนามกีฬามิตสึซาวะ โยโกฮาม่า ['สนามกีฬามิตสึซาวะ โยโกฮาม่า', 'สนามฟุตบอลมิตสึซาวะ', 'Yokohama Mitsuzawa Stadium', 'สนามกีฬามิตสึซาวะ', 'Mitsuzawa Stadium', 'ニッパツ三ツ沢球技場']
+Potato ['Potato', 'Irish potato', 'Potatoes', 'Irish potatoes']
+Reverend Rose Kariuki ['Reverend Rose Kariuki', 'Rose Kariuki', 'Rev. Rose Kariuki', 'Mchungaji Rose Kariuki']
+Hōnen ['Hōnen', 'Hōnen Shōnin', 'Genkū']
+สะพานอาคาชิไคเคียว ['สะพานอาคาชิไคเคียว', 'Saphan Akashi Kaikyo', 'สะพานไข่มุก', 'Saphan Khai Muk']
+Udon ['Udon', 'うどん']
+Inter-High Judo Tournament ['Inter-High Judo Tournament', 'All-Japan High School Judo Championships', 'Inter-High School Judo Championships']
+Boston accent ['Boston accent', 'Boston dialect']
+Compromise of 1877 ['Compromise of 1877']
+ख्राप ['ख्राप']
+น้ำดอกไม้ ['น้ำดอกไม้', 'Nam Dok Mai']
+ハイデラバード ['ハイデラバード', 'ハイデラバード市', 'Haiderabādo']
+ฆะฏัม ['ฆะฏัม', 'Ghatam']
+माउंट एल्गोन ['माउंट एल्गोन', 'एल्गोन']
+Shahada ya Heshima ya Udaktari ['Shahada ya Heshima ya Udaktari', 'Shahada ya Heshima ya Udaktari kutoka Chuo Kikuu cha Laikipia']
+Treaty of Fort Laramie (1868) ['Treaty of Fort Laramie (1868)', 'Fort Laramie Treaty (1868)', '1868 Treaty of Fort Laramie']
+खाशाबा दादासाहेब जाधव ['खाशाबा दादासाहेब जाधव', 'के. डी. जाधव', 'केडी जाधव']
+ซูซุ ['ซูซุ', 'Suzu', 'Suuzu', '鈴']
+Chikamatsu Monzaemon ['Chikamatsu Monzaemon', 'Monzaemon Chikamatsu', '近松門左衛門']
+การเดินขบวนสู่กรุงวอชิงตัน ['การเดินขบวนสู่กรุงวอชิงตัน', 'การเดินขบวนสู่กรุงวอชิงตันเพื่องานและอิสรภาพ']
+ओसाका ['ओसाका', 'Osaka (ओसाका)', 'Ōsaka']
+เกียวโต ['เกียวโต', 'เมืองเกียวโต']
+North American Free Trade Agreement ['North American Free Trade Agreement', 'NAFTA']
+Hachiko Statue ['Hachiko Statue', 'Statue of Hachiko', 'Hachiko-zo', 'Hachikō-zō']
+1526 ['1526']
+5,199 m ['5,199 m', '5199 m', '5,199 meters', '5199 meters', '5,199 metres', '5199 metres']
+奈良公園 ['奈良公園', 'Nara Koen', '奈良ディアパーク']
+1905 ['1905', '1905 ईस्वी']
+Thi Lo Su Waterfall ['Thi Lo Su Waterfall', 'น้ำตกทีลอซู', 'Namtok Thi Lo Su']
+100 km ['100 km', '100 kilometers', 'Approximately 100 km', 'Approximately 100 kilometers']
+2016年12月1日 ['2016年12月1日']
+थानोन थोंग चाई रेंज ['थानोन थोंग चाई रेंज', 'Thanon Thong Chai Range']
+フェニックス ['フェニックス', 'Fenikkusu (フェニックス)']
+1966 ['1966']
+インド ['インド', 'インドクリケットチーム', 'インド・クリケットチーム', 'インド代表']
+Chuo Kikuu cha Kyoto ['Chuo Kikuu cha Kyoto', 'Kituo cha Utafiti na Matumizi ya Seli za iPS cha Chuo Kikuu cha Kyoto', 'CiRA', 'Kituo cha Utafiti wa Seli za iPS cha Chuo Kikuu cha Kyoto', 'Kituo cha Utafiti wa Seli za Kyoto IPS na Kituo cha Maombi', 'Chuo Kikuu cha Kyoto (pamoja na CiRA)']
+スワミナサン ['スワミナサン', 'スワミ', 'スワミナサン（スワミ）']
+Ching ['Ching', 'Ching Chap']
+No way ['No way', "You're kidding", "I can't believe it"]
+マラッカ海峡 ['マラッカ海峡', 'マラッカかいきょう(Marakka Kaikyo)', 'Strait of Malacca']
+Tunday Kababi ['Tunday Kababi', 'Tunday Kababi Restaurant']
+राइस परिवार ['राइस परिवार', 'राइस']
+Kamakura ['Kamakura', 'Kamakura City']
+Kiamsha Kinywa cha Kitaifa cha Maombi ['Kiamsha Kinywa cha Kitaifa cha Maombi']
+ศาลฎีกา ['ศาลฎีกา', 'ศาลฎีกาแห่งสหรัฐอเมริกา', 'SCOTUS']
+Jagadish Chandra Bose ['Jagadish Chandra Bose', 'J. C. Bose', 'Sir J. C. Bose']
+เอไซ ['เอไซ', 'เมียวอัน เอไซ', 'โยไซ', 'Eisai', 'myōan eisai']
+金メダル ['金メダル', 'オリンピック金メダル']
+Medali ya Dhahabu ['Medali ya Dhahabu', 'Medali ya Dhahabu ya Olimpiki']
+西郷隆盛 ['西郷隆盛', 'さいごう たかもり', 'Saigo Takamori', 'Takamori Saigo']
+माजिक वाटर ['माजिक वाटर', 'माजिकवाटर', 'माजिक वाटर (Majik Water)', 'माजिकवाटर (Majikwater)', 'Majik Water']
+Long Island ['Long Island']
+Loi Krathong ['Loi Krathong']
+Unga wa mahindi ['Unga wa mahindi']
+रॉयल थाई पुलिस ['रॉयल थाई पुलिस', 'สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat)']
+Medali ya Dhahabu ['Medali ya Dhahabu', 'Bingwa wa Dunia']
+สวาฮิลี เพลท ['สวาฮิลี เพลท', 'Swahili Phlet']
+18 मई 1974 ['18 मई 1974']
+สนธิสัญญาสันติภาพซานฟรานซิสโก ['สนธิสัญญาสันติภาพซานฟรานซิสโก', 'สนธิสัญญาซานฟรานซิสโก', 'Sonthisanya Santiphap San Francisco']
+สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat) ['สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat)']
+सांता फ़े इंडियन मार्केट ['सांता फ़े इंडियन मार्केट']
+January 26, 1950 ['January 26, 1950', '26 January 1950', 'January 26th, 1950']
+Kitelugu ['Kitelugu']
+Teej ['Teej', 'Hariyali Teej', 'Hartalika Teej']
+1960 ['1960']
+รำสงกรานต์ ['รำสงกรานต์', 'Songkran Dance', 'Ram Songkran']
+Juneau ['Juneau']
+スコータイ王朝の成立 ['スコータイ王朝の成立', 'スコータイ建国', 'Sukhothai ōchō no seiritsu', 'Sukhothai kenkoku']
+Treaty of Portsmouth ['Treaty of Portsmouth', 'Portsmouth Treaty']
+1984年 ['1984年']
+大麻 ['大麻', 'おおぬさ', 'Ōnusa', 'Oonusa']
+อุตุนิยมวิทยา ['อุตุนิยมวิทยา', 'Utu Niyom Witya']
+Sheria ya Uhuru wa Mitaa ['Sheria ya Uhuru wa Mitaa', 'Sheria ya Uhuru wa Mitaa (Chihō Jichi Hō)', 'Chihō Jichi Hō', '地方自治法']
+Egesa ['Egesa']
+Khun Chang ['Khun Chang']
+New Mexico ['New Mexico']
+ओलिव गार्डन ['ओलिव गार्डन']
+1954 ['1954']
+納札 ['納札', 'おさめふだ', 'Osamefuda', 'Osame-fuda']
+Reverend Rose Kariuki ['Reverend Rose Kariuki', 'Rose Kariuki', 'Rev. Rose Kariuki']
+Shirazi ['Shirazi', 'Shirazi dynasty']
+โอไดโกะ ['โอไดโกะ', 'Ōdaiko', 'Odaiko', '大太鼓']
+1922 ['1922', '4 फरवरी 1922']
+อาห์เมดาบัด ['อาห์เมดาบัด', 'Ahmedabad']
+ओबोकानो ['ओबोकानो', 'गुसी वीणा', 'ओबोकानो', 'गुसी लिरे']
+Yama ['Yama', 'Yamraj', 'Lord of Death']
+オンディエク ['オンディエク', 'Ondiek']
+警察庁 ['警察庁', 'けいさつちょう', 'Keisatsu-cho']
+John GastMfangano Island  ['John Gast']['Mfangano Island']
+
+Sandra Day O'Connor ["Sandra Day O'Connor", "Sandra O'Connor", "O'Connor"]
+ฟีนิกซ์ ['ฟีนิกซ์', 'ฟีนิกซ์ (Phoenix)']
+1950年1月26日 ウォルト・ホイットマン ['1950年1月26日', '1950ねん1がつ26にち']
+['ウォルト・ホイットマン', 'ウォルター・ホイットマン']
+Katika Sifa ya Vivuli ['Katika Sifa ya Vivuli', "In'ei Raisan", '陰翳礼讃']
+1941 ['1941', '๑๙๔๑', '2484']
+ナンヤイ ['ナンヤイ', 'ナンヤイ (Nan Yai)', 'Nang Yai', 'หนังใหญ่']
+รางวัลเซอุน (รางวัลเซอุน) ['รางวัลเซอุน (รางวัลเซอุน)', 'รางวัล Seiun']
+進歩党 ['進歩党', 'プログレッシブ党', 'ブルムース党']
+แม่น้ำแชตตาฮูชี ['แม่น้ำแชตตาฮูชี', 'แชตตาฮูชี', 'Mae Nam Chattahoochee', 'Chattahoochee', 'แม่น้ำ Chattahoochee']
+บุก ['บุก', 'Konnyaku', 'ลิ้นของปีศาจ']
+2018年3月2日 ['2018年3月2日']
+1964 ['1964']
+नागाई स्टेडियम ['नागाई स्टेडियम', 'यानमार स्टेडियम नागाई', 'Nagai Stadium', 'Yanmar Stadium Nagai', '長居スタジアム']
+1,000 km ['1,000 km', '1000 km', 'Kilomita 1,000', 'Kilomita 1000', 'Takribani 1,000 km', 'Takribani 1000 km', 'Takribani kilomita 1,000', 'Takribani kilomita 1000', 'Takriban km 1,000', 'Takriban 1000 km', 'Takriban kilomita 1,000', 'Takriban kilomita 1000']
+1600年 ['1600年', '1600 nen', '1600ねん', '1600']
+Apichart Vanavichit ['Apichart Vanavichit', 'อภิชาติ วรรณวิจิตร']
+Eid al-Fitr ['Eid al-Fitr', 'Eid ul-Fitr', 'Meethi Eid', 'Eid', 'Sikukuu ya Kufungua Saumu']
+Aryabhata ['Aryabhata', 'Aryabhatta', 'आर्यभट']
+તિર્યક વિભક્તિ ['તિર્યક વિભક્તિ', 'Tiryak Vibhakti']
+2000 ['2000']
+ニューイングランド ['ニューイングランド']
+Chattahoochee River ['Chattahoochee River', 'Chattahoochee']
+Royal Thai Police ['Royal Thai Police', 'สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat)']
+Agni ['Agni']
+भूमिबोल अदुल्यादेज ['भूमिबोल अदुल्यादेज', 'राजा भूमिबोल', 'राम नवम', 'राम IX']
+Sushruta ['Sushruta']
+March 2, 2018 ['March 2, 2018', '2 March 2018']
+माउंट एल्गोन ['माउंट एल्गोन', 'एलगोन']
+Parachichi ['Parachichi']
+2505 ['2505', 'พ.ศ. 2505', '1962']
+ホワイト山脈 ['ホワイト山脈', 'Howaito Sanmyaku', '白い山']
+3डी प्रिंटिंग ['3डी प्रिंटिंग', '3D प्रिंटिंग', 'त्रि-आयामी मुद्रण', '3 डी मुद्रण', 'योजक विनिर्माण', 'Additive Manufacturing']
+Asante ['Asante']
+Shirika la Polisi la Kitaifa ['Shirika la Polisi la Kitaifa', 'Keisatsu-cho']
+โอซาก้า ['โอซาก้า', 'Osaka']
+Delicate Arch ['Delicate Arch', 'Tao Maridadi']
+นิวอิงแลนด์ ['นิวอิงแลนด์']
+कालिदास ['कालिदास']
+アイリッシュステップダンス ['アイリッシュステップダンス', 'アイリッシュステップダンス (Airisshusuteppudansu)']
+Swahili Plate ['Swahili Plate']
+Mzunguko wa Kimataifa wa Chang ['Mzunguko wa Kimataifa wa Chang', 'Chang International Circuit', 'Mzunguko wa Kimataifa wa Buriram', 'Buriram International Circuit', 'ช้าง อินเตอร์เนชั่นแนล เซอร์กิต']
+Tuzo ya Jomo Kenyatta ya Fasihi ['Tuzo ya Jomo Kenyatta ya Fasihi']
+メーワリー ['メーワリー', 'Mae Varee', 'แม่วารี']
+国民虹の連合 ['国民虹の連合', 'NARC']
+ฉิ่ง ['ฉิ่ง', 'Ching', 'Ching Chap']
+Swaminathan ['Swaminathan', 'Swami', 'Swaminathan (Swami)']
+Ajmer ['Ajmer']
+Osamefuda ['Osamefuda', 'Osame-fuda', '納札']
+Gor Mahia ['Gor Mahia', 'Gor Mahia FC']
+Asalha Puja ['Asalha Puja', 'Asanha Puja', 'Wan Asalha Puja', 'Wan Asanha Puja']
+แจ็ก ลอนดอน ['แจ็ก ลอนดอน', 'จอห์น กริฟฟิธ เชนีย์']
+Nakhon Si Thammarat Range ['Nakhon Si Thammarat Range', 'Nakhon Si Thammarat Mountains']
+34 ['34']
+มหาวิทยาลัยเกียวโต ['มหาวิทยาลัยเกียวโต', 'มหาวิทยาลัยเกียวโต (Kyoto University)', 'ศูนย์วิจัยและประยุกต์ใช้เซลล์ iPS มหาวิทยาลัยเกียวโต', 'CiRA', 'Center for iPS Cell Research and Application', 'มหาวิทยาลัยเกียวโต (รวมถึง CiRA)']
+Bantu ['Bantu']
+लॉन्ग आइलैंड ['लॉन्ग आइलैंड', 'लम्बा द्वीप']
+エルゴン山 ['エルゴン山', 'エルゴン', 'マウントエルゴン']
+ตระกูลแอสเตอร์ ['ตระกูลแอสเตอร์', 'ครอบครัวแอสเตอร์', 'แอสเตอร์']
+Padmini ['Padmini']
+Shikoku Pilgrimage ['Shikoku Pilgrimage', '88 Temple Pilgrimage', 'Shikoku Henro']
+คิซูมุ ['คิซูมุ', 'Kisumu']
+ภาษาอังกฤษ ['ภาษาอังกฤษ', 'P̣hās̄ʹā xạngkฤษ̄']
+Mkataba wa San Francisco ['Mkataba wa San Francisco', 'Mkataba wa Amani wa San Francisco']
+ข้อตกลงประนีประนอมปี 1877 ['ข้อตกลงประนีประนอมปี 1877']
+Ahmedabad ['Ahmedabad']
+気象庁 ['気象庁', '気象庁 (Kishōchō)', 'JMA']
+สนธิสัญญาเบอร์นี ['สนธิสัญญาเบอร์นี']
+การทอผ้าตะกร้าของชนพื้นเมืองอเมริกัน ['การทอผ้าตะกร้าของชนพื้นเมืองอเมริกัน', 'ศิลปะตะกร้าของชนพื้นเมืองอเมริกัน', 'การทอตะกร้าพื้นเมืองอเมริกัน']
+पोके ['पोके', 'पोके (Poke)']
+ディワリ ['ディワリ', 'ディーパバリ', '光の祭典', 'Hikari no Saiten', 'Deepavali', '光の祭り']
+Obokano ['Obokano', 'Kinubi cha Gusii']
+Simmering ['Simmering', 'Stewing']
+Hmong ['Hmong', 'Hmong language']
+Kolkata ['Kolkata', 'Salt Lake City, Kolkata', 'Bidhannagar']
+स्वामीनाथन ['स्वामीनाथन', 'स्वामी', 'स्वामीनाथन (स्वामी)']
+นยาติติ ['นยาติติ', 'พิณนยาติติ', 'Nyatiti', 'Nyatiti lyre']
+พอล วินเชลล์ ['พอล วินเชลล์', 'Paul Winchell']
+Tuzo ya Utamaduni ya Tafsiri ya Japani ['Tuzo ya Utamaduni ya Tafsiri ya Japani']
+डीप-फ्राइंग (Deep-frying) ['डीप-फ्राइंग (Deep-frying)', 'तलना (Talna)', 'गहरी तलना']
+Satyajit Ray ['Satyajit Ray']
+थाई लिपि ['थाई लिपि', 'अबुगिदा थाई', 'थाई अक्षर', 'थाई स्क्रिप्ट', 'อักษรไทย']
+เถรวาท ['เถรวาท', 'พุทธศาสนานิกายเถรวาท']
+Shō ['Shō', '笙']
+Computer Vision ['Computer Vision']
+横浜市三ツ沢公園球技場 ['横浜市三ツ沢公園球技場', 'Yokohama-shi Mitsuzawa Koen Kyugijo', 'ニッパツ三ツ沢球技場', 'Nippatsu Mitsuzawa Kyugijo', '横浜三ツ沢球技場', 'Yokohama Mitsuzawa Kyugijo']
+चांग इंटरनेशनल सर्किट ['चांग इंटरनेशनल सर्किट', 'चांग अंतर्राष्ट्रीय सर्किट', 'Chang International Circuit', 'बुरिराम इंटरनेशनल सर्किट', 'Buriram International Circuit', 'ช้าง อินเตอร์เนชั่นแนล เซอร์กิต']
+डुलसीमर ['डुलसीमर', 'अपलाचियन डुलसीमर', 'माउंटेन डुलसीमर', 'Dulcimer', 'Appalachian Dulcimer', 'Mountain Dulcimer']
+Long Island ['Long Island', 'Kisiwa cha Long']
+Kae Sa Luk ['Kae Sa Luk', 'Fruit carving', 'แกะสลัก']
+สภาการศึกษาเทคนิคแห่งอินเดียทั้งหมด ['สภาการศึกษาเทคนิคแห่งอินเดียทั้งหมด', 'Sapha Kan Suksa Theknik Haeng India Thangmot', 'AICTE']
+ภาคกลาง ['ภาคกลาง', 'เคนยาตอนกลาง', 'ภูมิภาคมันต์เคนยา']
+लॉर्ड डलहौजी ['लॉर्ड डलहौजी', 'डलहौजी', 'द अर्ल ऑफ़ डलहौजी', 'जेम्स एंड्रयू ब्रौन-रामसे, डलहौजी के पहले मार्किस']
+Anglo-German Agreement of 1886 ['Anglo-German Agreement of 1886', '1886 Anglo-German Agreement']
+Sri Thanonchai ['Sri Thanonchai', 'Si Thanonchai']
+बीजी पाथुम यूनाइटेड ['बीजी पाथुम यूनाइटेड']
+Kakuzo Okakura ['Kakuzo Okakura', 'Okakura Kakuzo']
+パトラ織り ['パトラ織り', 'パトラ']
+Tennessee Williams ['Tennessee Williams', 'Thomas Lanier Williams III']
+सौम ['सौम', 'सौम (Saum)']
+Kukaanga sana ['Kukaanga sana', 'Kukaanga', 'Kukaanga kwa kina']
+กรุงเทพมหานคร ['กรุงเทพมหานคร', 'Krung Thep Maha Nakhon', 'กรุงเทพฯ', 'Krung Thep']
+信濃川 ['信濃川', 'しなのがわ', 'Shinano-gawa', 'シナノ川']
+600 मीटर ['600 मीटर', '600 मी']
+サンドラ・デイ・オコナー ['サンドラ・デイ・オコナー', 'サンドラ・オコナー', 'オコナー']
+ヌアットタイ ['ヌアットタイ', 'ヌアットタイ (Nuad Thai)', 'タイ式マッサージ', 'タイ古式マッサージ', 'นวดไทย', 'นวดไทย (Nuad Thai)', 'Nuad Thai']
+1978年10月14日 ['1978年10月14日', '1978/10/14', '1978-10-14']
+34 ['34', 'चौंतीस']
+Nyatiti ['Nyatiti', 'Kinubi cha Nyatiti', 'Nyatiti lyre']
+Nam Dok Mai ['Nam Dok Mai', 'Nam Dokmai']
+दक्षिणी थाईलैंड ['दक्षिणी थाईलैंड', 'दक्षिण']
+アバニンドラナート・タゴール ['アバニンドラナート・タゴール', 'アバニンドラナート・タクル', 'アバニンドラナート・タクール']
+ชูบุ ['ชูบุ', 'Chubu']
+สนธิสัญญาพอร์ตสมัท ['สนธิสัญญาพอร์ตสมัท']
+チャールズ・グッドイヤー ['チャールズ・グッドイヤー', 'Charles Goodyear', 'チャールズグッドイヤー']
+Avocado ['Avocado', 'Avocados']
+Vikram Sarabhai ['Vikram Sarabhai', 'Dkt. Vikram Sarabhai', 'Vikram Ambalal Sarabhai']
+August 24, 2014 ['August 24, 2014', '24 August 2014']
+गिचूगु ['गिचूगु', 'गिचूगु किकुयू']
+Momofuku Ando ['Momofuku Ando', 'Ando Momofuku']
+Supreme Court ['Supreme Court', 'Supreme Court of the United States', 'SCOTUS']
+तेलुगु ['तेलुगु']
+अकबर ['अकबर', 'जलालुद्दीन मुहम्मद अकबर']
+พ.ศ. 2529 ['พ.ศ. 2529', '2529', 'ค.ศ. 1986', '1986']
+Silpawatthanatham Publishing ['Silpawatthanatham Publishing', 'สำนักพิมพ์ศิลปวัฒนธรรม', 'Samnakphim Silpawatthanatham']
+バターチキン ['バターチキン', 'ムルグマカニ']
+金メダル ['金メダル', '世界チャンピオン']
+แม่น้ำชินาโนะ ['แม่น้ำชินาโนะ', 'ชินาโน-กาวะ']
+शो ['शो', 'शो (Shō)', '笙']
+1984年 ['1984年']
+Yudhishthira ['Yudhishthira', 'Yudhishthir', 'Yudhisthira']
+บี. อาร์. อัมเบดการ์ ['บี. อาร์. อัมเบดการ์', 'ภีมราว รามจี อัมเบดการ์', 'บาบาซาเฮบ อัมเบดการ์']
+367 km ['367 km', 'Kilomita 367', 'Kilomita mia tatu sitini na saba']
+Kigullah ['Kigullah', 'Lugha ya Kigullah', 'Kigeechee', 'Lugha ya Kigeechee']
+การจาริกแสวงบุญชิโกกุ ['การจาริกแสวงบุญชิโกกุ', 'การจาริกแสวงบุญ 88 วัด', 'ชิโกกุ เฮนโระ']
+619 ['619', 'Anil Kumble', '619 ของ Anil Kumble']
+Astor family ['Astor family', 'Astors', 'The Astors']
+北部タイ語 ['北部タイ語', 'カムムアン語', 'カムムアン', 'ランナー', 'Kham Mueang', 'ランナー語 (Rannāgo)']
+केन्या का सर्वेक्षण ['केन्या का सर्वेक्षण']
+スワヒリ・プレート ['スワヒリ・プレート', 'Suwahiri Purēto']
+Buddha Purnima ['Buddha Purnima', 'Vesak', 'Buddha Jayanti']
+ナガルジュナレストラン ['ナガルジュナレストラン', 'ナガルジュナ']
+Anglo-Siamese Treaty of 1909 ['Anglo-Siamese Treaty of 1909', 'Bangkok Treaty of 1909', 'Treaty of Bangkok (1909)']
+近松門左衛門 ['近松門左衛門', 'Chikamatsu Monzaemon', 'Monzaemon Chikamatsu']
+Phi Sua Lae Dokmai ['Phi Sua Lae Dokmai', 'Pee Sua Lae Dokmai', 'Vipepeo na Maua']
+Goro Kikutani ['Goro Kikutani']
+Mary Leakey ['Mary Leakey']
+बांटू ['बांटू']
+Salman Rushdie ['Salman Rushdie']
+1968 ['1968']
+Traditional African Religions ['Traditional African Religions', 'African Traditional Religions']
+In Praise of Shadows ['In Praise of Shadows', "In'ei Raisan", '陰翳礼讃']
+Yudhishthira ['Yudhishthira']
+1963 ['1963']
+四国 ['四国', '四国地方', 'しこく', 'シコク']
+Juggut Singh ['Juggut Singh', 'Jugga']
+परदेसी आराधनालय ['परदेसी आराधनालय', 'कोचीन यहूदी आराधनालय', 'मट्टनचेरी आराधनालय']
+2002年11月25日 ['2002年11月25日', '2002ねん11がつ25にち', '2002/11/25', '2002-11-25']
+November 25, 2002 ['November 25, 2002', '25 November 2002', '2002-11-25']
+การปฏิวัติสยาม พ.ศ. 2475 ['การปฏิวัติสยาม พ.ศ. 2475', 'การเปลี่ยนแปลงการปกครอง พ.ศ. 2475', 'การปฏิวัติสยามปี 1932', "Siamese Coup d'état ของปี 1932", '2475', 'kan patiwat sayam phoso song sip ha jet ha', 'kan plian plaeng kan pokkhrong phoso song sip ha jet ha']
+ช้าง อินเตอร์เนชั่นแนล เซอร์กิต ['ช้าง อินเตอร์เนชั่นแนล เซอร์กิต', 'Chang International Circuit', 'สนามช้าง อินเตอร์เนชั่นแนล เซอร์กิต', 'Buriram International Circuit']
+安藤 百福 ['安藤 百福', 'あんどう ももふく', '安藤百福', 'Ando Momofuku']
+ओक फंसा ['ओक फंसा', 'औक फंसा', 'Ok Phansa', 'Awk Phansa']
+คุชราต ['คุชราต', 'รัฐคุชราต']
+Anyango Mpinga ['Anyango Mpinga']
+Ramakien ['Ramakien', 'Ramakian', 'รามเกียรติ์']
+Establishment of Sukhothai ['Establishment of Sukhothai', 'Founding of Sukhothai', 'Sukhothai Kingdom founding']
+फिलाडेल्फिया ['फिलाडेल्फिया', 'फ़िलाडेल्फ़िया']
+ปัทมินี ['ปัทมินี']
+สัตยาจิต เรย์ ['สัตยาจิต เรย์', 'Satyajit Ray']
+インディラ・ポイント ['インディラ・ポイント', 'インディラポイント']
+चार्ल्स शुल्ज ['चार्ल्स शुल्ज', 'चार्ल्स एम. शुल्ज', 'चार्ल्स शुल्ज़', 'चार्ल्स एम। शुल्ज़']
+Eggs ['Eggs', 'Tamago']
+Sanamu ya Hachiko ['Sanamu ya Hachiko', 'Hachiko-zo', 'Hachikō-zō']
+Bahadur Shah Zafar ['Bahadur Shah Zafar', 'Bahadur Shah II', 'Zafar']
+長野 ['長野', '長野県']
+Familia ya Brown ['Familia ya Brown', 'Brown']
+サラヴァナバワン ['サラヴァナバワン', 'ホテルサラヴァナバワン', 'サラバナ・バヴァン', 'ホテルサラバナバヴァン', 'Saravana Bhavan', 'Hotel Saravana Bhavan']
+นักเต้นน้อยวัยสิบสี่ปี ['นักเต้นน้อยวัยสิบสี่ปี', 'ลา เปอตีต ดองเซอส เดอ กาตอร์ส อองส์', 'Little Dancer of Fourteen Years']
+Burrito ['Burrito']
+सिलपावत्थानथम प्रकाशन ['सिलपावत्थानथम प्रकाशन', 'Silpawatthanatham Prakashan', 'สำนักพิมพ์ศิลปวัฒนธรรม', 'Samnakphim Silpawatthanatham']
+ラジーブ・ガンジー健康科学大学賞 (Rajību Ganjī Kenkō Kagaku Daigakushō) ['ラジーブ・ガンジー健康科学大学賞 (Rajību Ganjī Kenkō Kagaku Daigakushō)', 'Rajiv Gandhi Health Sciences Awards', 'राजीव गांधी स्वास्थ्य विज्ञान विश्वविद्यालय पुरस्कार (Rajiv Gandhi Swasthya Vigyan Vishwavidyalaya Puraskar)']
+หนังใหญ่ ['หนังใหญ่', 'Nang Yai']
+1977 ['1977']
+15 ['15']
+August 6, 1965 ['August 6, 1965', '6 August 1965', '1965-08-06']
+किसुमु ['किसुमु']
+Tennessee Williams ['Tennessee Williams', 'Thomas Lanier Williams III']
+Tabla ['Tabla', 'Tabala']
+Chama cha Progressive ['Chama cha Progressive', 'Bull Moose Party', 'Progressive']
+1,456 ['1,456']
+Chang International Circuit ['Chang International Circuit', 'ช้าง อินเตอร์เนชั่นแนล เซอร์กิต', 'Buriram International Circuit']
+Kalidasa ['Kalidasa', 'Kalidas']
+Thommayanti ['Thommayanti', 'Khunying Wimon Siriphaibun']
+ลำภูไท ['ลำภูไท', 'Lam Phu Thai']
+Whistleblower Protection Act ['Whistleblower Protection Act', 'Whistleblower Protection Act of 1989']
+1917 ['1917']
+Julai 1, 2017 ['Julai 1, 2017', '1 Julai 2017']
+Charles Hornsby ['Charles Hornsby']
+Garba ['Garba']
+กระทรวงการต่างประเทศ (Krasuang Kan Tang Prathet) ['กระทรวงการต่างประเทศ (Krasuang Kan Tang Prathet)']
+Natsume Sōseki ['Natsume Sōseki', 'Sōseki Natsume', '夏目漱石', 'なつめ そうせき']
+Konbanwa ['Konbanwa', 'こんばんは', 'こんばんは (Konbanwa)']
+รัฐสภา ['รัฐสภา', 'Ratthasapha', 'สภาคองเกรสแห่งสหรัฐอเมริกา']
+लॉन्गहॉर्न पब्लिशर्स ['लॉन्गहॉर्न पब्लिशर्स', 'लॉन्गहॉर्न']
+द नैरो रोड टू द डीप नॉर्थ ['द नैरो रोड टू द डीप नॉर्थ', 'ओकू नो होसोमिची', 'गहरे उत्तर की ओर संकीर्ण सड़क', '奥の細道']
+Maelewano ya 1877 ['Maelewano ya 1877']
+อะโวคาโด ['อะโวคาโด']
+Khashaba Dadasaheb Jadhav ['Khashaba Dadasaheb Jadhav', 'K. D. Jadhav', 'KD Jadhav']
+菊谷吾郎 ['菊谷吾郎', 'きくたに ごろう', 'Kikutani Goro', 'ゴロ・キクタニ']
+Garba ['Garba']
+गैस मास्क ['गैस मास्क', 'सुरक्षा हुड', 'श्वास हुड', 'गैस मुखौटा', 'सुरक्षा टोपी', 'गैस का मुखौटा', 'सांस लेना हुड']
+513,120 वर्ग किमी ['513,120 वर्ग किमी', '513,120 वर्ग किलोमीटर']
+Mlima Kenya ['Mlima Kenya', 'Mt. Kenya']
+Northern Thailand ['Northern Thailand', 'North', 'North Thailand']
+Okonomiyaki ['Okonomiyaki', 'お好み焼き']
+हिसामित्सु स्प्रिंग्स ['हिसामित्सु स्प्रिंग्स', 'Hisamitsu Springs', '久光スプリングス']
+คันไซ ['คันไซ', 'คินกิ']
+Desemba 1, 2016 ['Desemba 1, 2016', '1 Desemba 2016']
+テネシー・ウィリアムズ ['テネシー・ウィリアムズ', 'トーマス・ラニア・ウィリアムズ3世']
+Mlima Elgon ['Mlima Elgon', 'Elgon']
+उत्तरी थाई ['उत्तरी थाई', 'खाम मुएंग', 'काम मुआंग', 'लन्ना', 'उत्तरी थाई (Uttari Thai)', 'खाम मुइंग', 'काम मुंग', 'लाना (Lana)']
+レモン対クルツマン ['レモン対クルツマン', 'レモン v. クルツマン', 'Lemon v. Kurtzman']
+เทือกเขาไวต์ ['เทือกเขาไวต์', 'Thueak Khao Wait', 'ภูเขาสีขาว']
+エルゴン山 ['エルゴン山', 'エルゴン', 'マウントエルゴン']
+サンタフェ・インディアン・マーケット ['サンタフェ・インディアン・マーケット', 'サンタフェインディアンマーケット']
+マンハッタン計画 ['マンハッタン計画', 'マンハッタンプロジェクト', 'マンハッタンエンジニアリング地区']
+อารยภฏ ['อารยภฏ', 'Aryabhata', 'Aryabhatta']
+June 29, 2007 ['June 29, 2007', '29 June 2007', '2007-06-29']
+ลิตเติล บราวน์ แอนด์ คอมพานี ['ลิตเติล บราวน์ แอนด์ คอมพานี', 'ลิตเติล บราวน์', 'Little, Brown and Company', 'Little, Brown']
+2013 ['2013']
+จักกัต สิงห์ ['จักกัต สิงห์', 'จักกา']
+60 ['60', 'Sixty', '60 home runs']
+1952 ['1952', 'Nineteen fifty-two']
+เรือพระที่นั่งสุพรรณหงส์ ['เรือพระที่นั่งสุพรรณหงส์', 'เรือสุพรรณหงส์']
+आकाशी कैक्यो ब्रिज ['आकाशी कैक्यो ब्रिज', 'Akashi Kaikyo Bridge', 'आकाशी-कैक्यो ब्रिज', 'Akashi-Kaikyo Bridge', 'पर्ल ब्रिज', 'Pearl Bridge']
+BGパトゥム・ユナイテッド ['BGパトゥム・ユナイテッド']
+Holi ['Holi']
+Absalom Jones ['Absalom Jones']
+Agosti 14, 1935 ['Agosti 14, 1935', '14 Agosti 1935', '1935-08-14']
+紫綬褒章 ['紫綬褒章', 'しじゅほうしょう']
+Medali ya Zambarau ya Heshima ['Medali ya Zambarau ya Heshima', 'Medali ya Heshima', 'Medali ya zambarau ya heshima', 'Medali ya heshima ya zambarau']
+3,776.24 ม. ['3,776.24 ม.', '3776.24 ม.', '3776.24 เมตร', '3,776.24 เมตร']
+अखिल भारतीय तकनीकी शिक्षा परिषद ['अखिल भारतीय तकनीकी शिक्षा परिषद', 'एआईसीटीई', 'Akhil Bharatiya Takniki Shiksha Parishad', 'AICTE']
+Sheria ya Ulinzi wa Watoa Taarifa ['Sheria ya Ulinzi wa Watoa Taarifa', 'Sheria ya Ulinzi wa Watoa Taarifa ya 1989']
+Eisai ['Eisai', 'Myōan Eisai', 'Yōsai']
+Chonburi ['Chonburi', 'Mkoa wa Chonburi']
+Osaka ['Osaka', 'Ōsaka']
+AIFF Super Cup ['AIFF Super Cup', 'Super Cup', 'เอไอเอฟเอฟ ซูเปอร์ คัพ', 'ซูเปอร์ คัพ']
+सौतेइंग (Sautéing) ['सौतेइंग (Sautéing)', 'सोटे करना (Sote karna)', 'हलचल तलना (Halchal talna)', 'स्टिर-फ्राइंग (Stir-frying)', 'भूनना (Bhunna)']
+ข้อตกลงสรรพนามสัมพัทธ์ ['ข้อตกลงสรรพนามสัมพัทธ์', 'ข้อตกลงประโยคสัมพัทธ์', 'ข้อตกลงในประโยคสัมพัทธ์']
+Mahakama Kuu ['Mahakama Kuu', 'Supreme Court', 'Mahakama Kuu ya Merika', 'SCOTUS']
+तीज ['तीज', 'हरियाली तीज', 'हरतालिका तीज']
+कैबिनेट इंटेलिजेंस एंड रिसर्च ऑफिस ['कैबिनेट इंटेलिजेंस एंड रिसर्च ऑफिस', 'नाइचो', 'Naicho', '内閣情報調査室', 'कैबिनेट इंटेलिजेंस एंड रिसर्च ऑफिस']
+พ.ศ. 2069 ['พ.ศ. 2069', 'ค.ศ. 1526', '1526']
+ภาษาเมวารี ['ภาษาเมวารี']
+स्वर्ण पदक ['स्वर्ण पदक', 'विश्व चैंपियन']
+Mkataba wa Anglo-German wa 1886 ['Mkataba wa Anglo-German wa 1886', 'Mkataba wa Anglo-Ujerumani wa 1886']
+ศูนย์วิจัยปรมาณู Bhabha ['ศูนย์วิจัยปรมาณู Bhabha', 'BARC', 'ศูนย์วิจัยอะตอมของ Bhabha']
+John Gast ['John Gast']
+タノン・トンチャイ山脈 ['タノン・トンチャイ山脈', 'Thanon Thong Chai Range', 'ทิวเขาถนนธงชัย']
+1964 ['1964']
+アーメダバード ['アーメダバード', 'アーメダバード (Āmedabādo)', ' अहमदाबाद (Āmedābādo)']
+Bunge ['Bunge', 'Congress', 'Bunge la Marekani']
+พระราชบัญญัติการเลือกตั้ง ['พระราชบัญญัติการเลือกตั้ง', 'กฎหมายการเลือกตั้ง']
+Texas ['Texas']
+Survey of Kenya ['Survey of Kenya']
+タイ北部地方 ['タイ北部地方', '北部地方', '北部', 'タイ北部', '北']
+1917年 ['1917年', '1917ねん']
+Gor Mahia ['Gor Mahia', 'Gor Mahia FC']
+1962 ['1962']
+November 2, 1945 ['November 2, 1945', '2 November 1945', '1945-11-02']
+Songkran ['Songkran', 'Songkran Festival']
+Maporomoko ya Maji ya Thi Lo Su ['Maporomoko ya Maji ya Thi Lo Su', 'Thi Lo Su Waterfall', 'น้ำตกทีลอซู', 'Namtok Thi Lo Su', 'Maporomoko ya maji ya Thi Lo Su (tafsiri mbadala)', 'Maporomoko ya maji ya Thilosu']
+Juneau ['Juneau']
+मुरासाकी शिकिबु ['मुरासाकी शिकिबु', 'लेडी मुरासाकी', 'Murasaki Shikibu', 'Lady Murasaki', '紫式部']
+1952 ['1952']
+Deep-frying ['Deep-frying', 'Deep frying']
+チャンドラヤーン ['チャンドラヤーン', 'チャンドラヤン', 'Chandrayaan']
+鎌倉 ['鎌倉', '鎌倉市']
+โช ['โช', 'Shō', '笙']
+56,000 ['56,000']
+Familia ya Astor ['Familia ya Astor', 'Astor']
+Naming ceremony ['Naming ceremony', 'Naming ritual', 'Naming rite']
+Bhumibol Adulyadej ['Bhumibol Adulyadej', 'King Bhumibol', 'Rama IX']
+Msichana Anayecheza ['Msichana Anayecheza', 'Msichana Anayecheza wa Mohenjo-daro']
+1952 ['1952']
+गुल्ला ['गुल्ला', 'गुल्ला भाषा', 'गीची', 'गीची भाषा']
+1526 ['1526', '21 अप्रैल 1526']
+Philadelphia ['Philadelphia']
+लुआउ ['लुआउ', 'Luau']
+カシャバ・ダダサヘブ・ジャダブ ['カシャバ・ダダサヘブ・ジャダブ', 'Khashaba Dadasaheb Jadhav', 'K. D. Jadhav', 'KD Jadhav']
+राष्ट्रीय खुफिया सेवा ['राष्ट्रीय खुफिया सेवा', 'नेशनल इंटेलिजेंस सर्विस', 'एनआईएस', 'NIS']
+बावर्ची ['बावर्ची', 'बावर्ची रेस्टोरेंट', 'बावर्ची रेस्तरां']
+14 ตุลาคม 2521 ['14 ตุลาคม 2521', '14 ตุลาคม พ.ศ. 2521', '1978-10-14', '2521-10-14']
+コルカタ ['コルカタ', 'ソルトレイクシティ、コルカタ', 'ビダーンナガル']
+East African Educational Publishers ['East African Educational Publishers', 'EAEP', 'Wachapishaji wa elimu wa Afrika Mashariki']
+Plaek Phibunsongkhram ['Plaek Phibunsongkhram', 'Phibun', 'Field Marshal Plaek Phibunsongkhram']
+1984 ['1984', '2527']
+चार्ल्स गुडइयर ['चार्ल्स गुडइयर', 'Charles Goodyear']
+アデテト ['アデテト', 'トゥルカナの角笛', 'アデテト(Adetet)', 'トゥルカナホーン', 'アデテト(Turkana horn)']
+เลมอน วี. เคิร์ตซ์แมน ['เลมอน วี. เคิร์ตซ์แมน']
+लाम फु थाई ['लाम फु थाई', 'लैम फु थाई', 'Lam Phu Thai', 'ลำภูไท']
+笙 ['笙', 'しょう', 'Shō']
+村上春樹 ['村上春樹', 'むらかみはるき', 'Murakami Haruki', 'Haruki Murakami']
+Shigeru Yoshida ['Shigeru Yoshida', 'Yoshida Shigeru']
+Nagarjuna Restaurant ['Nagarjuna Restaurant', 'Nagarjuna']
+Theravada ['Theravada', 'Theravada Buddhism']
+हिंदी ['हिंदी']
+โจนาส ซอล์ก ['โจนาส ซอล์ก']
+थाईलैंड 4.0 ['थाईलैंड 4.0', 'थाईलैंड ४.०']
+रिकेन ['रिकेन', 'रिकेन (RIKEN)', 'आरआईकेईएन', 'Riken']
+まさか ['まさか', 'Masaka', 'うそでしょ', 'Uso desho', '信じられない', 'Shinjirarenai', 'とんでもない', '冗談です', 'ありえない', 'arienai']
+Flametree Publishers ['Flametree Publishers']
+268,596平方マイル ['268,596平方マイル', '268596平方マイル', '695,662平方キロメートル', '695662平方キロメートル']
+2013年 ['2013年', '2013ねん']
+Hyderabad ['Hyderabad']
+Uoni wa Kompyuta ['Uoni wa Kompyuta', 'Maono ya Kompyuta']
+รางวัลโจโม เคนยัตตา สาขาวรรณกรรม ['รางวัลโจโม เคนยัตตา สาขาวรรณกรรม']
+Vallabhbhai Patel ['Vallabhbhai Patel', 'Sardar Vallabhbhai Patel']
+ओन्डिएक ['ओन्डिएक']
+Densi ya Hatua ya Ireland ['Densi ya Hatua ya Ireland']
+กาลิทาส ['กาลิทาส', 'Kalidasa', 'Kalidas']
+Okonomiyaki ['Okonomiyaki', 'お好み焼き', 'Okonomiaki']
+Lakshmi ['Lakshmi', 'Laxmi', 'Sri']
+18 अगस्त 1920 ['18 अगस्त 1920', 'अगस्त 18, 1920', '1920-08-18', '18 अगस्त, 1920']
+นวดไทย ['นวดไทย', 'Nuad Thai', 'Thai massage']
+जोमो केन्याटा साहित्य पुरस्कार ['जोमो केन्याटा साहित्य पुरस्कार', 'साहित्य के लिए जोमो केन्याटा पुरस्कार']
+1600 ['1600']
+1964 ['1964', 'หนึ่งพันเก้าร้อยหกสิบสี่', '2507']
+1939 ['1939', '1939 ईस्वी']
+1984 ['1984']
+ชิเงรุ โยชิดะ ['ชิเงรุ โยชิดะ', 'โยชิดะ ชิเงรุ', 'Shigeru Yoshida', 'Yoshida Shigeru']
+Nagano ['Nagano', 'Nagano Prefecture']
+सालबाई की संधि ['सालबाई की संधि', 'सालबाई संधि', 'सल्बाई की संधि', 'सल्बाई संधि']
+Kihmong ['Kihmong', 'Lugha ya Kihmong', 'Hmong', 'Lugha ya Hmong']
+Grilling ['Grilling']
+แอบซาโลม โจนส์ ['แอบซาโลม โจนส์']
+J. B. Lippincott & Co. ['J. B. Lippincott & Co.', 'J. B. Lippincott', 'J・B・リッピンコット']
+เกาะมฟังกานู ['เกาะมฟังกานู', 'Mfangano Island']
+एलायंस फॉर सस्टेनेबल एनर्जी, एलएलसी (Alliance for Sustainable Energy, LLC) ['एलायंस फॉर सस्टेनेबल एनर्जी, एलएलसी (Alliance for Sustainable Energy, LLC)', 'एलायंस फॉर सस्टेनेबल एनर्जी (Alliance for Sustainable Energy)', 'सस्टेनेबल एनर्जी के लिए गठबंधन, एलएलसी']
+सापेक्ष सर्वनाम समझौता ['सापेक्ष सर्वनाम समझौता', 'सापेक्ष उपवाक्य समझौता', 'सापेक्ष उपवाक्यों में समझौता']
+โอซาเมะฟุดะ ['โอซาเมะฟุดะ', 'Osamefuda', 'โอซาเมะ-ฟุดะ', 'Osame-fuda', '納札']
+कोई रास्ता नहीं ['कोई रास्ता नहीं', 'तुम मजाक कर रहे हो', 'मुझे विश्वास नहीं हो रहा', 'बिलकुल नहीं', 'आप मजाक कर रहे हो', 'मैं इस पर विश्वास नहीं कर सकता']
+15 มกราคม 1967 ['15 มกราคม 1967', '15 มกราคม พ.ศ. 2510', '15 มกราคม 2510']
+อาเดเตต ['อาเดเตต', 'Adetet', 'แตรเตอร์กานา', 'Turkana horn', 'อาเดเตต (Adetet)', 'แตรเตอร์กานา (Turkana Horn)']
+紀伊半島 ['紀伊半島', 'きいはんとう', 'Kii hantō']
+1987 ['1987']
+Jack London ['Jack London', 'John Griffith Chaney']
+Charlotte ['Charlotte', 'Charlotte, North Carolina']
+โอโบกาโน ['โอโบกาโน', 'gusii lyre']
+กิชูกู ['กิชูกู', 'กิชูกู คิคูยู']
+भाभा परमाणु अनुसंधान केंद्र ['भाभा परमाणु अनुसंधान केंद्र', 'बार्क', 'Bhabha Parmanu Anusandhan Kendra', 'BARC']
+ジョン・ガスト ['ジョン・ガスト', 'John Gast', 'じょん・がすと']
+367 km ['367 km', '367 kilometers', '367 kilometres']
+1963年 ['1963年', '1963 nen']
+選挙法 ['選挙法', '選挙法 (せんきょほう)']
+513,120 km za mraba ['513,120 km za mraba', 'Kilomita za mraba 513,120', '513,120 sq km']
+อบนินทรนาถ ฐากูร ['อบนินทรนาถ ฐากูร', 'Abanindranath Tagore']
+ヴァッラブバーイー・パテール ['ヴァッラブバーイー・パテール', 'サルダール・ヴァッラブバーイー・パテール', 'パテール副首相', 'Vallabhbhai Patel', 'Sardar Vallabhbhai Patel']
+Barakoa ya gesi ['Barakoa ya gesi', 'Kofia ya usalama', 'Hood ya kupumulia', 'Mask ya gesi']
+RIKEN ['RIKEN', 'Riken', '理化学研究所', 'Rikagaku Kenkyūsho']
+太陽の党 ['太陽の党', 'Taiyō no Tō', 'たいようのとう']
+Jomo Kenyatta Prize for Literature ['Jomo Kenyatta Prize for Literature']
+Nyasaye ['Nyasaye']
+สาราวานา บาวัน ['สาราวานา บาวัน', 'Saravana Bhavan', 'Hotel Saravana Bhavan']
+Pittsburghese ['Pittsburghese', 'Lahaja ya Pittsburgh']
+रक्त भंडारण तकनीक ['रक्त भंडारण तकनीक', 'रक्त भंडारण', 'रक्त संरक्षण', 'ब्लड बैंकिंग', 'रक्त बैंक', 'रक्त परिरक्षण', 'रक्त बैंकिंग', 'ब्लड प्लाज्मा पृथक्करण']
+Owakudani ['Owakudani', 'Owakudani Valley', 'Great Boiling Valley']
+Kii Peninsula ['Kii Peninsula']
+khrap ['khrap', 'krap']
+チョンブリー ['チョンブリー', 'チョンブリー県']
+Murasaki Shikibu ['Murasaki Shikibu', 'Lady Murasaki', '紫式部']
+Reform Party ['Reform Party', 'Reform', 'Chama cha Reform']
+バワルチ ['バワルチ', 'バワルチレストラン']
+ガンジス川 ['ガンジス川', 'Gangesu-gawa', 'Ganges River', 'ガンジス', 'ガンガー', 'Ganga', 'Ganges']
+グラ語 ['グラ語', 'ギーチー語', 'Gullah', 'Geechee']
+バセイン条約 ['バセイン条約', 'バセインじょうやく', 'Basein Jōyaku']
+จูโน ['จูโน']
+फोर्ड का थिएटर ['फोर्ड का थिएटर', 'फोर्ड का थियेटर', 'फोर्ड थिएटर']
+นาคูรู ['นาคูรู', 'Nakuru']
+Little, Brown and Company ['Little, Brown and Company', 'Little, Brown']
+1,456 ['1,456']
+Nam Dok Mai ['Nam Dok Mai', 'Nam Dokmai']
+ชาร์ลอตต์ ['ชาร์ลอตต์', 'ชาร์ลอตต์, นอร์ทแคโรไลนา']
+Saigo Takamori ['Saigo Takamori', 'Takamori Saigo']
+Fort Jesus ['Fort Jesus']
+268,596 ตารางไมล์ ['268,596 ตารางไมล์', '268596 ตารางไมล์', '695,662 ตารางกิโลเมตร', '695662 ตารางกิโลเมตร']
+การสถาปนากรุงสุโขทัยデイビッド・ルディシャ  ['การสถาปนากรุงสุโขทัย', 'การก่อตั้งอาณาจักรสุโขทัย', 'การจัดตั้ง Sukhothai']['デイビッド・ルディシャ', 'デビッド・ルディシャ', 'David Rudisha']
+
+Teej揚げ (Age)  ['Teej', 'Hariyali Teej', 'Hartalika Teej']
+['揚げ (Age)', 'ディープフライ (Diipufurai)', '深揚げ (Fukaage)', '揚げ物']
+สำนักงานอุตุนิยมวิทยาญี่ปุ่น ['สำนักงานอุตุนิยมวิทยาญี่ปุ่น', 'สำนักงานอุตุนิยมวิทยาญี่ปุ่น (Japan Meteorological Agency)', 'JMA']
+タイ東北部 ['タイ東北部', 'イサーン', 'イサン', 'エサン', '東北タイ', 'タイ北東部']
+मैनहट्टन परियोजनाKukaanga sana  ['Kukaanga sana', 'Deep-frying', 'Kukaanga kwa kina']['मैनहट्टन परियोजना', 'मैनहट्टन इंजीनियरिंग डिस्ट्रिक्ट', 'मैनहट्टन प्रोजेक्ट', 'मैनहट्टन इंजीनियरिंग जिला']
+
+Cyrus Kabiru ['Cyrus Kabiru']
+ไนโรบี ['ไนโรบี']
+15 ['15']
+เดียร์บอร์น ['เดียร์บอร์น', 'เดียร์บอร์น, มิชิแกน']
+268,596 वर्ग मीलラーマキエン  ['268,596 वर्ग मील', '268596 वर्ग मील', '695,662 वर्ग किलोमीटर', '695662 वर्ग किलोमीटर']
+['ラーマキエン', 'ラマキエン', 'ラマキアン', 'รามเกียรติ์', 'Ramakien']
+मोंटियन बूनमा ['मोंटियन बूनमा', 'Montien Boonma', 'มณเฑียร บุญมา']
+Pro Kabaddi League ['Pro Kabaddi League', 'PKL', 'โปร กาบัดดี้ ลีก']
+トンマヤンティ ['トンマヤンティ', 'クンイン・ウィモン・シリパイブン']
+Pwani ['Pwani', 'Ukanda wa Pwani']
+1885 ['1885']
+O ['O', 'お', '御', 'o-', 'go-']
+ค่ะ ['ค่ะ', 'คะ']
+Hindi ['Hindi', 'हिन्दी']
+सोंगक्रान ['सोंगक्रान', 'सोंगक्रान महोत्सव', 'Songkran', 'Songkran Mahotsav']
+Anglo-Japanese Alliance ['Anglo-Japanese Alliance']
+6 สิงหาคม 1965 ['6 สิงหาคม 1965', '6 ส.ค. 1965', '1965-08-06', '6 สิงหาคม 2508']
+日本翻訳文化賞 (Nihon Honyaku Bunka Shō) ['日本翻訳文化賞 (Nihon Honyaku Bunka Shō)', '日本翻訳文化賞']
+Bangkok ['Bangkok', 'Krung Thep Maha Nakhon', 'Krung Thep']
+อร่อย ['อร่อย', 'aroi', 'aroy']
+513,120 sq km ['513,120 sq km', '513,120平方キロメートル', '513,120 平方キロ']
+大太鼓 ['大太鼓', 'おおだいこ', 'Ōdaiko', 'オダイコ']
+सैन फ्रांसिस्को की संधि ['सैन फ्रांसिस्को की संधि', 'सैन फ्रांसिस्को शांति संधि']
+योकोहामा मित्सुजावा स्टेडियम ['योकोहामा मित्सुजावा स्टेडियम', 'मित्सुजावा सॉकर स्टेडियम', 'Yokohama Mitsuzawa Stadium', 'Mitsuzawa Soccer Stadium', 'निप्पत्सु मित्सुजावा क्योउगीजो', 'ニッパツ三ツ沢球技場']
+जापान मौसम विज्ञान एजेंसी ['जापान मौसम विज्ञान एजेंसी', 'जापान मौसम विज्ञान एजेंसी (Japan Meteorological Agency)', 'जेएमए', 'जापानी मौसम विज्ञान एजेंसी']
+京都大学 ['京都大学', '京都大学 (Kyōto Daigaku)', '京都大学iPS細胞研究所', 'CiRA', '京都大学iPS細胞研究応用センター', '京都大学iPSセル研究およびアプリケーションセンター', 'iPS細胞研究応用センター', 'CiRA（京都大学）']
+Poke ['Poke', 'Poké']
+3Dプリンティング ['3Dプリンティング', '3D印刷', '三次元プリンティング', '三次元印刷', 'アディティブマニュファクチャリング', 'Additive Manufacturing']
+फुकुओका सॉफ्टबैंक हॉक्स ['फुकुओका सॉफ्टबैंक हॉक्स', 'Fukuoka SoftBank Hawks', '福岡ソフトバンクホークス']
+พิตต์สเบอร์กีส ['พิตต์สเบอร์กีส', 'ภาษาถิ่นพิตต์สเบิร์ก', 'Pittsburghese']
+60 ['60', 'หกสิบ']
+14 अगस्त 1935 ['14 अगस्त 1935', 'अगस्त 14, 1935', '1935-08-14']
+इंडो-आर्यन ['इंडो-आर्यन', 'इंडोआर्यन']
+金メダル ['金メダル', 'オリンピック金メダル']
+グリル (Guriru) ['グリル (Guriru)', 'グリル']
+टुंडे कबाबी ['टुंडे कबाबी', 'टुंडे कबाबी रेस्टोरेंट', 'तुनडे कबाबी', 'तुनडे कबाबी रेस्तरां']
+ソマリ語 ['ソマリ語', 'ソマリご', 'Somari-go']
+Maandamano ya Washington ['Maandamano ya Washington', 'Machi kwenye Washington kwa Kazi na Uhuru']
+नागानो ['नागानो', 'नागानो प्रीफेक्चर', 'नागानो प्रांत']
+शिनानो नदी ['शिनानो नदी', 'शिनानो-गावा']
+Kibaata ['Kibaata']
+May 18, 1974 ['May 18, 1974']
+Blood storage techniques ['Blood storage techniques', 'Blood storage', 'Blood preservation', 'Blood banking', 'Blood plasma separation']
+Texas ['Texas']
+ゴル・マヒア ['ゴル・マヒア', 'ゴル・マヒアFC']
+59.199 ['59.199']
+अफ्रीकी संघ का संविधान अधिनियम ['अफ्रीकी संघ का संविधान अधिनियम', 'एयू संविधान अधिनियम', 'Afriki Sangh ka Samvidhan Adhiniyam']
+เดลิเคตอาร์ช ['เดลิเคตอาร์ช', 'ซุ้มประตูที่บอบบาง']
+川と源 ['川と源', 'The River and the Source']
+メアリー・リーキー ['メアリー・リーキー']
+रिफॉर्म पार्टी ['रिफॉर्म पार्टी', 'रिफॉर्म']
+お ['お', '御', 'o-', 'go-']
+Rice family ['Rice family', 'Rices']
+नोहकलिकाई जलप्रपात ['नोहकलिकाई जलप्रपात', 'नोहकलिकाई']
+ग्रेट स्मोकी पर्वत ['ग्रेट स्मोकी पर्वत', 'स्मोकी पर्वत', 'स्मोकीज', 'महान स्मोकी पर्वत', 'स्मोकी माउंटेन']
+1964年 ['1964年', '1964ねん']
+Kitai cha Kusini ['Kitai cha Kusini', 'Pak Tai', 'Thai Tai', 'Thai ya kusini', 'Kipak Tai', 'Kitai Tai']
+Lam Phu Thai ['Lam Phu Thai', 'ลำภูไท']
+30 years ['30 years', 'Thirty years', '30 years old']
+Mother Mosque of America ['Mother Mosque of America', 'มัสยิดแม่แห่งอเมริกา']
+जोनास साल्क ['जोनास साल्क']
+การคายน้ำ ['การคายน้ำ', 'Kan Khai Nam']
+नारा पार्क ['नारा पार्क', 'नारा हिरण पार्क', 'Nara Park', 'Nara Deer Park']
+Familia ya Harrison ['Familia ya Harrison']
+イーストアフリカンエデュケーショナルパブリッシャーズ ['イーストアフリカンエデュケーショナルパブリッシャーズ', 'EAEP', '東アフリカの教育出版社']
+Haiwezekani ['Haiwezekani', 'Unatania', 'Siwezi kuamini', 'Hakuna njia']
+Orix Buffaloes ['Orix Buffaloes', 'Orikkusu Bafarozu', 'Buffaloes za ORIX']
+ป้อมพระเยซู ['ป้อมพระเยซู', 'Fort Jesus']
+พระราชบัญญัติควบคุมคนเข้าเมืองและการรับรองผู้ลี้ภัย ['พระราชบัญญัติควบคุมคนเข้าเมืองและการรับรองผู้ลี้ภัย', 'พระราชบัญญัติควบคุมการเข้าเมือง', 'Nyūkanhō', '入管法']
+Sra Bua by Kiin Kiin ['Sra Bua by Kiin Kiin', 'Sra Bua']
+ポール・ウィンチェル ['ポール・ウィンチェル', 'Paul Winchell']
+日英同盟 ['日英同盟', 'Nichi-Ei Dōmei']
+खाद बनाना ['खाद बनाना', 'कंपोस्टिंग', 'खाद']
+Kumenyeka ['Kumenyeka', 'Kutengeneza mchuzi']
+हैरिसन परिवार ['हैरिसन परिवार']
+आईएनएसी कोबे लियोनेसा ['आईएनएसी कोबे लियोनेसा', 'INAC Kobe Leonessa', 'INAC神戸レオネッサ', 'इनाक कोबे लियोनेसा']
+2013年 ['2013年']
+તિર્યક વિભક્તિ (ติรยัก วิภักติ) ['તિર્યક વિભક્તિ (ติรยัก วิภักติ)', 'Tiryak Vibhakti']
+เอเกซา ['เอเกซา']
+อร่อย (अरोई) ['อร่อย (अरोई)', 'aroi', 'aroy', 'อร่อย']
+1941 ['1941']
+เดวิด รูดิชา ['เดวิด รูดิชา', 'David Rudisha']
+1963 ['1963', 'หนึ่งพันเก้าร้อยหกสิบสาม', '2506']
+ओनुसा (Ōnusa) ['ओनुसा (Ōnusa)', 'ओनुसा', 'Ōnusa', '大麻']
+ティールタンカラ ['ティールタンカラ', 'ティルタンカラ']
+พระราชบัญญัติรัฐธรรมนูญแห่งสหภาพแอฟริกา ['พระราชบัญญัติรัฐธรรมนูญแห่งสหภาพแอฟริกา', 'พระราชบัญญัติรัฐธรรมนูญ AU', 'Phra Ratchabanyat Rattha Thammanun Haeng Sahaphap Afrikka', 'Phra Ratchabanyat Rattha Thammanun AU']
+Songkran Dance ['Songkran Dance', 'รำสงกรานต์', 'Ram Songkran']
+काताकाना ['काताकाना', 'カタカナ', 'かたかな']
+Theravada ['Theravada', 'Ubuddha wa Theravada']
+तंदूर में पकाना ['तंदूर में पकाना', 'तंदूरी खाना पकाना', 'तंदूर ओवन में पकाना', 'तंदूर में बेकिंग', 'मिट्टी के ओवन में पकाना']
+2013 ['2013']
+โฮเน็น ['โฮเน็น', 'โฮเน็น โชนิน', 'เก็นคู']
+2017年7月1日 ['2017年7月1日', '2017ねん7がつ1にち', 'Nisenjūnana nen shichigatsu tsuitachi']
+จอห์น แกสต์ ['จอห์น แกสต์', 'John Gast']
+पूर्वी थाईलैंड ['पूर्वी थाईलैंड', 'पूर्व']
+リトル・ブラウン ['リトル・ブラウン', 'リトル・ブラウン・アンド・カンパニー', 'Little, Brown and Company', 'Little, Brown']
+1954 ['1954', 'พ.ศ. 2497']
+Charles Schulz ['Charles Schulz', 'Charles M. Schulz']
+गोरो किकुटानी ['गोरो किकुटानी']
+Mto Chattahoochee ['Mto Chattahoochee', 'Chattahoochee', 'Chattahoochee River', 'Mto wa Chattahoochee']
+Kakuzo Okakura ['Kakuzo Okakura', 'Okakura Kakuzo']
+Khon ['Khon', 'โขน']
+栄西 (Eisai) ['栄西 (Eisai)', '明庵栄西 (Myōan Eisai)', '葉上 (Yōsai)']
+ना कुरु काउंटी ['ना कुरु काउंटी', 'नाकुरु काउंटी', 'ना कुरु', 'नाकुरु']
+บิวะ ['บิวะ', 'Biwa', '琵琶', '琵琶 (Biwa)']
+Nakhon Si Thammarat Range ['Nakhon Si Thammarat Range', 'Milima ya Nakhon Si Thammarat']
+2000 ['2000']
+デーヴァナーガリー文字 ['デーヴァナーガリー文字', 'デーヴァナーガリー', 'Devanagari', 'Dēvanāgarī']
+Butter Chicken ['Butter Chicken', 'Murgh Makhani', 'Kuku ya siagi']
+イード・アル＝フィトル ['イード・アル＝フィトル', 'イード・ウル＝フィトル', 'ミティ・イード', 'イード', '断食明けの祭り', 'Eid al-Fitr', 'Eid ul-Fitr', 'Meethi Eid']
+बुरिराम यूनाइटेड ['बुरिराम यूनाइटेड', 'बुरीराम युनाइटेड', 'บุรีรัมย์ ยูไนเต็ด', 'Buriram United']
+Julie Krone ['Julie Krone']
+BG Pathum United ['BG Pathum United']
+พ.ศ. 2509 ['พ.ศ. 2509', '2509']
+最高裁判所 ['最高裁判所', '米国最高裁判所', '最高裁判所 (Saikou-saibansho)', '米国最高裁判所 (Beikoku-saikou-saibansho)', 'SCOTUS']
+Nagano ['Nagano', 'Mkoa wa Nagano']
+30 ปี ['30 ปี', 'สามสิบปี', 'อายุ 30 ปี']
+Sushruta ['Sushruta', 'スシュルタ']
+New England ['New England']
+1952 ['1952']
+कोनबानवा ['कोनबानवा', 'कोनबानवा (Konbanwa)', 'こんばんは', 'こんばんは (Konbanwa)']
+Sri Thanonchai ['Sri Thanonchai', 'Si Thanonchai']
+Saravana Bhavan ['Saravana Bhavan', 'Hotel Saravana Bhavan', 'Hoteli Saravana Bhavan']
+AIFF Super Cup ['AIFF Super Cup', 'Super Cup']
+Oktoba 14, 1978 ['Oktoba 14, 1978', '14 Oktoba 1978', '1978-10-14']
+Marathon ya Berlin ya 2014 ['Marathon ya Berlin ya 2014', 'Berlin Marathon 2014']
+ภาคใต้ ['ภาคใต้', 'Phak Tai', 'ภาคใต้ของประเทศไทย', 'ใต้']
+Relative pronoun agreement ['Relative pronoun agreement', 'Relative clause agreement', 'Agreement in relative clauses']
+Khon ['Khon', 'โขน']
+ผัด (Phat) ['ผัด (Phat)']
+โบสถ์พาราเดซี ['โบสถ์พาราเดซี', 'โบสถ์ยิวโคชิน', 'โบสถ์มัตตันเชอร์รี']
+Map:  21%|██        | 469/2208 [00:00<00:00, 4649.97 examples/s]Diwali ['Diwali', 'Deepavali', 'Sikukuu ya Taa']
+อินทิราพอยต์ ['อินทิราพอยต์', 'จุดอินทิรา']
+उत्तरी थाईलैंड ['उत्तरी थाईलैंड', 'उत्तर', 'उत्तरी थाईलैंड क्षेत्र']
+1991 ['1991', 'Nineteen ninety-one']
+โมโมฟุกุ อันโด ['โมโมฟุกุ อันโด', 'อันโด โมโมฟุกุ', 'Momofuku Ando', 'Ando Momofuku']
+ओरिक्स बफ़ेलोज़ ['ओरिक्स बफ़ेलोज़', 'ओरिक्स बफ़ेलो', 'Orix Buffaloes', 'オリックス・バファローズ']
+34 ['34', '34点']
+1965年8月6日 ['1965年8月6日', '1965ねん8がつ6にち', '1965/08/06', '1965-08-06']
+जे. बी. लिप्पिनकॉट एंड कंपनी ['जे. बी. लिप्पिनकॉट एंड कंपनी', 'जे. बी. लिप्पिनकॉट']
+シー・タノンチャイ ['シー・タノンチャイ', 'Sri Thanonchai', 'Si Thanonchai']
+1,000 km ['1,000 km', '1000 km', '1,000 kilometers', '1000 kilometers', 'Approximately 1,000 km', 'Approximately 1000 km', 'Approximately 1,000 kilometers', 'Approximately 1000 kilometers']
+Bustani ya TD ['Bustani ya TD', 'Bustani', 'Bustani ya Boston']
+ओसामेफुदा ['ओसामेफुदा', 'Osamefuda', 'ओसामे-फुदा', 'Osame-fuda', '納札']
+ตลาดอินเดียนซานตาเฟ ['ตลาดอินเดียนซานตาเฟ']
+1869年 ['1869年', '1869ねん']
+1964 ['1964']
+Thailand ya Kaskazini ['Thailand ya Kaskazini', 'Kaskazini', 'Kaskazini mwa Thailand']
+1600年 ['1600年', '1600']
+Mount Kenya ['Mount Kenya', 'Mt. Kenya']
+2013 ['2013']
+1967年1月15日 ['1967年1月15日', '1967年1月15日 (せんきゅうひゃくろくじゅうななねんいちがつじゅうごにち)', '1967/01/15']
+イーデン・ガーデンズ ['イーデン・ガーデンズ', 'イーデン・ガーデンズ、コルカタ', 'イーデンガーデンズ', 'イーデンガーデンズ、コルカタ', 'エデンガーデン', 'エデンガーデン、コルカタ']
+बुगाकु ['बुगाकु']
+Absalom Jones ['Absalom Jones']
+क्योटो विश्वविद्यालय ['क्योटो विश्वविद्यालय', 'क्योटो विश्वविद्यालय iPS सेल अनुसंधान और अनुप्रयोग केंद्र', 'CiRA', 'क्योटो यूनिवर्सिटी', 'क्योटो यूनिवर्सिटी आईपीएस सेल रिसर्च एंड एप्लीकेशन सेंटर', 'सीआईआरए', 'सेंटर फॉर iPS सेल रिसर्च एंड एप्लीकेशन']
+चिकामात्सु मोंज़ेमोन ['चिकामात्सु मोंज़ेमोन', 'मोंज़ेमोन चिकामात्सु', '近松門左衛門']
+国家情報庁 ['国家情報庁', '国家情報サービス', 'Kokka Jōhōchō', 'Kokka Jōhō Sābisu', 'NIS']
+टेनेसी विलियम्स ['टेनेसी विलियम्स', 'थॉमस लानियर विलियम्स III']
+Asalha Puja ['Asalha Puja', 'Asanha Puja', 'Wan Asalha Puja', 'Wan Asanha Puja']
+ギチュグ ['ギチュグ', 'ギチュグ・キクユ']
+พรรครุ่งอรุณแห่งญี่ปุ่น ['พรรครุ่งอรุณแห่งญี่ปุ่น', 'Taiyō no Tō', '太陽の党']
+Jagadish Chandra Bose ['Jagadish Chandra Bose', 'J.C. Bose', 'Sir J.C. Bose']
+1919 ['1919', 'พ.ศ. 2462', '2462', '13 เมษายน 2462']
+बिवा ['बिवा', 'बीवा', '琵琶', '琵琶 (Biwa)']
+Ubon Ratchathani Candle Festival ['Ubon Ratchathani Candle Festival', 'Candle Festival']
+Burney Treaty ['Burney Treaty', 'Treaty of Burney']
+Vallabhbhai Patel ['Vallabhbhai Patel', 'Sardar Vallabhbhai Patel']
+चट्टाहूची नदी ['चट्टाहूची नदी', 'चट्टाहूची', 'चटाहोची नदी', 'चत्ताहूची', 'Chattahoochee River', 'Chattahoochee']
+फ्यूचर फॉरवर्ड पार्टी ['फ्यूचर फॉरवर्ड पार्टी', 'अनाकोट माई पार्टी']
+National Police Agency ['National Police Agency', 'Keisatsu-cho', '警察庁']
+Meteorolojia ['Meteorolojia', 'Meteorology']
+ชลบุรี ['ชลบุรี', 'จังหวัดชลบุรี']
+関西 ['関西', '近畿']
+うどん ['うどん', 'Udon']
+Mkataba wa Portsmouth ['Mkataba wa Portsmouth']
+川端康成 ['川端康成', 'かわばたやすなり', 'Kawabata Yasunari', 'Yasunari Kawabata']
+Satyajit Ray ['Satyajit Ray']
+ヤギ (Yagi) ['ヤギ (Yagi)', 'ヤギ肉', 'ヤギ', '牛肉 (Gyūniku)', '牛肉']
+Honorary Doctorate ['Honorary Doctorate', 'Honorary Doctorate from Laikipia University']
+ウクレレ ['ウクレレ']
+ตระกูลบราวน์ ['ตระกูลบราวน์']
+กอร์ มาเฮีย ['กอร์ มาเฮีย', 'กอร์ มาเฮีย เอฟซี']
+ジャック・ニクラス ['ジャック・ニクラス', 'ジャック・ニクラウス', 'ニクラス、ジャック']
+ソンクラーン ['ソンクラーン', 'ソンクラーン祭り', 'ソングクラン', 'ソングクランフェスティバル']
+तैहो कोकी Swami and Friends ['तैहो कोकी', 'ताइहो कोकी', 'तैहो', 'ताइहो']
+['Swami and Friends', 'สวามีและเพื่อน', 'สวามีและเพื่อนๆ']
+जगदीश चंद्र बोस ['जगदीश चंद्र बोस', 'जे. सी. बोस', 'सर जे. सी. बोस']อินัค โกเบ เลโอเนสซา
+ ['อินัค โกเบ เลโอเนสซา', 'INAC Kobe Leonessa', 'INAC神戸レオネッサ']
+Kikannada ['Kikannada', 'Kannada']
+パラム・プラヴェーガ ['パラム・プラヴェーガ', 'Param Pravega']
+ケニア測量局 ['ケニア測量局', 'ケニア測量', 'ケニアの測量']
+Majik Water ['Majik Water', 'マジックウォーター', 'Majikwater', 'Majik Water（マジックウォーター）', 'Majikwater（マジックウォーター）']
+Kuchipudi ['Kuchipudi', 'Kuchipudi dance']
+ปรัม ปราเวกา ['ปรัม ปราเวกา', 'ปรัม-ปราเวกา', 'Param Pravega']
+สำเนียงบอสตัน ['สำเนียงบอสตัน', 'ภาษาถิ่นบอสตัน']
+बुरीटो ['बुरीटो', 'बरिटो']
+1986 ['1986']
+กาลิทาส ['กาลิทาส', 'Kalidasa', 'Kalidas']
+25 พฤศจิกายน 2002 ['25 พฤศจิกายน 2002', '25 พ.ย. 2002', '2002-11-25', '25 พฤศจิกายน 2545']
+Batian ['Batian']
+वरहाडी ['वरहाडी', 'वरहदी', 'वरदी', 'Varhadi']
+Patola weaving ['Patola weaving', 'Patola']
+इवानामी शोतेन ['इवानामी शोतेन', 'इवानामी शोतेन, प्रकाशक', '岩波書店']
+Kukaanga sana ['Kukaanga sana', 'Kukaanga kwa maji kidogo', 'Kukaanga kwenye kikaango', 'Kukaanga']
+1861年 ['1861年']
+ダルハウジー卿 ['ダルハウジー卿', 'ダルハウジー', 'Daruhōjī-kyō (ダルハウジー卿)', 'ダルハウジー伯爵', 'ジェームズ・アンドリュー・ブラウン＝ラムゼイ、初代ダルハウジー侯爵']
+English ['English']
+P. V. Sindhu ['P. V. Sindhu', 'PV Sindhu', 'Pusarla Venkata Sindhu']
+Kiguru ['Kiguru', 'Gichukia']
+舞楽 ['舞楽', 'ぶがく', 'Bugaku', 'ブガク']
+8 ['8', 'Nane']
+किगुरु ['किगुरु', 'गिचुकिआ']
+クン・チャーン ['クン・チャーン', 'Khun Chang']
+チン ['チン', 'チンチャップ', 'ฉิ่ง']
+Longhorn Publishers ['Longhorn Publishers', 'Longhorn', 'สำนักพิมพ์ Longhorn']
+Biwa ['Biwa', '琵琶', '琵琶 (Biwa)']
+Midnight's Children ["Midnight's Children"]
+Indira Point ['Indira Point', 'Uhakika wa Indira']
+Mkataba wa Bassein ['Mkataba wa Bassein']
+Kisumu ['Kisumu']
+शिंचोशा ['शिंचोशा', 'शिंचोशा प्रकाशन कंपनी लिमिटेड', 'शिनचोशा', 'शिनचोशा पब्लिशिंग कंपनी, लिमिटेड', '新潮社', '新潮社 (Shincho-sha)', '株式会社新潮社']
+1960年 ['1960年', '1960']
+स्वर्ण पदक ['स्वर्ण पदक', 'ओलंपिक स्वर्ण पदक']
+นางาโนะ ['นางาโนะ', 'จังหวัดนางาโนะ', 'นากาโน่', 'จังหวัดนากาโน่']
+स्कॉटिश पीएफए प्लेयर्स प्लेयर ऑफ द ईयर ['स्कॉटिश पीएफए प्लेयर्स प्लेयर ऑफ द ईयर', 'स्कॉटिश पीएफए प्लेयर ऑफ द ईयर', 'पीएफए स्कॉटलैंड प्लेयर्स प्लेयर ऑफ द ईयर']
+Mkataba wa Salbai ['Mkataba wa Salbai']
+ラクシュミー ['ラクシュミー', 'ラクシュミ', 'スリ', 'ラクシュミ', 'ラクシュミー']
+フォード劇場 ['フォード劇場', 'フォードシアター', 'フォードの劇場']
+सत्यजित रे ['सत्यजित रे', 'सत्यजीत रे']
+ナイロビ ['ナイロビ', 'ないろび', 'Nairobi']
+सान फ्रा फूम ['सान फ्रा फूम', 'स्पिरिट हाउस', 'San Phra Phum', 'Spirit House', 'आत्मा गृह', 'ศาลพระภูมิ']
+Were ['Were']
+अवनिंद्रनाथ टैगोर ['अवनिंद्रनाथ टैगोर', 'अवनिन्द्र नाथ टैगोर', 'अवनिंद्रनाथ ठाकुर']
+Phoenix ['Phoenix']
+アブサロム・ジョーンズ ['アブサロム・ジョーンズ']
+Deep-frying ['Deep-frying', 'Frying', 'Deep fried']
+東京 ['東京', '東京市']
+गोर माहिया ['गोर माहिया', 'गोर माहिया एफसी']
+मफंगानो द्वीप ['मफंगानो द्वीप', 'मफंगानो आइलैंड', 'मफांगेनो आइलैंड']
+1600 ['1600', '१६००']
+असंते ['असंते', 'असांटे']
+อีฎิ้ลฟิตริ ['อีฎิ้ลฟิตริ', 'อีฎ อัล-ฟิตร์', 'มีถี อีฎ', 'Eid al-Fitr', 'Eid ul-Fitr', 'Meethi Eid', 'อีฎ', 'เทศกาลแห่งการละศีลอด']
+Nakuru ['Nakuru']
+ธีโอดอร์ ไมแมน ['ธีโอดอร์ ไมแมน', 'ธีโอดอร์ แฮโรลด์ ไมแมน']
+Walt Whitman ['Walt Whitman', 'Walter Whitman']
+सेबास्टियाओ रोड्रिग्स ['सेबास्टियाओ रोड्रिग्स', 'सेबस्टियाओ रोड्रिगेस', 'सेबास्टियाओ रोड्रिग्स']
+Olive Garden ['Olive Garden', 'Bustani ya Mizeituni']
+Sebastião Rodrigues ['Sebastião Rodrigues', 'Sebastiao Rodrigues']
+1962年 ['1962年', '1962']
+Bangkok ['Bangkok', 'Krung Thep Maha Nakhon']
+ดำรงค์ เกษมเศรษฐ์ ['ดำรงค์ เกษมเศรษฐ์', 'Dumrong Kasemset']
+ตะไคร้ ['ตะไคร้']
+1977 ['1977']
+สำนักงานตำรวจแห่งชาติ ['สำนักงานตำรวจแห่งชาติ', 'Samnakngan Tamruat Haeng Chat', '警察庁', 'Keisatsu-cho']
+जोमो केन्याटा साहित्य पुरस्कार ['जोमो केन्याटा साहित्य पुरस्कार', 'साहित्य के लिए जोमो केन्याटा पुरस्कार']
+1977 ['1977']
+सुप्रीम कोर्ट ['सुप्रीम कोर्ट', 'संयुक्त राज्य अमेरिका का सर्वोच्च न्यायालय', 'उच्चतम न्यायालय', 'स्कोटस']
+द सेंटेनियल लैंड रन मॉन्युमेंट ['द सेंटेनियल लैंड रन मॉन्युमेंट', 'सेंटेनियल लैंड रन स्मारक']
+डीप फ्राई ['डीप फ्राई', 'शैलो फ्राई', 'पैन फ्राई', 'तलना', 'उथला तलना']
+Reform Party ['Reform Party', 'Reform']
+मोमोफुकु एंडो ['मोमोफुकु एंडो', 'एंडो मोमोफुकु', 'अंडो मोमोफुकु']
+Ukulele ['Ukulele']
+खोन ['खोन', 'Khon', 'โขน']
+ภาษาเตลูกู ['ภาษาเตลูกู']
+व्हिसलब्लोअर संरक्षण अधिनियम ['व्हिसलब्लोअर संरक्षण अधिनियम', 'व्हिसलब्लोअर संरक्षण अधिनियम 1989']
+Udon ['Udon', 'うどん']
+สนามกีฬา นางาอิ ['สนามกีฬา นางาอิ', 'สนามกีฬายันมาร์ นางาอิ', 'Nagai Stadium', 'Yanmar Stadium Nagai', '長居スタジアム']
+न्यू मैक्सिको ['न्यू मैक्सिको', 'न्यू मेक्सिको']
+जॉन एफ. कैनेडी ['जॉन एफ. कैनेडी', 'जॉन कैनेडी', 'जेएफके', 'जॉन फिट्जगेराल्ड कैनेडी', 'जॉन एफ कैनेडी']
+เคี่ยว (Khiao) ['เคี่ยว (Khiao)', 'การเคี่ยว (Kan Khiao)']
+Treaty of Salbai ['Treaty of Salbai', 'Salbai Treaty']
+アフリカ連合憲章 ['アフリカ連合憲章', 'AU憲章', 'Afurika Rengō Ken Shō', 'AU Ken Shō', 'アフリカ連合設立法', 'アフリカ連合構成法', 'Afurika Rengō Sōchi Hō', 'Afurika Rengō Kōsei Hō', 'AU 設立法', 'AU 構成法', 'AU Sōchi Hō', 'AU Kōsei Hō']
+मौसम विज्ञान ['मौसम विज्ञान', 'मीटियोरोलॉजी']
+タンドール料理 (Tandōru ryōri) ['タンドール料理 (Tandōru ryōri)', 'タンドリー料理 (Tandōrī ryōri)', 'タンドールでの調理 (Tandōru de no chōri)', '粘土オーブン料理 (Nendo ōbun ryōri)']
+アシス (Asis) ['アシス (Asis)']
+การปรุงอาหารด้วยเตาทันดูร์ (Kan prung ahan duai tao than dur) ['การปรุงอาหารด้วยเตาทันดูร์ (Kan prung ahan duai tao than dur)', 'การปรุงอาหารทันดูรี (Kan prung ahan than duri)', 'การปรุงอาหารในเตาทันดูร์ (Kan prung ahan nai tao than dur)', 'การปรุงอาหารด้วยเตาอบดิน (Kan prung ahan duai tao op din)']
+ย่าง (Yang) ['ย่าง (Yang)', 'การย่าง']
+Nairobi ['Nairobi']
+เทคนิคการเก็บรักษาเลือด ['เทคนิคการเก็บรักษาเลือด', 'การเก็บรักษาเลือด', 'ธนาคารเลือด', 'เทคนิคการเก็บเลือด', 'การจัดเก็บเลือด', 'การอนุรักษ์เลือด', 'การแยกพลาสมาในเลือด']
+1917 ['1917', '๑๙๑๗', '2460']
+Walt Whitman ['Walt Whitman', 'Walter Whitman']
+माउंट एल्गोन ['माउंट एल्गोन', 'एल्गोन']
+Progressive Party ['Progressive Party', 'Bull Moose Party', 'Progressive']
+नेशनल रेनबो कोएलिशन ['नेशनल रेनबो कोएलिशन', 'नार्क', 'राष्ट्रीय इंद्रधनुषी गठबंधन']
+Paradesi Synagogue ['Paradesi Synagogue', 'Cochin Jewish Synagogue', 'Mattancherry Synagogue', 'Paradesi sinagogi', 'Cochin Wayahudi sinagogi', 'Mattancherry sinagogi']
+スピリチュアル ['スピリチュアル', 'ニグロスピリチュアル', '黒人霊歌']
+アラバマ物語 ['アラバマ物語', 'To Kill a Mockingbird']
+星雲賞 (Seiun Shō) ['星雲賞 (Seiun Shō)', 'Seiun賞']
+サタジット・レイ ['サタジット・レイ', 'Satyajit Ray', 'Satajitto Rei']
+1600 ['1600']
+แซนดรา เด โอคอนเนอร์ ['แซนดรา เด โอคอนเนอร์', 'แซนดรา โอคอนเนอร์', 'โอคอนเนอร์']
+द बेल जार ['द बेल जार']
+1,456 ['1,456']
+जैक निकलॉस ['जैक निकलॉस', 'जैक निक्लॉस', 'निकलॉस, जैक']
+2013 ['2013']
+ルース・リリー詩賞 ['ルース・リリー詩賞', 'ルース・リリー賞']
+Diwali ['Diwali', 'Deepavali', 'Festival of Lights']
+Majik Water ['Majik Water', 'Majikwater']
+ワイ ['ワイ', 'Wai', 'ไหว้']
+中央公論新社 ['中央公論新社', '株式会社中央公論新社', '中央公論社', 'Chuokoron-Shinsha']
+1986 ['1986']
+ソンクラーンダンス ['ソンクラーンダンス', 'Sonkurān Dansu', 'Songkran Dance', 'รำสงกรานต์', 'Ram Songkran', 'ソングクランダンス', 'ラムソングクラン']
+Hayashi Akira ['Hayashi Akira', 'Akira Hayashi', '林韑', 'Hayashi Daigaku-no-kami']
+ガルバ ['ガルバ', 'Garba']
+Param Pravega ['Param Pravega', 'Param-Pravega']
+Butter Chicken ['Butter Chicken', 'Murgh Makhani']
+Nakuru County ['Nakuru County', 'Nakuru']
+ゴア・コンカニ語 ['ゴア・コンカニ語', 'ゴエンチ・コンカニ語']
+Devanagari ['Devanagari', 'Devanāgarī']
+Tokugawa Yoshinobu ['Tokugawa Yoshinobu', 'Yoshinobu Tokugawa', 'Tokugawa Keiki', 'Keiki Tokugawa']
+6 अगस्त 1965 ['6 अगस्त 1965', 'अगस्त 6, 1965', '1965-08-06', '6 अगस्त, 1965']
+อุทยานนารา ['อุทยานนารา', 'อุทยานกวางนารา', 'นาราพาร์ค', 'Nara Park', 'Nara Deer Park']
+Maize flour ['Maize flour', 'Cornmeal']
+1979 ['1979']
+Ganges ['Ganges', 'Ganga', 'Mto Ganges', 'Mto Ganga']
+1964 ['1964', 'หนึ่งพันเก้าร้อยหกสิบสี่', 'พ.ศ. 2507']
+Arunachal Pradesh ['Arunachal Pradesh', 'Arunachal Pradesh State']
+1 दिसंबर 2016 ['1 दिसंबर 2016', 'दिसंबर 1, 2016']
+1941 ['1941', '१९४१']
+1987 ['1987']
+โอลีฟ การ์เด้น ['โอลีฟ การ์เด้น']
+एब्सलोम जोन्स ['एब्सलोम जोन्स']
+コンピュータビジョン ['コンピュータビジョン', 'コンピュータービジョン', 'Konpyūta bijon', 'Konpyūtā bijon', 'Computer Vision']
+पर्पल मेडल ऑफ ऑनर ['पर्पल मेडल ऑफ ऑनर', 'मेडल ऑफ ऑनर', 'बैंगनी मेडल ऑफ ऑनर', 'बैंगनी सम्मान पदक']
+Jagadish Chandra Bose ['Jagadish Chandra Bose', 'J. C. Bose', 'Sir J. C. Bose']
+सोंगक्रान नृत्य ['सोंगक्रान नृत्य', 'Songkran Dance', 'รำสงกรานต์', 'Ram Songkran', 'राम सोंगक्रान']
+Kituo cha Utafiti wa Atomiki cha Bhabha ['Kituo cha Utafiti wa Atomiki cha Bhabha', 'BARC']
+Mkataba wa San Francisco ['Mkataba wa San Francisco', 'Mkataba wa Amani wa San Francisco']
+ハリソン家 ['ハリソン家']
+สนามกีฬามิตสึซาวะ โยโกฮาม่า ['สนามกีฬามิตสึซาวะ โยโกฮาม่า', 'สนามฟุตบอลมิตสึซาวะ', 'Yokohama Mitsuzawa Stadium', 'สนามกีฬามิตสึซาวะ', 'Mitsuzawa Stadium', 'ニッパツ三ツ沢球技場']
+Reverend Rose Kariuki ['Reverend Rose Kariuki', 'Rose Kariuki', 'Rev. Rose Kariuki', 'Mchungaji Rose Kariuki']
+สะพานอาคาชิไคเคียว ['สะพานอาคาชิไคเคียว', 'Saphan Akashi Kaikyo', 'สะพานไข่มุก', 'Saphan Khai Muk']
+Inter-High Judo Tournament ['Inter-High Judo Tournament', 'All-Japan High School Judo Championships', 'Inter-High School Judo Championships']
+Compromise of 1877 ['Compromise of 1877']
+น้ำดอกไม้ ['น้ำดอกไม้', 'Nam Dok Mai']
+ฆะฏัม ['ฆะฏัม', 'Ghatam']
+Shahada ya Heshima ya Udaktari ['Shahada ya Heshima ya Udaktari', 'Shahada ya Heshima ya Udaktari kutoka Chuo Kikuu cha Laikipia']
+खाशाबा दादासाहेब जाधव ['खाशाबा दादासाहेब जाधव', 'के. डी. जाधव', 'केडी जाधव']
+Chikamatsu Monzaemon ['Chikamatsu Monzaemon', 'Monzaemon Chikamatsu', '近松門左衛門']
+ओसाका ['ओसाका', 'Osaka (ओसाका)', 'Ōsaka']
+North American Free Trade Agreement ['North American Free Trade Agreement', 'NAFTA']
+1526 ['1526']
+奈良公園 ['奈良公園', 'Nara Koen', '奈良ディアパーク']
+1905 ['1905', '1905 ईस्वी']
+Thi Lo Su Waterfall ['Thi Lo Su Waterfall', 'น้ำตกทีลอซู', 'Namtok Thi Lo Su']
+100 km ['100 km', '100 kilometers', 'Approximately 100 km', 'Approximately 100 kilometers']
+थानोन थोंग चाई रेंज ['थानोन थोंग चाई रेंज', 'Thanon Thong Chai Range']
+1966 ['1966']
+Chuo Kikuu cha Kyoto ['Chuo Kikuu cha Kyoto', 'Kituo cha Utafiti na Matumizi ya Seli za iPS cha Chuo Kikuu cha Kyoto', 'CiRA', 'Kituo cha Utafiti wa Seli za iPS cha Chuo Kikuu cha Kyoto', 'Kituo cha Utafiti wa Seli za Kyoto IPS na Kituo cha Maombi', 'Chuo Kikuu cha Kyoto (pamoja na CiRA)']
+Ching ['Ching', 'Ching Chap']
+マラッカ海峡 ['マラッカ海峡', 'マラッカかいきょう(Marakka Kaikyo)', 'Strait of Malacca']
+राइस परिवार ['राइस परिवार', 'राइस']
+Kiamsha Kinywa cha Kitaifa cha Maombi ['Kiamsha Kinywa cha Kitaifa cha Maombi']
+Jagadish Chandra Bose ['Jagadish Chandra Bose', 'J. C. Bose', 'Sir J. C. Bose']
+Map:  45%|████▍     | 992/2208 [00:00<00:00, 4927.11 examples/s]
+金メダル ['金メダル', 'オリンピック金メダル']
+西郷隆盛 ['西郷隆盛', 'さいごう たかもり', 'Saigo Takamori', 'Takamori Saigo']
+Long Island ['Long Island']
+Unga wa mahindi ['Unga wa mahindi']
+Medali ya Dhahabu ['Medali ya Dhahabu', 'Bingwa wa Dunia']
+18 मई 1974 ['18 मई 1974']
+สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat) ['สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat)']
+January 26, 1950 ['January 26, 1950', '26 January 1950', 'January 26th, 1950']
+Teej ['Teej', 'Hariyali Teej', 'Hartalika Teej']
+รำสงกรานต์ ['รำสงกรานต์', 'Songkran Dance', 'Ram Songkran']
+スコータイ王朝の成立 ['スコータイ王朝の成立', 'スコータイ建国', 'Sukhothai ōchō no seiritsu', 'Sukhothai kenkoku']
+1984年 ['1984年']
+อุตุนิยมวิทยา ['อุตุนิยมวิทยา', 'Utu Niyom Witya']
+Egesa ['Egesa']
+New Mexico ['New Mexico']
+1954 ['1954']
+Reverend Rose Kariuki ['Reverend Rose Kariuki', 'Rose Kariuki', 'Rev. Rose Kariuki']
+โอไดโกะ ['โอไดโกะ', 'Ōdaiko', 'Odaiko', '大太鼓']
+อาห์เมดาบัด ['อาห์เมดาบัด', 'Ahmedabad']
+オンディエク ['オンディエク', 'Ondiek']
+John Gast ['John Gast']
+Sandra Day O'Connor ["Sandra Day O'Connor", "Sandra O'Connor", "O'Connor"]
+ウォルト・ホイットマン ['ウォルト・ホイットマン', 'ウォルター・ホイットマン']
+1941 ['1941', '๑๙๔๑', '2484']
+รางวัลเซอุน (รางวัลเซอุน) ['รางวัลเซอุน (รางวัลเซอุน)', 'รางวัล Seiun']
+แม่น้ำแชตตาฮูชี ['แม่น้ำแชตตาฮูชี', 'แชตตาฮูชี', 'Mae Nam Chattahoochee', 'Chattahoochee', 'แม่น้ำ Chattahoochee']
+2018年3月2日 ['2018年3月2日']
+नागाई स्टेडियम ['नागाई स्टेडियम', 'यानमार स्टेडियम नागाई', 'Nagai Stadium', 'Yanmar Stadium Nagai', '長居スタジアム']
+1600年 ['1600年', '1600 nen', '1600ねん', '1600']
+Eid al-Fitr ['Eid al-Fitr', 'Eid ul-Fitr', 'Meethi Eid', 'Eid', 'Sikukuu ya Kufungua Saumu']
+તિર્યક વિભક્તિ ['તિર્યક વિભક્તિ', 'Tiryak Vibhakti']
+ニューイングランド ['ニューイングランド']
+Royal Thai Police ['Royal Thai Police', 'สำนักงานตำรวจแห่งชาติ (Samnakngan Tamruat Haeng Chat)']
+भूमिबोल अदुल्यादेज ['भूमिबोल अदुल्यादेज', 'राजा भूमिबोल', 'राम नवम', 'राम IX']
+March 2, 2018 ['March 2, 2018', '2 March 2018']
+Parachichi ['Parachichi']
+ホワイト山脈 ['ホワイト山脈', 'Howaito Sanmyaku', '白い山']
+Asante ['Asante']
+โอซาก้า ['โอซาก้า', 'Osaka']
+นิวอิงแลนด์ ['นิวอิงแลนด์']
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1333, in <module>
+[rank0]:     main()
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1329, in main
+[rank0]:     grpo_function(model_args, script_args, training_args)
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1120, in grpo_function
+[rank0]:     train_dataset, test_dataset = prepare_hf_factual_dataset(
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1031, in prepare_hf_factual_dataset
+[rank0]:     formatted_dataset = dataset.map(generate_factual_prompt)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 557, in wrapper
+[rank0]:     out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3074, in map
+[rank0]:     for rank, done, content in Dataset._map_single(**dataset_kwargs):
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3492, in _map_single
+[rank0]:     for i, example in iter_outputs(shard_iterable):
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3466, in iter_outputs
+[rank0]:     yield i, apply_function(example, i, offset=offset)
+[rank0]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3389, in apply_function
+[rank0]:     processed_inputs = function(*fn_args, *additional_args, **fn_kwargs)
+[rank0]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1015, in generate_factual_prompt
+[rank0]:     print(answer_list[0], answer_list)
+[rank0]: IndexError: list index out of range
+アイリッシュステップダンス ['アイリッシュステップダンス', 'アイリッシュステップダンス (Airisshusuteppudansu)']
+Mzunguko wa Kimataifa wa Chang ['Mzunguko wa Kimataifa wa Chang', 'Chang International Circuit', 'Mzunguko wa Kimataifa wa Buriram', 'Buriram International Circuit', 'ช้าง อินเตอร์เนชั่นแนล เซอร์กิต']
+メーワリー ['メーワリー', 'Mae Varee', 'แม่วารี']
+ฉิ่ง ['ฉิ่ง', 'Ching', 'Ching Chap']
+Ajmer ['Ajmer']
+Gor Mahia ['Gor Mahia', 'Gor Mahia FC']
+แจ็ก ลอนดอน ['แจ็ก ลอนดอน', 'จอห์น กริฟฟิธ เชนีย์']
+34 ['34']
+Bantu ['Bantu']
+エルゴン山 ['エルゴン山', 'エルゴン', 'マウントエルゴン']
+Padmini ['Padmini']
+คิซูมุ ['คิซูมุ', 'Kisumu']
+Mkataba wa San Francisco ['Mkataba wa San Francisco', 'Mkataba wa Amani wa San Francisco']
+Ahmedabad ['Ahmedabad']
+気象庁 ['気象庁', '気象庁 (Kishōchō)', 'JMA']
+สนธิสัญญาเบอร์นี ['สนธิสัญญาเบอร์นี']
+การทอผ้าตะกร้าของชนพื้นเมืองอเมริกัน ['การทอผ้าตะกร้าของชนพื้นเมืองอเมริกัน', 'ศิลปะตะกร้าของชนพื้นเมืองอเมริกัน', 'การทอตะกร้าพื้นเมืองอเมริกัน']
+पोके ['पोके', 'पोके (Poke)']
+ディワリ ['ディワリ', 'ディーパバリ', '光の祭典', 'Hikari no Saiten', 'Deepavali', '光の祭り']
+Obokano ['Obokano', 'Kinubi cha Gusii']
+Hmong ['Hmong', 'Hmong language']
+स्वामीनाथन ['स्वामीनाथन', 'स्वामी', 'स्वामीनाथन (स्वामी)']
+พอล วินเชลล์ ['พอล วินเชลล์', 'Paul Winchell']
+डीप-फ्राइंग (Deep-frying) ['डीप-फ्राइंग (Deep-frying)', 'तलना (Talna)', 'गहरी तलना']
+थाई लिपि ['थाई लिपि', 'अबुगिदा थाई', 'थाई अक्षर', 'थाई स्क्रिप्ट', 'อักษรไทย']
+Shō ['Shō', '笙']
+横浜市三ツ沢公園球技場 ['横浜市三ツ沢公園球技場', 'Yokohama-shi Mitsuzawa Koen Kyugijo', 'ニッパツ三ツ沢球技場', 'Nippatsu Mitsuzawa Kyugijo', '横浜三ツ沢球技場', 'Yokohama Mitsuzawa Kyugijo']
+डुलसीमर ['डुलसीमर', 'अपलाचियन डुलसीमर', 'माउंटेन डुलसीमर', 'Dulcimer', 'Appalachian Dulcimer', 'Mountain Dulcimer']
+Kae Sa Luk ['Kae Sa Luk', 'Fruit carving', 'แกะสลัก']
+ภาคกลาง ['ภาคกลาง', 'เคนยาตอนกลาง', 'ภูมิภาคมันต์เคนยา']
+Anglo-German Agreement of 1886 ['Anglo-German Agreement of 1886', '1886 Anglo-German Agreement']
+बीजी पाथुम यूनाइटेड ['बीजी पाथुम यूनाइटेड']
+パトラ織り ['パトラ織り', 'パトラ']
+सौम ['सौम', 'सौम (Saum)']
+กรุงเทพมหานคร ['กรุงเทพมหานคร', 'Krung Thep Maha Nakhon', 'กรุงเทพฯ', 'Krung Thep']
+600 मीटर ['600 मीटर', '600 मी']
+ヌアットタイ ['ヌアットタイ', 'ヌアットタイ (Nuad Thai)', 'タイ式マッサージ', 'タイ古式マッサージ', 'นวดไทย', 'นวดไทย (Nuad Thai)', 'Nuad Thai']
+34 ['34', 'चौंतीस']
+Nam Dok Mai ['Nam Dok Mai', 'Nam Dokmai']
+アバニンドラナート・タゴール ['アバニンドラナート・タゴール', 'アバニンドラナート・タクル', 'アバニンドラナート・タクール']
+สนธิสัญญาพอร์ตสมัท ['สนธิสัญญาพอร์ตสมัท']
+Avocado ['Avocado', 'Avocados']
+August 24, 2014 ['August 24, 2014', '24 August 2014']
+तेलुगु ['तेलुगु']
+พ.ศ. 2529 ['พ.ศ. 2529', '2529', 'ค.ศ. 1986', '1986']
+バターチキン ['バターチキン', 'ムルグマカニ']
+แม่น้ำชินาโนะ ['แม่น้ำชินาโนะ', 'ชินาโน-กาวะ']
+1984年 ['1984年']
+บี. อาร์. อัมเบดการ์ ['บี. อาร์. อัมเบดการ์', 'ภีมราว รามจี อัมเบดการ์', 'บาบาซาเฮบ อัมเบดการ์']
+Kigullah ['Kigullah', 'Lugha ya Kigullah', 'Kigeechee', 'Lugha ya Kigeechee']
+619 ['619', 'Anil Kumble', '619 ของ Anil Kumble']
+北部タイ語 ['北部タイ語', 'カムムアン語', 'カムムアン', 'ランナー', 'Kham Mueang', 'ランナー語 (Rannāgo)']
+スワヒリ・プレート ['スワヒリ・プレート', 'Suwahiri Purēto']
+ナガルジュナレストラン ['ナガルジュナレストラン', 'ナガルジュナ']
+近松門左衛門 ['近松門左衛門', 'Chikamatsu Monzaemon', 'Monzaemon Chikamatsu']
+Goro Kikutani ['Goro Kikutani']
+बांटू ['बांटू']
+1968 ['1968']
+In Praise of Shadows ['In Praise of Shadows', "In'ei Raisan", '陰翳礼讃']
+1963 ['1963']
+Juggut Singh ['Juggut Singh', 'Jugga']
+2002年11月25日 ['2002年11月25日', '2002ねん11がつ25にち', '2002/11/25', '2002-11-25']
+การปฏิวัติสยาม พ.ศ. 2475 ['การปฏิวัติสยาม พ.ศ. 2475', 'การเปลี่ยนแปลงการปกครอง พ.ศ. 2475', 'การปฏิวัติสยามปี 1932', "Siamese Coup d'état ของปี 1932", '2475', 'kan patiwat sayam phoso song sip ha jet ha', 'kan plian plaeng kan pokkhrong phoso song sip ha jet ha']
+安藤 百福 ['安藤 百福', 'あんどう ももふく', '安藤百福', 'Ando Momofuku']
+คุชราต ['คุชราต', 'รัฐคุชราต']
+Ramakien ['Ramakien', 'Ramakian', 'รามเกียรติ์']
+फिलाडेल्फिया ['फिलाडेल्फिया', 'फ़िलाडेल्फ़िया']
+สัตยาจิต เรย์ ['สัตยาจิต เรย์', 'Satyajit Ray']
+चार्ल्स शुल्ज ['चार्ल्स शुल्ज', 'चार्ल्स एम. शुल्ज', 'चार्ल्स शुल्ज़', 'चार्ल्स एम। शुल्ज़']
+Sanamu ya Hachiko ['Sanamu ya Hachiko', 'Hachiko-zo', 'Hachikō-zō']
+長野 ['長野', '長野県']
+サラヴァナバワン ['サラヴァナバワン', 'ホテルサラヴァナバワン', 'サラバナ・バヴァン', 'ホテルサラバナバヴァン', 'Saravana Bhavan', 'Hotel Saravana Bhavan']
+Burrito ['Burrito']
+ラジーブ・ガンジー健康科学大学賞 (Rajību Ganjī Kenkō Kagaku Daigakushō) ['ラジーブ・ガンジー健康科学大学賞 (Rajību Ganjī Kenkō Kagaku Daigakushō)', 'Rajiv Gandhi Health Sciences Awards', 'राजीव गांधी स्वास्थ्य विज्ञान विश्वविद्यालय पुरस्कार (Rajiv Gandhi Swasthya Vigyan Vishwavidyalaya Puraskar)']
+1977 ['1977']
+August 6, 1965 ['August 6, 1965', '6 August 1965', '1965-08-06']
+Tennessee Williams ['Tennessee Williams', 'Thomas Lanier Williams III']
+Chama cha Progressive ['Chama cha Progressive', 'Bull Moose Party', 'Progressive']
+1,456 ['1,456']
+Chang International Circuit ['Chang International Circuit', 'ช้าง อินเตอร์เนชั่นแนล เซอร์กิต', 'Buriram International Circuit']
+Kalidasa ['Kalidasa', 'Kalidas']
+Thommayanti ['Thommayanti', 'Khunying Wimon Siriphaibun']
+ลำภูไท ['ลำภูไท', 'Lam Phu Thai']
+Whistleblower Protection Act ['Whistleblower Protection Act', 'Whistleblower Protection Act of 1989']
+1917 ['1917']
+Julai 1, 2017 ['Julai 1, 2017', '1 Julai 2017']
+Charles Hornsby ['Charles Hornsby']
+Garba ['Garba']
+Natsume Sōseki ['Natsume Sōseki', 'Sōseki Natsume', '夏目漱石', 'なつめ そうせき']
+Konbanwa ['Konbanwa', 'こんばんは', 'こんばんは (Konbanwa)']
+लॉन्गहॉर्न पब्लिशर्स ['लॉन्गहॉर्न पब्लिशर्स', 'लॉन्गहॉर्न']
+Maelewano ya 1877 ['Maelewano ya 1877']
+Khashaba Dadasaheb Jadhav ['Khashaba Dadasaheb Jadhav', 'K. D. Jadhav', 'KD Jadhav']
+Garba ['Garba']
+513,120 वर्ग किमी ['513,120 वर्ग किमी', '513,120 वर्ग किलोमीटर']
+Northern Thailand ['Northern Thailand', 'North', 'North Thailand']
+हिसामित्सु स्प्रिंग्स ['हिसामित्सु स्प्रिंग्स', 'Hisamitsu Springs', '久光スプリングス']
+Desemba 1, 2016 ['Desemba 1, 2016', '1 Desemba 2016']
+Mlima Elgon ['Mlima Elgon', 'Elgon']
+レモン対クルツマン ['レモン対クルツマン', 'レモン v. クルツマン', 'Lemon v. Kurtzman']
+エルゴン山 ['エルゴン山', 'エルゴン', 'マウントエルゴン']
+マンハッタン計画 ['マンハッタン計画', 'マンハッタンプロジェクト', 'マンハッタンエンジニアリング地区']
+June 29, 2007 ['June 29, 2007', '29 June 2007', '2007-06-29']
+2013 ['2013']
+60 ['60', 'Sixty', '60 home runs']
+เรือพระที่นั่งสุพรรณหงส์ ['เรือพระที่นั่งสุพรรณหงส์', 'เรือสุพรรณหงส์']
+BGパトゥム・ユナイテッド ['BGパトゥム・ユナイテッド']
+Agosti 14, 1935 ['Agosti 14, 1935', '14 Agosti 1935', '1935-08-14']
+Medali ya Zambarau ya Heshima ['Medali ya Zambarau ya Heshima', 'Medali ya Heshima', 'Medali ya zambarau ya heshima', 'Medali ya heshima ya zambarau']
+अखिल भारतीय तकनीकी शिक्षा परिषद ['अखिल भारतीय तकनीकी शिक्षा परिषद', 'एआईसीटीई', 'Akhil Bharatiya Takniki Shiksha Parishad', 'AICTE']
+Eisai ['Eisai', 'Myōan Eisai', 'Yōsai']
+Osaka ['Osaka', 'Ōsaka']
+सौतेइंग (Sautéing) ['सौतेइंग (Sautéing)', 'सोटे करना (Sote karna)', 'हलचल तलना (Halchal talna)', 'स्टिर-फ्राइंग (Stir-frying)', 'भूनना (Bhunna)']
+Mahakama Kuu ['Mahakama Kuu', 'Supreme Court', 'Mahakama Kuu ya Merika', 'SCOTUS']
+कैबिनेट इंटेलिजेंस एंड रिसर्च ऑफिस ['कैबिनेट इंटेलिजेंस एंड रिसर्च ऑफिस', 'नाइचो', 'Naicho', '内閣情報調査室', 'कैबिनेट इंटेलिजेंस एंड रिसर्च ऑफिस']
+ภาษาเมวารี ['ภาษาเมวารี']
+Mkataba wa Anglo-German wa 1886 ['Mkataba wa Anglo-German wa 1886', 'Mkataba wa Anglo-Ujerumani wa 1886']
+John Gast ['John Gast']
+1964 ['1964']
+Bunge ['Bunge', 'Congress', 'Bunge la Marekani']
+Texas ['Texas']
+タイ北部地方 ['タイ北部地方', '北部地方', '北部', 'タイ北部', '北']
+Gor Mahia ['Gor Mahia', 'Gor Mahia FC']
+November 2, 1945 ['November 2, 1945', '2 November 1945', '1945-11-02']
+Maporomoko ya Maji ya Thi Lo Su ['Maporomoko ya Maji ya Thi Lo Su', 'Thi Lo Su Waterfall', 'น้ำตกทีลอซู', 'Namtok Thi Lo Su', 'Maporomoko ya maji ya Thi Lo Su (tafsiri mbadala)', 'Maporomoko ya maji ya Thilosu']
+मुरासाकी शिकिबु ['मुरासाकी शिकिबु', 'लेडी मुरासाकी', 'Murasaki Shikibu', 'Lady Murasaki', '紫式部']
+Deep-frying ['Deep-frying', 'Deep frying']
+鎌倉 ['鎌倉', '鎌倉市']
+56,000 ['56,000']
+Naming ceremony ['Naming ceremony', 'Naming ritual', 'Naming rite']
+Msichana Anayecheza ['Msichana Anayecheza', 'Msichana Anayecheza wa Mohenjo-daro']
+गुल्ला ['गुल्ला', 'गुल्ला भाषा', 'गीची', 'गीची भाषा']
+Philadelphia ['Philadelphia']
+カシャバ・ダダサヘブ・ジャダブ ['カシャバ・ダダサヘブ・ジャダブ', 'Khashaba Dadasaheb Jadhav', 'K. D. Jadhav', 'KD Jadhav']
+बावर्ची ['बावर्ची', 'बावर्ची रेस्टोरेंट', 'बावर्ची रेस्तरां']
+コルカタ ['コルカタ', 'ソルトレイクシティ、コルカタ', 'ビダーンナガル']
+Plaek Phibunsongkhram ['Plaek Phibunsongkhram', 'Phibun', 'Field Marshal Plaek Phibunsongkhram']
+चार्ल्स गुडइयर ['चार्ल्स गुडइयर', 'Charles Goodyear']
+เลมอน วี. เคิร์ตซ์แมน ['เลมอน วี. เคิร์ตซ์แมน']
+笙 ['笙', 'しょう', 'Shō']
+Shigeru Yoshida ['Shigeru Yoshida', 'Yoshida Shigeru']
+Theravada ['Theravada', 'Theravada Buddhism']
+โจนาส ซอล์ก ['โจนาส ซอล์ก']
+रिकेन ['रिकेन', 'रिकेन (RIKEN)', 'आरआईकेईएन', 'Riken']
+Flametree Publishers ['Flametree Publishers']
+2013年 ['2013年', '2013ねん']
+Uoni wa Kompyuta ['Uoni wa Kompyuta', 'Maono ya Kompyuta']
+Vallabhbhai Patel ['Vallabhbhai Patel', 'Sardar Vallabhbhai Patel']
+Densi ya Hatua ya Ireland ['Densi ya Hatua ya Ireland']
+กาลิทาส ['กาลิทาส', 'Kalidasa', 'Kalidas']
+Okonomiyaki ['Okonomiyaki', 'お好み焼き', 'Okonomiaki']
+Lakshmi ['Lakshmi', 'Laxmi', 'Sri']
+18 अगस्त 1920 ['18 अगस्त 1920', 'अगस्त 18, 1920', '1920-08-18', '18 अगस्त, 1920']
+นวดไทย ['นวดไทย', 'Nuad Thai', 'Thai massage']
+जोमो केन्याटा साहित्य पुरस्कार ['जोमो केन्याटा साहित्य पुरस्कार', 'साहित्य के लिए जोमो केन्याटा पुरस्कार']
+1600 ['1600']
+1964 ['1964', 'หนึ่งพันเก้าร้อยหกสิบสี่', '2507']
+1939 ['1939', '1939 ईस्वी']
+ชิเงรุ โยชิดะ ['ชิเงรุ โยชิดะ', 'โยชิดะ ชิเงรุ', 'Shigeru Yoshida', 'Yoshida Shigeru']
+सालबाई की संधि ['सालबाई की संधि', 'सालबाई संधि', 'सल्बाई की संधि', 'सल्बाई संधि']
+แอบซาโลม โจนส์ ['แอบซาโลม โจนส์']
+เกาะมฟังกานู ['เกาะมฟังกานู', 'Mfangano Island']
+सापेक्ष सर्वनाम समझौता ['सापेक्ष सर्वनाम समझौता', 'सापेक्ष उपवाक्य समझौता', 'सापेक्ष उपवाक्यों में समझौता']
+कोई रास्ता नहीं ['कोई रास्ता नहीं', 'तुम मजाक कर रहे हो', 'मुझे विश्वास नहीं हो रहा', 'बिलकुल नहीं', 'आप मजाक कर रहे हो', 'मैं इस पर विश्वास नहीं कर सकता']
+อาเดเตต ['อาเดเตต', 'Adetet', 'แตรเตอร์กานา', 'Turkana horn', 'อาเดเตต (Adetet)', 'แตรเตอร์กานา (Turkana Horn)']
+1987 ['1987']
+Charlotte ['Charlotte', 'Charlotte, North Carolina']
+กิชูกู ['กิชูกู', 'กิชูกู คิคูยู']
+ジョン・ガスト ['ジョン・ガスト', 'John Gast', 'じょん・がすと']
+1963年 ['1963年', '1963 nen']
+513,120 km za mraba ['513,120 km za mraba', 'Kilomita za mraba 513,120', '513,120 sq km']
+Barakoa ya gesi ['Barakoa ya gesi', 'Kofia ya usalama', 'Hood ya kupumulia', 'Mask ya gesi']
+太陽の党 ['太陽の党', 'Taiyō no Tō', 'たいようのとう']
+Nyasaye ['Nyasaye']
+Pittsburghese ['Pittsburghese', 'Lahaja ya Pittsburgh']
+Owakudani ['Owakudani', 'Owakudani Valley', 'Great Boiling Valley']
+khrap ['khrap', 'krap']
+Murasaki Shikibu ['Murasaki Shikibu', 'Lady Murasaki', '紫式部']
+バワルチ ['バワルチ', 'バワルチレストラン']
+グラ語 ['グラ語', 'ギーチー語', 'Gullah', 'Geechee']
+จูโน ['จูโน']
+นาคูรู ['นาคูรู', 'Nakuru']
+1,456 ['1,456']
+ชาร์ลอตต์ ['ชาร์ลอตต์', 'ชาร์ลอตต์, นอร์ทแคโรไลนา']
+Fort Jesus ['Fort Jesus']
+การสถาปนากรุงสุโขทัย ['การสถาปนากรุงสุโขทัย', 'การก่อตั้งอาณาจักรสุโขทัย', 'การจัดตั้ง Sukhothai']
+Teej ['Teej', 'Hariyali Teej', 'Hartalika Teej']
+สำนักงานอุตุนิยมวิทยาญี่ปุ่น ['สำนักงานอุตุนิยมวิทยาญี่ปุ่น', 'สำนักงานอุตุนิยมวิทยาญี่ปุ่น (Japan Meteorological Agency)', 'JMA']
+मैनहट्टन परियोजना ['मैनहट्टन परियोजना', 'मैनहट्टन इंजीनियरिंग डिस्ट्रिक्ट', 'मैनहट्टन प्रोजेक्ट', 'मैनहट्टन इंजीनियरिंग जिला']
+ไนโรบี ['ไนโรบี']
+เดียร์บอร์น ['เดียร์บอร์น', 'เดียร์บอร์น, มิชิแกน']
+ラーマキエン ['ラーマキエン', 'ラマキエン', 'ラマキアン', 'รามเกียรติ์', 'Ramakien']
+Pro Kabaddi League ['Pro Kabaddi League', 'PKL', 'โปร กาบัดดี้ ลีก']
+Pwani ['Pwani', 'Ukanda wa Pwani']
+O ['O', 'お', '御', 'o-', 'go-']
+Hindi ['Hindi', 'हिन्दी']
+Anglo-Japanese Alliance ['Anglo-Japanese Alliance']
+日本翻訳文化賞 (Nihon Honyaku Bunka Shō) ['日本翻訳文化賞 (Nihon Honyaku Bunka Shō)', '日本翻訳文化賞']
+อร่อย ['อร่อย', 'aroi', 'aroy']
+大太鼓 ['大太鼓', 'おおだいこ', 'Ōdaiko', 'オダイコ']
+योकोहामा मित्सुजावा स्टेडियम ['योकोहामा मित्सुजावा स्टेडियम', 'मित्सुजावा सॉकर स्टेडियम', 'Yokohama Mitsuzawa Stadium', 'Mitsuzawa Soccer Stadium', 'निप्पत्सु मित्सुजावा क्योउगीजो', 'ニッパツ三ツ沢球技場']
+京都大学 ['京都大学', '京都大学 (Kyōto Daigaku)', '京都大学iPS細胞研究所', 'CiRA', '京都大学iPS細胞研究応用センター', '京都大学iPSセル研究およびアプリケーションセンター', 'iPS細胞研究応用センター', 'CiRA（京都大学）']
+3Dプリンティング ['3Dプリンティング', '3D印刷', '三次元プリンティング', '三次元印刷', 'アディティブマニュファクチャリング', 'Additive Manufacturing']
+พิตต์สเบอร์กีส ['พิตต์สเบอร์กีส', 'ภาษาถิ่นพิตต์สเบิร์ก', 'Pittsburghese']
+14 अगस्त 1935 ['14 अगस्त 1935', 'अगस्त 14, 1935', '1935-08-14']
+金メダル ['金メダル', 'オリンピック金メダル']
+टुंडे कबाबी ['टुंडे कबाबी', 'टुंडे कबाबी रेस्टोरेंट', 'तुनडे कबाबी', 'तुनडे कबाबी रेस्तरां']
+Maandamano ya Washington ['Maandamano ya Washington', 'Machi kwenye Washington kwa Kazi na Uhuru']
+शिनानो नदी ['शिनानो नदी', 'शिनानो-गावा']
+May 18, 1974 ['May 18, 1974']
+Texas ['Texas']
+59.199 ['59.199']
+เดลิเคตอาร์ช ['เดลิเคตอาร์ช', 'ซุ้มประตูที่บอบบาง']
+メアリー・リーキー ['メアリー・リーキー']
+お ['お', '御', 'o-', 'go-']
+नोहकलिकाई जलप्रपात ['नोहकलिकाई जलप्रपात', 'नोहकलिकाई']
+1964年 ['1964年', '1964ねん']
+Lam Phu Thai ['Lam Phu Thai', 'ลำภูไท']
+30 years ['30 years', 'Thirty years', '30 years old']
+Mother Mosque of America ['Mother Mosque of America', 'มัสยิดแม่แห่งอเมริกา']
+जोनास साल्क ['जोनास साल्क']
+การคายน้ำ ['การคายน้ำ', 'Kan Khai Nam']
+नारा पार्क ['नारा पार्क', 'नारा हिरण पार्क', 'Nara Park', 'Nara Deer Park']
+Familia ya Harrison ['Familia ya Harrison']
+イーストアフリカンエデュケーショナルパブリッシャーズ ['イーストアフリカンエデュケーショナルパブリッシャーズ', 'EAEP', '東アフリカの教育出版社']
+Haiwezekani ['Haiwezekani', 'Unatania', 'Siwezi kuamini', 'Hakuna njia']
+Orix Buffaloes ['Orix Buffaloes', 'Orikkusu Bafarozu', 'Buffaloes za ORIX']
+ป้อมพระเยซู ['ป้อมพระเยซู', 'Fort Jesus']
+Sra Bua by Kiin Kiin ['Sra Bua by Kiin Kiin', 'Sra Bua']
+日英同盟 ['日英同盟', 'Nichi-Ei Dōmei']
+Kumenyeka ['Kumenyeka', 'Kutengeneza mchuzi']
+आईएनएसी कोबे लियोनेसा ['आईएनएसी कोबे लियोनेसा', 'INAC Kobe Leonessa', 'INAC神戸レオネッサ', 'इनाक कोबे लियोनेसा']
+તિર્યક વિભક્તિ (ติรยัก วิภักติ) ['તિર્યક વિભક્તિ (ติรยัก วิภักติ)', 'Tiryak Vibhakti']
+อร่อย (अरोई) ['อร่อย (अरोई)', 'aroi', 'aroy', 'อร่อย']
+เดวิด รูดิชา ['เดวิด รูดิชา', 'David Rudisha']
+ティールタンカラ ['ティールタンカラ', 'ティルタンカラ']
+Songkran Dance ['Songkran Dance', 'รำสงกรานต์', 'Ram Songkran']
+Theravada ['Theravada', 'Ubuddha wa Theravada']
+2013 ['2013']
+2017年7月1日 ['2017年7月1日', '2017ねん7がつ1にち', 'Nisenjūnana nen shichigatsu tsuitachi']
+पूर्वी थाईलैंड ['पूर्वी थाईलैंड', 'पूर्व']
+1954 ['1954', 'พ.ศ. 2497']
+गोरो किकुटानी ['गोरो किकुटानी']
+Kakuzo Okakura ['Kakuzo Okakura', 'Okakura Kakuzo']
+栄西 (Eisai) ['栄西 (Eisai)', '明庵栄西 (Myōan Eisai)', '葉上 (Yōsai)']
+บิวะ ['บิวะ', 'Biwa', '琵琶', '琵琶 (Biwa)']
+2000 ['2000']
+Butter Chicken ['Butter Chicken', 'Murgh Makhani', 'Kuku ya siagi']
+बुरिराम यूनाइटेड ['बुरिराम यूनाइटेड', 'बुरीराम युनाइटेड', 'บุรีรัมย์ ยูไนเต็ด', 'Buriram United']
+BG Pathum United ['BG Pathum United']
+最高裁判所 ['最高裁判所', '米国最高裁判所', '最高裁判所 (Saikou-saibansho)', '米国最高裁判所 (Beikoku-saikou-saibansho)', 'SCOTUS']
+30 ปี ['30 ปี', 'สามสิบปี', 'อายุ 30 ปี']
+New England ['New England']
+कोनबानवा ['कोनबानवा', 'कोनबानवा (Konbanwa)', 'こんばんは', 'こんばんは (Konbanwa)']
+Saravana Bhavan ['Saravana Bhavan', 'Hotel Saravana Bhavan', 'Hoteli Saravana Bhavan']
+Oktoba 14, 1978 ['Oktoba 14, 1978', '14 Oktoba 1978', '1978-10-14']
+ภาคใต้ ['ภาคใต้', 'Phak Tai', 'ภาคใต้ของประเทศไทย', 'ใต้']
+Khon ['Khon', 'โขน']
+โบสถ์พาราเดซี ['โบสถ์พาราเดซี', 'โบสถ์ยิวโคชิน', 'โบสถ์มัตตันเชอร์รี']
+Diwali ['Diwali', 'Deepavali', 'Sikukuu ya Taa']
+उत्तरी थाईलैंड ['उत्तरी थाईलैंड', 'उत्तर', 'उत्तरी थाईलैंड क्षेत्र']
+โมโมฟุกุ อันโด ['โมโมฟุกุ อันโด', 'อันโด โมโมฟุกุ', 'Momofuku Ando', 'Ando Momofuku']
+34 ['34', '34点']
+जे. बी. लिप्पिनकॉट एंड कंपनी ['जे. बी. लिप्पिनकॉट एंड कंपनी', 'जे. बी. लिप्पिनकॉट']
+1,000 km ['1,000 km', '1000 km', '1,000 kilometers', '1000 kilometers', 'Approximately 1,000 km', 'Approximately 1000 km', 'Approximately 1,000 kilometers', 'Approximately 1000 kilometers']
+ओसामेफुदा ['ओसामेफुदा', 'Osamefuda', 'ओसामे-फुदा', 'Osame-fuda', '納札']
+1869年 ['1869年', '1869ねん']
+Thailand ya Kaskazini ['Thailand ya Kaskazini', 'Kaskazini', 'Kaskazini mwa Thailand']
+Mount Kenya ['Mount Kenya', 'Mt. Kenya']
+1967年1月15日 ['1967年1月15日', '1967年1月15日 (せんきゅうひゃくろくじゅうななねんいちがつじゅうごにち)', '1967/01/15']
+बुगाकु ['बुगाकु']
+क्योटो विश्वविद्यालय ['क्योटो विश्वविद्यालय', 'क्योटो विश्वविद्यालय iPS सेल अनुसंधान और अनुप्रयोग केंद्र', 'CiRA', 'क्योटो यूनिवर्सिटी', 'क्योटो यूनिवर्सिटी आईपीएस सेल रिसर्च एंड एप्लीकेशन सेंटर', 'सीआईआरए', 'सेंटर फॉर iPS सेल रिसर्च एंड एप्लीकेशन']
+国家情報庁 ['国家情報庁', '国家情報サービス', 'Kokka Jōhōchō', 'Kokka Jōhō Sābisu', 'NIS']
+Asalha Puja ['Asalha Puja', 'Asanha Puja', 'Wan Asalha Puja', 'Wan Asanha Puja']
+พรรครุ่งอรุณแห่งญี่ปุ่น ['พรรครุ่งอรุณแห่งญี่ปุ่น', 'Taiyō no Tō', '太陽の党']
+1919 ['1919', 'พ.ศ. 2462', '2462', '13 เมษายน 2462']
+Ubon Ratchathani Candle Festival ['Ubon Ratchathani Candle Festival', 'Candle Festival']
+Vallabhbhai Patel ['Vallabhbhai Patel', 'Sardar Vallabhbhai Patel']
+फ्यूचर फॉरवर्ड पार्टी ['फ्यूचर फॉरवर्ड पार्टी', 'अनाकोट माई पार्टी']
+Meteorolojia ['Meteorolojia', 'Meteorology']
+関西 ['関西', '近畿']
+Mkataba wa Portsmouth ['Mkataba wa Portsmouth']
+Satyajit Ray ['Satyajit Ray']
+Honorary Doctorate ['Honorary Doctorate', 'Honorary Doctorate from Laikipia University']
+ตระกูลบราวน์ ['ตระกูลบราวน์']
+ジャック・ニクラス ['ジャック・ニクラス', 'ジャック・ニクラウス', 'ニクラス、ジャック']
+तैहो कोकी ['तैहो कोकी', 'ताइहो कोकी', 'तैहो', 'ताइहो']
+อินัค โกเบ เลโอเนสซา ['อินัค โกเบ เลโอเนสซา', 'INAC Kobe Leonessa', 'INAC神戸レオネッサ']
+Kikannada ['Kikannada', 'Kannada']
+パラム・プラヴェーガ ['パラム・プラヴェーガ', 'Param Pravega']
+ケニア測量局 ['ケニア測量局', 'ケニア測量', 'ケニアの測量']
+Majik Water ['Majik Water', 'マジックウォーター', 'Majikwater', 'Majik Water（マジックウォーター）', 'Majikwater（マジックウォーター）']
+Kuchipudi ['Kuchipudi', 'Kuchipudi dance']
+ปรัม ปราเวกา ['ปรัม ปราเวกา', 'ปรัม-ปราเวกา', 'Param Pravega']
+สำเนียงบอสตัน ['สำเนียงบอสตัน', 'ภาษาถิ่นบอสตัน']
+बुरीटो ['बुरीटो', 'बरिटो']
+1986 ['1986']
+25 พฤศจิกายน 2002 ['25 พฤศจิกายน 2002', '25 พ.ย. 2002', '2002-11-25', '25 พฤศจิกายน 2545']
+Batian ['Batian']
+Patola weaving ['Patola weaving', 'Patola']
+1861年 ['1861年']
+English ['English']
+Kiguru ['Kiguru', 'Gichukia']
+8 ['8', 'Nane']
+クン・チャーン ['クン・チャーン', 'Khun Chang']
+Longhorn Publishers ['Longhorn Publishers', 'Longhorn', 'สำนักพิมพ์ Longhorn']
+Midnight's Children ["Midnight's Children"]
+Mkataba wa Bassein ['Mkataba wa Bassein']
+शिंचोशा ['शिंचोशा', 'शिंचोशा प्रकाशन कंपनी लिमिटेड', 'शिनचोशा', 'शिनचोशा पब्लिशिंग कंपनी, लिमिटेड', '新潮社', '新潮社 (Shincho-sha)', '株式会社新潮社']
+स्वर्ण पदक ['स्वर्ण पदक', 'ओलंपिक स्वर्ण पदक']
+स्कॉटिश पीएफए प्लेयर्स प्लेयर ऑफ द ईयर ['स्कॉटिश पीएफए प्लेयर्स प्लेयर ऑफ द ईयर', 'स्कॉटिश पीएफए प्लेयर ऑफ द ईयर', 'पीएफए स्कॉटलैंड प्लेयर्स प्लेयर ऑफ द ईयर']
+ラクシュミー ['ラクシュミー', 'ラクシュミ', 'スリ', 'ラクシュミ', 'ラクシュミー']
+सत्यजित रे ['सत्यजित रे', 'सत्यजीत रे']
+सान फ्रा फूम ['सान फ्रा फूम', 'स्पिरिट हाउस', 'San Phra Phum', 'Spirit House', 'आत्मा गृह', 'ศาลพระภูมิ']
+अवनिंद्रनाथ टैगोर ['अवनिंद्रनाथ टैगोर', 'अवनिन्द्र नाथ टैगोर', 'अवनिंद्रनाथ ठाकुर']
+アブサロム・ジョーンズ ['アブサロム・ジョーンズ']
+東京 ['東京', '東京市']
+मफंगानो द्वीप ['मफंगानो द्वीप', 'मफंगानो आइलैंड', 'मफांगेनो आइलैंड']
+असंते ['असंते', 'असांटे']
+Nakuru ['Nakuru']
+Walt Whitman ['Walt Whitman', 'Walter Whitman']
+Olive Garden ['Olive Garden', 'Bustani ya Mizeituni']
+1962年 ['1962年', '1962']
+ดำรงค์ เกษมเศรษฐ์ ['ดำรงค์ เกษมเศรษฐ์', 'Dumrong Kasemset']
+Map:  45%|████▍     | 992/2208 [00:00<00:00, 4821.32 examples/s]
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1333, in <module>
+[rank1]:     main()
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1329, in main
+[rank1]:     grpo_function(model_args, script_args, training_args)
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1120, in grpo_function
+[rank1]:     train_dataset, test_dataset = prepare_hf_factual_dataset(
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1031, in prepare_hf_factual_dataset
+[rank1]:     formatted_dataset = dataset.map(generate_factual_prompt)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 557, in wrapper
+[rank1]:     out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3074, in map
+[rank1]:     for rank, done, content in Dataset._map_single(**dataset_kwargs):
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3492, in _map_single
+[rank1]:     for i, example in iter_outputs(shard_iterable):
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3466, in iter_outputs
+[rank1]:     yield i, apply_function(example, i, offset=offset)
+[rank1]:   File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3389, in apply_function
+[rank1]:     processed_inputs = function(*fn_args, *additional_args, **fn_kwargs)
+[rank1]:   File "/n/home05/kumartanmay/main/calibrated_multilingualism/Multilingual_R1/run_factual_grpo.py", line 1015, in generate_factual_prompt
+[rank1]:     print(answer_list[0], answer_list)
+[rank1]: IndexError: list index out of range
+[rank1]:[W514 23:03:42.302769333 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank0]:[W514 23:03:42.305855749 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+E0514 23:03:42.806000 3372999 torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 3374670) of binary: /n/home05/kumartanmay/multilingual_env/bin/python
+Traceback (most recent call last):
+  File "/n/sw/Mambaforge-22.11.1-4/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/n/sw/Mambaforge-22.11.1-4/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1223, in <module>
+    main()
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1219, in main
+    launch_command(args)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1204, in launch_command
+    multi_gpu_launcher(args)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/accelerate/commands/launch.py", line 825, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/n/home05/kumartanmay/multilingual_env/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+run_factual_grpo.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2025-05-14_23:03:42
+  host      : holygpu7c26201.rc.fas.harvard.edu
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 3374671)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-05-14_23:03:42
+  host      : holygpu7c26201.rc.fas.harvard.edu
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 3374670)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
