@@ -1,0 +1,4 @@
+Metric,Value
+Factual Recall Score (FRS),0.7523917202991824
+Knowledge Transfer Score (KTS),0.8303145853193517
+Cross-Lingual Factual Knowledge Transferability Score (X-FaKT),0.7894349280345896

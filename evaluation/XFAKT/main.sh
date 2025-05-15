@@ -1,7 +1,7 @@
 # Base Model Evaluation
 
-# LLM Generation on Factual dataset
-python XFaKT.py --model_name "Qwen2.5-7B-Instruct-base" \
+LLM Generation on Factual dataset
+python llm_generation.py --model_name "Qwen2.5-7B-Instruct-base" \
         --model "Qwen/Qwen2.5-7B-Instruct" \
         --batch_size 8 \
         --gpu_ids "0" \
@@ -18,9 +18,9 @@ python llm_judge.py \
     --max_tokens 256
 
 # Score calculation
-BASE_DIR="results/factual_recall"
+BASE_DIR="./results/factual_recall"
 # List of models to evaluate
-MODELS="Qwen2.5-7B-Instruct-Grpo-100ckpt-lr-5e-5"
+MODELS="Qwen2.5-7B-Instruct-base"
 
 # Output directory for metrics
 OUTPUT_DIR="metrics_results"
@@ -29,11 +29,11 @@ OUTPUT_DIR="metrics_results"
 mkdir -p $OUTPUT_DIR
 
 # Construct path to results for this model
-RESULTS_PATH="$BASE_DIR/Qwen2.5-7B-Instruct-Grpo-100ckpt-lr-5e-5/without_system_prompt"
+RESULTS_PATH="$BASE_DIR/Qwen2.5-7B-Instruct-base/without_system_prompt"
 
 python scores.py \
     --results_dir "$RESULTS_PATH" \
-    --model_name "$MODEL" \
+    --model_name "$MODELS" \
     --output_dir "$OUTPUT_DIR"
  
 echo "All metrics calculation complete!"

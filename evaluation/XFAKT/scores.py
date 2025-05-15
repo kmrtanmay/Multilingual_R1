@@ -35,25 +35,24 @@ COUNTRIES = [
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description="Calculate Cross-Lingual Factual Knowledge Transferability Score")
-    parser.add_argument("--model", type=str, required=True, help="Model name or path")
-    parser.add_argument("--dataset", type=str, default="factual_recall", help="Dataset type")
-    parser.add_argument("--prompt", type=str, default="without_system_prompt", help="Prompt style")
-    parser.add_argument("--output_dir", type=str, default="metrics", help="Directory to save metrics results")
+    parser.add_argument("--results_dir", type=str, required=True, 
+                        help="Path to directory containing CSV files with evaluation results")
+    parser.add_argument("--model_name", type=str, default=None, 
+                        help="Model name for output files (defaults to directory name if not provided)")
+    parser.add_argument("--output_dir", type=str, default="metrics", 
+                        help="Directory to save metrics results")
     return parser.parse_args()
 
-def calculate_scores(model_path, dataset, prompt):
-    """Calculate scores from evaluation results"""
-    # Normalize model path if it's a directory
-    model_name = os.path.split(model_path)[1] if os.path.exists(model_path) else model_path
-    
+def calculate_scores(results_dir):
+    """Calculate scores from evaluation results directly from specified directory"""
     # Dictionary to store scores for each language
     data_scores = {}
     
     # Process each language
     for lang in LANGUAGES:
         # Get result paths
-        result_path = f"results/{dataset}/{model_name}/{prompt}/{lang}.csv"
-        english_result_path = f"results/{dataset}/{model_name}/{prompt}/English.csv"
+        result_path = os.path.join(results_dir, f"{lang}.csv")
+        english_result_path = os.path.join(results_dir, "English.csv")
         
         # Check if files exist
         if not os.path.exists(result_path):
@@ -193,8 +192,11 @@ def save_metrics(metrics, group_metrics, args):
     # Create output directory
     os.makedirs(args.output_dir, exist_ok=True)
     
+    # Get model name
+    model_name = args.model_name if args.model_name else os.path.basename(args.results_dir.rstrip('/'))
+    
     # Save overall metrics
-    overall_metrics_path = os.path.join(args.output_dir, f"{args.model}_{args.dataset}_metrics.csv")
+    overall_metrics_path = os.path.join(args.output_dir, f"{model_name}_metrics.csv")
     
     with open(overall_metrics_path, "w") as f:
         f.write("Metric,Value\n")
@@ -203,7 +205,7 @@ def save_metrics(metrics, group_metrics, args):
         f.write(f"Cross-Lingual Factual Knowledge Transferability Score (X-FaKT),{metrics['X-FaKT']}\n")
     
     # Save group metrics
-    group_metrics_path = os.path.join(args.output_dir, f"{args.model}_{args.dataset}_group_metrics.csv")
+    group_metrics_path = os.path.join(args.output_dir, f"{model_name}_group_metrics.csv")
     
     with open(group_metrics_path, "w") as f:
         f.write("Group,FRS,KTS,X-FaKT\n")
@@ -219,10 +221,15 @@ def main():
     # Parse arguments
     args = parse_args()
     
-    print(f"Calculating metrics for model: {args.model}")
+    # Ensure results directory exists
+    if not os.path.exists(args.results_dir):
+        print(f"Error: Results directory not found - {args.results_dir}")
+        return
+        
+    print(f"Calculating metrics for results in: {args.results_dir}")
     
     # Calculate scores
-    data_scores = calculate_scores(args.model, args.dataset, args.prompt)
+    data_scores = calculate_scores(args.results_dir)
     
     if not data_scores:
         print("Error: No valid data scores could be calculated.")

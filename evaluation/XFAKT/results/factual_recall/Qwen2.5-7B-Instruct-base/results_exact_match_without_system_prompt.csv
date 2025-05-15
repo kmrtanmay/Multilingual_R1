@@ -1,0 +1,5 @@
+Type,English,Hindi,Chinese,Russian,Arabic,French,Nepali,Japanese,Ukrainian,Greek,Turkish,Swahili,Thai
+Same-Correct,769,350,403,358,175,145,278,83,418,145,465,181,353
+English-Correct,0,0,12,0,0,18,1,0,0,0,1,3,0
+Different-Correct,11,325,330,401,575,593,280,680,311,410,313,557,384
+Incorrect,22,127,57,43,52,46,243,39,73,247,23,61,65
